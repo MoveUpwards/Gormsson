@@ -1,0 +1,8 @@
+author: Move Upwards
+author_url: https://github.com/MoveUpwards
+github_url: https://github.com/MoveUpwards/Gormsson
+root_url: https://github.com/MoveUpwards
+module: Gormsson
+output: docs
+theme: fullwidth
+xcodebuild_arguments: [-workspace, 'Gormsson.xcworkspace', -scheme, 'Gormsson iOS']
