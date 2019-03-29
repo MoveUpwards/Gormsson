@@ -141,6 +141,8 @@
 				F3DD4E41224E15F000D515E3 /* Sources */,
 				F3DD4E42224E15F000D515E3 /* Frameworks */,
 				F3DD4E43224E15F000D515E3 /* Resources */,
+				F3DD4E60224E1B3600D515E3 /* Swiftlint */,
+				F3DD4E5F224E1AF000D515E3 /* Jazzy */,
 			);
 			buildRules = (
 			);
@@ -267,6 +269,42 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F3DD4E5F224E1AF000D515E3 /* Jazzy */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Jazzy;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if which jazzy >/dev/null; then\n# Working command to tap in your terminal:\n#jazzy -x -workspace,Gormsson.xcworkspace,-scheme,Gormsson -a MoveUpwards -u https://moveupwards.dev -g https://github.com/MoveUpwards/Gormsson --min-acl internal\n#else\n#echo \"warning: jazzy not installed, download from https://github.com/realm/jazzy\"\n#fi\n";
+		};
+		F3DD4E60224E1B3600D515E3 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
