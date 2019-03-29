@@ -30,8 +30,6 @@
 		92F2AAF98BD29740A16042AC /* Pods-Gormsson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.release.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.release.xcconfig"; sourceTree = "<group>"; };
 		964EA670B7F3B0024D4BFFD2 /* Pods_Gormsson_GormssonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson_GormssonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F081ED895F08DA8DDBF88B /* Pods-Gormsson-GormssonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AED6E8DE1666CE805F20A6B3 /* Pods-GormssonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonTests.release.xcconfig"; path = "Target Support Files/Pods-GormssonTests/Pods-GormssonTests.release.xcconfig"; sourceTree = "<group>"; };
-		D3EDEA9A2456FFC7A0B00E40 /* Pods-GormssonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonTests.debug.xcconfig"; path = "Target Support Files/Pods-GormssonTests/Pods-GormssonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3DD4E48224E15F000D515E3 /* Gormsson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gormsson.h; sourceTree = "<group>"; };
 		F3DD4E49224E15F000D515E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,8 +65,6 @@
 			children = (
 				F5D9FE1C5F4BDD43ED8B7226 /* Pods-Gormsson.debug.xcconfig */,
 				92F2AAF98BD29740A16042AC /* Pods-Gormsson.release.xcconfig */,
-				D3EDEA9A2456FFC7A0B00E40 /* Pods-GormssonTests.debug.xcconfig */,
-				AED6E8DE1666CE805F20A6B3 /* Pods-GormssonTests.release.xcconfig */,
 				A6F081ED895F08DA8DDBF88B /* Pods-Gormsson-GormssonTests.debug.xcconfig */,
 				3FFDC39292AE3D36F9BDBED4 /* Pods-Gormsson-GormssonTests.release.xcconfig */,
 			);
