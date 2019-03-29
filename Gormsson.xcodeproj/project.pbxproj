@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3772BF18D2547B8AABB71E33 /* Pods_Gormsson_GormssonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964EA670B7F3B0024D4BFFD2 /* Pods_Gormsson_GormssonTests.framework */; };
-		98048AC47178C1249DA7574F /* Pods_Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8978B4BFB7111891A5DAE10A /* Pods_Gormsson.framework */; };
+		5C914A6E689480E0F42240C4 /* Pods_Gormsson_GormssonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB18BAC49137C1968D3B0BC0 /* Pods_Gormsson_GormssonTests.framework */; };
+		AF02DDB5BC25BE1B05FFFB95 /* Pods_Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BA22EE25DA5D9FF24FB0B6 /* Pods_Gormsson.framework */; };
 		F3DD4E56224E15F000D515E3 /* Gormsson.h in Headers */ = {isa = PBXBuildFile; fileRef = F3DD4E48224E15F000D515E3 /* Gormsson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3DD4E7A224E1FAF00D515E3 /* Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD4E45224E15F000D515E3 /* Gormsson.framework */; };
 		F3DD4E80224E204200D515E3 /* GormssonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DD4E68224E1D2A00D515E3 /* GormssonTests.swift */; };
@@ -25,18 +25,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3FFDC39292AE3D36F9BDBED4 /* Pods-Gormsson-GormssonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.release.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.release.xcconfig"; sourceTree = "<group>"; };
-		8978B4BFB7111891A5DAE10A /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92F2AAF98BD29740A16042AC /* Pods-Gormsson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.release.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.release.xcconfig"; sourceTree = "<group>"; };
-		964EA670B7F3B0024D4BFFD2 /* Pods_Gormsson_GormssonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson_GormssonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6F081ED895F08DA8DDBF88B /* Pods-Gormsson-GormssonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2AFCBC727B7262A3E8317CB1 /* Pods-Gormsson-GormssonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4467768F6682B9AD04B813C0 /* Pods-Gormsson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.release.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.release.xcconfig"; sourceTree = "<group>"; };
+		61BA22EE25DA5D9FF24FB0B6 /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62B25650CB9DEB5CCA314023 /* Pods-Gormsson-GormssonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.release.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.release.xcconfig"; sourceTree = "<group>"; };
+		DB9FD07825D7530E38C0B5A9 /* Pods-Gormsson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.debug.xcconfig"; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3DD4E48224E15F000D515E3 /* Gormsson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gormsson.h; sourceTree = "<group>"; };
 		F3DD4E49224E15F000D515E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3DD4E68224E1D2A00D515E3 /* GormssonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonTests.swift; sourceTree = "<group>"; };
 		F3DD4E6A224E1D2A00D515E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3DD4E75224E1FAF00D515E3 /* GormssonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GormssonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5D9FE1C5F4BDD43ED8B7226 /* Pods-Gormsson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.debug.xcconfig"; sourceTree = "<group>"; };
+		FB18BAC49137C1968D3B0BC0 /* Pods_Gormsson_GormssonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson_GormssonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98048AC47178C1249DA7574F /* Pods_Gormsson.framework in Frameworks */,
+				AF02DDB5BC25BE1B05FFFB95 /* Pods_Gormsson.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3DD4E7A224E1FAF00D515E3 /* Gormsson.framework in Frameworks */,
-				3772BF18D2547B8AABB71E33 /* Pods_Gormsson_GormssonTests.framework in Frameworks */,
+				5C914A6E689480E0F42240C4 /* Pods_Gormsson_GormssonTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,19 +63,19 @@
 		9E8298351A7E125D955C9457 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F5D9FE1C5F4BDD43ED8B7226 /* Pods-Gormsson.debug.xcconfig */,
-				92F2AAF98BD29740A16042AC /* Pods-Gormsson.release.xcconfig */,
-				A6F081ED895F08DA8DDBF88B /* Pods-Gormsson-GormssonTests.debug.xcconfig */,
-				3FFDC39292AE3D36F9BDBED4 /* Pods-Gormsson-GormssonTests.release.xcconfig */,
+				DB9FD07825D7530E38C0B5A9 /* Pods-Gormsson.debug.xcconfig */,
+				4467768F6682B9AD04B813C0 /* Pods-Gormsson.release.xcconfig */,
+				2AFCBC727B7262A3E8317CB1 /* Pods-Gormsson-GormssonTests.debug.xcconfig */,
+				62B25650CB9DEB5CCA314023 /* Pods-Gormsson-GormssonTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		CEC0D4A1566CEA0685B37F63 /* Frameworks */ = {
+		B5BBB48CE06639093464BBB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8978B4BFB7111891A5DAE10A /* Pods_Gormsson.framework */,
-				964EA670B7F3B0024D4BFFD2 /* Pods_Gormsson_GormssonTests.framework */,
+				61BA22EE25DA5D9FF24FB0B6 /* Pods_Gormsson.framework */,
+				FB18BAC49137C1968D3B0BC0 /* Pods_Gormsson_GormssonTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 				F3DD4E67224E1D2A00D515E3 /* GormssonTests */,
 				F3DD4E46224E15F000D515E3 /* Products */,
 				9E8298351A7E125D955C9457 /* Pods */,
-				CEC0D4A1566CEA0685B37F63 /* Frameworks */,
+				B5BBB48CE06639093464BBB1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,7 +144,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3DD4E59224E15F000D515E3 /* Build configuration list for PBXNativeTarget "Gormsson" */;
 			buildPhases = (
-				D4023F98BF9B093C47E435FA /* [CP] Check Pods Manifest.lock */,
+				157E95FADAB4F16831D49EFA /* [CP] Check Pods Manifest.lock */,
 				F3DD4E40224E15F000D515E3 /* Headers */,
 				F3DD4E41224E15F000D515E3 /* Sources */,
 				F3DD4E42224E15F000D515E3 /* Frameworks */,
@@ -165,11 +165,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3DD4E7D224E1FAF00D515E3 /* Build configuration list for PBXNativeTarget "GormssonTests" */;
 			buildPhases = (
-				7F04EA7E1655DF82B85F2123 /* [CP] Check Pods Manifest.lock */,
+				F379901C3D13621C852991E9 /* [CP] Check Pods Manifest.lock */,
 				F3DD4E71224E1FAF00D515E3 /* Sources */,
 				F3DD4E72224E1FAF00D515E3 /* Frameworks */,
 				F3DD4E73224E1FAF00D515E3 /* Resources */,
-				572953FF579AFC51DFE9FDA2 /* [CP] Embed Pods Frameworks */,
+				105210359BEC30261D4B6EDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -235,7 +235,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		572953FF579AFC51DFE9FDA2 /* [CP] Embed Pods Frameworks */ = {
+		105210359BEC30261D4B6EDD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,29 +252,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F04EA7E1655DF82B85F2123 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Gormsson-GormssonTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D4023F98BF9B093C47E435FA /* [CP] Check Pods Manifest.lock */ = {
+		157E95FADAB4F16831D49EFA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,6 +268,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Gormsson-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F379901C3D13621C852991E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gormsson-GormssonTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -487,7 +487,7 @@
 		};
 		F3DD4E5A224E15F000D515E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5D9FE1C5F4BDD43ED8B7226 /* Pods-Gormsson.debug.xcconfig */;
+			baseConfigurationReference = DB9FD07825D7530E38C0B5A9 /* Pods-Gormsson.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -514,7 +514,7 @@
 		};
 		F3DD4E5B224E15F000D515E3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92F2AAF98BD29740A16042AC /* Pods-Gormsson.release.xcconfig */;
+			baseConfigurationReference = 4467768F6682B9AD04B813C0 /* Pods-Gormsson.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -541,7 +541,7 @@
 		};
 		F3DD4E7E224E1FAF00D515E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6F081ED895F08DA8DDBF88B /* Pods-Gormsson-GormssonTests.debug.xcconfig */;
+			baseConfigurationReference = 2AFCBC727B7262A3E8317CB1 /* Pods-Gormsson-GormssonTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
@@ -560,7 +560,7 @@
 		};
 		F3DD4E7F224E1FAF00D515E3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FFDC39292AE3D36F9BDBED4 /* Pods-Gormsson-GormssonTests.release.xcconfig */;
+			baseConfigurationReference = 62B25650CB9DEB5CCA314023 /* Pods-Gormsson-GormssonTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
