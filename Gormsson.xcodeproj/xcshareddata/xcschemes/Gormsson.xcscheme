@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F3DD4E65224E1D2A00D515E3"
+               BlueprintIdentifier = "F3DD4E74224E1FAF00D515E3"
                BuildableName = "GormssonTests.xctest"
                BlueprintName = "GormssonTests"
                ReferencedContainer = "container:Gormsson.xcodeproj">
