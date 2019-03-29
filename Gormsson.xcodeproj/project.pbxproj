@@ -3,12 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5C914A6E689480E0F42240C4 /* Pods_Gormsson_GormssonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB18BAC49137C1968D3B0BC0 /* Pods_Gormsson_GormssonTests.framework */; };
 		AF02DDB5BC25BE1B05FFFB95 /* Pods_Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BA22EE25DA5D9FF24FB0B6 /* Pods_Gormsson.framework */; };
+		F3421B75224E28F500B173B3 /* Gormsson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B74224E28F500B173B3 /* Gormsson.swift */; };
+		F3421B77224E294800B173B3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B76224E294800B173B3 /* Service.swift */; };
+		F3421B7B224E367900B173B3 /* Peripheral+BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B7A224E367900B173B3 /* Peripheral+BatteryService.swift */; };
+		F3421B7D224E3A4C00B173B3 /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B7C224E3A4C00B173B3 /* Characteristic.swift */; };
+		F3421B80224E3B5300B173B3 /* Peripheral+GenericAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B7F224E3B5300B173B3 /* Peripheral+GenericAccess.swift */; };
+		F3421B82224E3C0F00B173B3 /* Peripheral+TxPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B81224E3C0F00B173B3 /* Peripheral+TxPower.swift */; };
+		F3421B84224E3C3200B173B3 /* Peripheral+DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3421B83224E3C3200B173B3 /* Peripheral+DeviceInformation.swift */; };
 		F3DD4E56224E15F000D515E3 /* Gormsson.h in Headers */ = {isa = PBXBuildFile; fileRef = F3DD4E48224E15F000D515E3 /* Gormsson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3DD4E7A224E1FAF00D515E3 /* Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD4E45224E15F000D515E3 /* Gormsson.framework */; };
 		F3DD4E80224E204200D515E3 /* GormssonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DD4E68224E1D2A00D515E3 /* GormssonTests.swift */; };
@@ -30,6 +37,13 @@
 		61BA22EE25DA5D9FF24FB0B6 /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B25650CB9DEB5CCA314023 /* Pods-Gormsson-GormssonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson-GormssonTests.release.xcconfig"; path = "Target Support Files/Pods-Gormsson-GormssonTests/Pods-Gormsson-GormssonTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB9FD07825D7530E38C0B5A9 /* Pods-Gormsson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.debug.xcconfig"; sourceTree = "<group>"; };
+		F3421B74224E28F500B173B3 /* Gormsson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gormsson.swift; sourceTree = "<group>"; };
+		F3421B76224E294800B173B3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		F3421B7A224E367900B173B3 /* Peripheral+BatteryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Peripheral+BatteryService.swift"; sourceTree = "<group>"; };
+		F3421B7C224E3A4C00B173B3 /* Characteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
+		F3421B7F224E3B5300B173B3 /* Peripheral+GenericAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Peripheral+GenericAccess.swift"; sourceTree = "<group>"; };
+		F3421B81224E3C0F00B173B3 /* Peripheral+TxPower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Peripheral+TxPower.swift"; sourceTree = "<group>"; };
+		F3421B83224E3C3200B173B3 /* Peripheral+DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Peripheral+DeviceInformation.swift"; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3DD4E48224E15F000D515E3 /* Gormsson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gormsson.h; sourceTree = "<group>"; };
 		F3DD4E49224E15F000D515E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +94,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F3421B7E224E3A9F00B173B3 /* GattServices */ = {
+			isa = PBXGroup;
+			children = (
+				F3421B7A224E367900B173B3 /* Peripheral+BatteryService.swift */,
+				F3421B7F224E3B5300B173B3 /* Peripheral+GenericAccess.swift */,
+				F3421B81224E3C0F00B173B3 /* Peripheral+TxPower.swift */,
+				F3421B83224E3C3200B173B3 /* Peripheral+DeviceInformation.swift */,
+			);
+			path = GattServices;
+			sourceTree = "<group>";
+		};
 		F3DD4E3B224E15F000D515E3 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +138,10 @@
 		F3DD4E61224E1CC600D515E3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F3421B74224E28F500B173B3 /* Gormsson.swift */,
+				F3421B76224E294800B173B3 /* Service.swift */,
+				F3421B7C224E3A4C00B173B3 /* Characteristic.swift */,
+				F3421B7E224E3A9F00B173B3 /* GattServices */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -193,6 +222,7 @@
 				TargetAttributes = {
 					F3DD4E44224E15F000D515E3 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 					};
 					F3DD4E74224E1FAF00D515E3 = {
 						CreatedOnToolsVersion = 10.2;
@@ -339,6 +369,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3421B7D224E3A4C00B173B3 /* Characteristic.swift in Sources */,
+				F3421B75224E28F500B173B3 /* Gormsson.swift in Sources */,
+				F3421B77224E294800B173B3 /* Service.swift in Sources */,
+				F3421B7B224E367900B173B3 /* Peripheral+BatteryService.swift in Sources */,
+				F3421B80224E3B5300B173B3 /* Peripheral+GenericAccess.swift in Sources */,
+				F3421B84224E3C3200B173B3 /* Peripheral+DeviceInformation.swift in Sources */,
+				F3421B82224E3C0F00B173B3 /* Peripheral+TxPower.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB9FD07825D7530E38C0B5A9 /* Pods-Gormsson.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -507,6 +545,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.Gormsson;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -516,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4467768F6682B9AD04B813C0 /* Pods-Gormsson.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -543,6 +583,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AFCBC727B7262A3E8317CB1 /* Pods-Gormsson-GormssonTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
 				INFOPLIST_FILE = GormssonTests/Info.plist;
@@ -562,6 +603,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 62B25650CB9DEB5CCA314023 /* Pods-Gormsson-GormssonTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
 				INFOPLIST_FILE = GormssonTests/Info.plist;
