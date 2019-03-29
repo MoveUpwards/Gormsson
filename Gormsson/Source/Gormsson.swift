@@ -34,6 +34,9 @@ public final class Gormsson {
     /// The current state of bluetooth mixed with the connected device
     public var state = BehaviorSubject<BluetoothState>(value: .unknown)
 
+    /// A scanned peripheral
+    public var peripheral = PublishSubject<ScannedPeripheral>()
+
     /// List custom peripheral services
     public var services: [CBUUID]?
 
@@ -45,19 +48,22 @@ public final class Gormsson {
 
         manager.observeState()
             .startWith(manager.state)
-            .filter({ $0 == .poweredOn })
             .asObservable()
             .subscribe(onNext: { [weak self] state in
                 self?.state.onNext(state)
             }).disposed(by: bag)
     }
 
-    /// Scan peripheral
-    public func scan(_ success: @escaping (ScannedPeripheral) -> Void) {
+    /// Scan for peripheral
+    public func scan() {
         manager?.scanForPeripherals(withServices: services)
-            .subscribe(onNext: { peripheral in
-                success(peripheral)
+            .subscribe(onNext: { [weak self] peripheral in
+                self?.peripheral.onNext(peripheral)
             }).disposed(by: bag)
+    }
+
+    public func stop() {
+        manager?.manager.stopScan()
     }
 
     /// Disconnect the current connected device
