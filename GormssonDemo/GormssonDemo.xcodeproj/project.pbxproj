@@ -16,6 +16,7 @@
 		F39E3A0A225E3A95003804A7 /* Gormsson.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F39E3A08225E3A95003804A7 /* Gormsson.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F39E3A10225E3AD0003804A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39E3A0C225E3AD0003804A7 /* LaunchScreen.storyboard */; };
 		F39E3A11225E3AD0003804A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39E3A0E225E3AD0003804A7 /* Main.storyboard */; };
+		F39E3A15225E4F8C003804A7 /* GattCustomAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A14225E4F8C003804A7 /* GattCustomAdvertisement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		F39E3A08225E3A95003804A7 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39E3A0D225E3AD0003804A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39E3A0F225E3AD0003804A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F39E3A14225E4F8C003804A7 /* GattCustomAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattCustomAdvertisement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				F39E39F6225E3A69003804A7 /* AppDelegate.swift */,
 				F39E39FC225E3A6A003804A7 /* MasterViewController.swift */,
 				F39E39F9225E3A69003804A7 /* DetailViewController.swift */,
+				F39E3A14225E4F8C003804A7 /* GattCustomAdvertisement.swift */,
 				F39E39FA225E3A69003804A7 /* GattCustomCharacteristic */,
 				F39E3A0C225E3AD0003804A7 /* LaunchScreen.storyboard */,
 				F39E3A0E225E3AD0003804A7 /* Main.storyboard */,
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39E3A04225E3A6A003804A7 /* MasterViewController.swift in Sources */,
+				F39E3A15225E4F8C003804A7 /* GattCustomAdvertisement.swift in Sources */,
 				F39E3A03225E3A6A003804A7 /* GPSControlService.swift in Sources */,
 				F39E39FF225E3A6A003804A7 /* AppDelegate.swift in Sources */,
 				F39E3A02225E3A6A003804A7 /* DetailViewController.swift in Sources */,

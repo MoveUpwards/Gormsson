@@ -23,27 +23,17 @@ class MasterViewController: UITableViewController {
 
         // ### Gormsson ###
         manager.scan([.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")],
-                     didDiscover: { [weak self] peripheral, advertisementData, rssi in
-            print("rssi:", rssi)
-            print("CBAdvertisementDataLocalNameKey:", advertisementData[CBAdvertisementDataLocalNameKey] ?? "nil")
-            print("CBAdvertisementDataIsConnectable:", advertisementData[CBAdvertisementDataIsConnectable] as? Bool ?? false)
-            if let serviceData = advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data],
-                let data = serviceData[CBUUID(string: "C94E7734-F70C-4B96-BB48-F1E3CB95F79E")] {
+                     didDiscover: { [weak self] peripheral, advertisementData in
+                        print("rssi:", advertisementData.rssi)
+                        print("localName:", advertisementData.localName ?? "nil")
+                        print("isConnectable:", advertisementData.isConnectable)
+                        print("mac address:", advertisementData.macAddress ?? "nil")
 
-//                var intValue = UInt(0)
-//                for (index, element) in [UInt8](data).enumerated() {
-//                    intValue += UInt(element) << (8 * index)
-//                }
-//                print("CBAdvertisementDataServiceDataKey:", intValue)
-                print("CBAdvertisementDataServiceDataKey:", data)
-            }
-//            print("CBAdvertisementDataServiceDataKey", advertisementData[CBAdvertisementDataServiceDataKey] ?? "nil")
-
-            self?.objects.insert(peripheral, at: 0)
-            let indexPath = IndexPath(row: 0, section: 0)
-            DispatchQueue.main.async {
-                self?.tableView.insertRows(at: [indexPath], with: .automatic)
-            }
+                        DispatchQueue.main.async {
+                            self?.objects.insert(peripheral, at: 0)
+                            let indexPath = IndexPath(row: 0, section: 0)
+                            self?.tableView.insertRows(at: [indexPath], with: .automatic)
+                        }
         })
         // ### Gormsson ###
 

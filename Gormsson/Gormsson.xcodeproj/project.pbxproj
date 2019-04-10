@@ -14,6 +14,7 @@
 		F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D9225E391E003804A7 /* BatteryService.swift */; };
 		F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DA225E391E003804A7 /* DeviceInformation.swift */; };
 		F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DB225E391E003804A7 /* GenericAccess.swift */; };
+		F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A12225E448C003804A7 /* GattAdvertisement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F39E39D9225E391E003804A7 /* BatteryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryService.swift; sourceTree = "<group>"; };
 		F39E39DA225E391E003804A7 /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
 		F39E39DB225E391E003804A7 /* GenericAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericAccess.swift; sourceTree = "<group>"; };
+		F39E3A12225E448C003804A7 /* GattAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattAdvertisement.swift; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -43,10 +45,11 @@
 		F39E39D3225E391E003804A7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				F39E39D4225E391E003804A7 /* GattCharacteristic.swift */,
-				F39E39D5225E391E003804A7 /* GattRequest.swift */,
 				F39E39D6225E391E003804A7 /* Gormsson.swift */,
+				F39E39D5225E391E003804A7 /* GattRequest.swift */,
+				F39E3A12225E448C003804A7 /* GattAdvertisement.swift */,
 				F39E39D7225E391E003804A7 /* GattService.swift */,
+				F39E39D4225E391E003804A7 /* GattCharacteristic.swift */,
 				F39E39D8225E391E003804A7 /* GattCharacteristic */,
 			);
 			path = Source;
@@ -205,6 +208,7 @@
 				F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */,
 				F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */,
 				F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */,
+				F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */,
 				F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */,
 				F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */,
 			);

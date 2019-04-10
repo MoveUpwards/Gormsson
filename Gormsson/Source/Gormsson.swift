@@ -32,7 +32,7 @@ public final class Gormsson: NSObject {
     private var options: [String: Any]?
 
     // Block for => didDiscover peripheral:
-    private var didDiscoverBlock: ((CBPeripheral, [String: Any], Int) -> Void)?
+    private var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
     // Current requests
     private var currentRequests = [GattRequest]()
@@ -62,7 +62,7 @@ public final class Gormsson: NSObject {
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     didDiscover: @escaping (CBPeripheral, [String: Any], Int) -> Void) {
+                     didDiscover: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
         didDiscoverBlock = didDiscover
         guard isPoweredOn else {
             needScan = true
@@ -195,7 +195,7 @@ extension Gormsson: CBCentralManagerDelegate {
                                didDiscover peripheral: CBPeripheral,
                                advertisementData: [String: Any],
                                rssi RSSI: NSNumber) {
-        didDiscoverBlock?(peripheral, advertisementData, RSSI.intValue)
+        didDiscoverBlock?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.
