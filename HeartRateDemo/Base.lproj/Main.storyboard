@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current heart Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRu-8O-0g6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Heart Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRu-8O-0g6">
                                 <rect key="frame" x="20" y="194" width="374" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -30,20 +30,39 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sensor Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ats-ke-tST">
+                                <rect key="frame" x="20" y="438.5" width="374" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoA-dq-CYN">
+                                <rect key="frame" x="20" y="483.5" width="374" height="82"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="68"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ats-ke-tST" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0ZA-aB-Q44"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LoA-dq-CYN" secondAttribute="trailing" constant="20" id="4Bq-lI-d9o"/>
                             <constraint firstItem="nRu-8O-0g6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="53T-MG-ZNn"/>
                             <constraint firstItem="nRu-8O-0g6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="E4u-KE-PjM"/>
+                            <constraint firstItem="LoA-dq-CYN" firstAttribute="top" secondItem="ats-ke-tST" secondAttribute="bottom" constant="16" id="GCF-bN-4pq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ats-ke-tST" secondAttribute="trailing" constant="20" id="Pjd-9h-AGl"/>
                             <constraint firstItem="hJP-zg-qQR" firstAttribute="top" secondItem="nRu-8O-0g6" secondAttribute="bottom" constant="16" id="Q02-Sd-qkh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hJP-zg-qQR" secondAttribute="trailing" constant="20" id="YBm-gx-7SX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nRu-8O-0g6" secondAttribute="trailing" constant="20" id="ZSB-ot-qDq"/>
+                            <constraint firstItem="ats-ke-tST" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="aap-Pd-iOi"/>
                             <constraint firstItem="hJP-zg-qQR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ax1-59-caf"/>
+                            <constraint firstItem="LoA-dq-CYN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="z5o-zg-hcC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="heartRate" destination="hJP-zg-qQR" id="qVI-Df-F0p"/>
+                        <outlet property="sensorLocation" destination="LoA-dq-CYN" id="hyn-io-PeX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
