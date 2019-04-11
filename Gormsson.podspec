@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Gormsson/Source/**/*.swift'
 
   s.frameworks = 'Foundation'
-
-  s.dependency 'RxBluetoothKit'
+  s.frameworks = 'CoreBluetooth'
 end
