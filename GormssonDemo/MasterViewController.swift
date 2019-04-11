@@ -16,25 +16,16 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
+    private let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+
     var observation: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // ### Gormsson ###
-        manager.scan([.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")],
-                     didDiscover: { [weak self] peripheral, advertisementData in
-                        print("rssi:", advertisementData.rssi)
-                        print("localName:", advertisementData.localName ?? "nil")
-                        print("isConnectable:", advertisementData.isConnectable)
-                        print("mac address:", advertisementData.macAddress ?? "nil")
+        manager.scan([gpsControlService], didDiscover: didDiscover)
 
-                        DispatchQueue.main.async {
-                            self?.objects.insert(peripheral, at: 0)
-                            let indexPath = IndexPath(row: 0, section: 0)
-                            self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                        }
-        })
         // ### Gormsson ###
 
         // Do any additional setup after loading the view.
@@ -91,6 +82,19 @@ class MasterViewController: UITableViewController {
 
     deinit {
         observation?.invalidate()
+    }
+
+    func didDiscover(_ peripheral: CBPeripheral, _ advertisementData: GattAdvertisement) {
+        print("rssi:", advertisementData.rssi)
+        print("localName:", advertisementData.localName ?? "nil")
+        print("isConnectable:", advertisementData.isConnectable)
+        print("mac address:", advertisementData.macAddress ?? "nil")
+
+        DispatchQueue.main.async { [weak self] in
+            self?.objects.insert(peripheral, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            self?.tableView.insertRows(at: [indexPath], with: .automatic)
+        }
     }
 
     @objc
