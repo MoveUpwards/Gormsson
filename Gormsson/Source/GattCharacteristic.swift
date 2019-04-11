@@ -45,7 +45,7 @@ public enum GattCharacteristic {
 //    case bloodPressureMeasurement
 //    case bodyCompositionFeature
 //    case bodyCompositionMeasurement
-//    case bodySensorLocation
+    case bodySensorLocation
 //    case bondManagementControlPoint
 //    case bondManagementFeatures
 //    case bootKeyboardInputReport
@@ -102,7 +102,7 @@ public enum GattCharacteristic {
     case hardwareRevisionString
 //    case heartRateControlPoint
 //    case heartRateMax
-//    case heartRateMeasurement
+    case heartRateMeasurement
 //    case heatIndex
 //    case height
 //    case hidControlPoint
@@ -305,8 +305,8 @@ public enum GattCharacteristic {
 //            return ""
 //        case .bodyCompositionMeasurement:
 //            return ""
-//        case .bodySensorLocation:
-//            return ""
+        case .bodySensorLocation:
+            return BodySensorLocation()
 //        case .bondManagementControlPoint:
 //            return ""
 //        case .bondManagementFeatures:
@@ -416,11 +416,11 @@ public enum GattCharacteristic {
         case .hardwareRevisionString:
             return HardwareRevisionString()
 //        case .heartRateControlPoint:
-//            return ""
+//            return HeartRateControlPoint()
 //        case .heartRateMax:
 //            return ""
-//        case .heartRateMeasurement:
-//            return ""
+        case .heartRateMeasurement:
+            return HeartRateMeasurement()
 //        case .heatIndex:
 //            return ""
 //        case .height:

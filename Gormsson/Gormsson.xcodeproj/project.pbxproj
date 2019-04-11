@@ -15,6 +15,7 @@
 		F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DA225E391E003804A7 /* DeviceInformation.swift */; };
 		F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DB225E391E003804A7 /* GenericAccess.swift */; };
 		F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A12225E448C003804A7 /* GattAdvertisement.swift */; };
+		F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A16225F3271003804A7 /* HeartRate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F39E39DA225E391E003804A7 /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
 		F39E39DB225E391E003804A7 /* GenericAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericAccess.swift; sourceTree = "<group>"; };
 		F39E3A12225E448C003804A7 /* GattAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattAdvertisement.swift; sourceTree = "<group>"; };
+		F39E3A16225F3271003804A7 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 				F39E39D9225E391E003804A7 /* BatteryService.swift */,
 				F39E39DA225E391E003804A7 /* DeviceInformation.swift */,
 				F39E39DB225E391E003804A7 /* GenericAccess.swift */,
+				F39E3A16225F3271003804A7 /* HeartRate.swift */,
 			);
 			path = GattCharacteristic;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */,
+				F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */,
 				F39E39E3225E391E003804A7 /* GattService.swift in Sources */,
 				F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */,
 				F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */,

@@ -272,6 +272,7 @@ extension Gormsson: CBPeripheralDelegate {
         }
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     private func read(_ characteristic: CBCharacteristic, for request: GattRequest) {
         guard let data = characteristic.value else { return }
 
@@ -319,6 +320,10 @@ extension Gormsson: CBPeripheralDelegate {
         case is String.Type:
             if let block = request.block as? (String?) -> Void {
                 block(String(bytes: [UInt8](data), encoding: .utf8))
+            }
+        case is HeartRateMeasurementType.Type:
+            if let block = request.block as? (HeartRateMeasurementType?) -> Void {
+                block(HeartRateMeasurementType(with: data))
             }
         default:
             print("UNKNOWN TYPE")
