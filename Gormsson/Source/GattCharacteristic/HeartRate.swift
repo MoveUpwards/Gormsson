@@ -38,7 +38,7 @@ internal final class BodySensorLocation: CharacteristicProtocol {
 
 // TODO: Add missing: HeartRateControlPoint
 
-public enum BodySensorLocationEnum: UInt8 {
+public enum BodySensorLocationEnum: UInt8, CustomStringConvertible {
     case other = 0
     case chest
     case wrist
@@ -48,6 +48,27 @@ public enum BodySensorLocationEnum: UInt8 {
     case foot
 
     case unknown
+
+    public var description: String {
+        switch self {
+        case .other:
+            return "Other"
+        case .chest:
+            return "Chest"
+        case .wrist:
+            return "Wrist"
+        case .finger:
+            return "Finger"
+        case .hand:
+            return "Hand"
+        case .earLobe:
+            return "Ear Lobe"
+        case .foot:
+            return "Foot"
+        default:
+            return "Reserved for future use"
+        }
+    }
 }
 
 public enum SensorContactStatus: UInt8 {
