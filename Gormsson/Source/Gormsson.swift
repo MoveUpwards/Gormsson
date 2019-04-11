@@ -87,8 +87,7 @@ public final class Gormsson: NSObject {
             stopScan()
         }
         manager?.connect(peripheral)
-        current = peripheral //TODO: Shouldn't better to set in delegate function?
-        current?.delegate = self
+        peripheral.delegate = self
     }
 
     /// Cancels an active or pending local connection to the current peripheral.
@@ -204,6 +203,10 @@ extension Gormsson: CBCentralManagerDelegate {
                                error: Error?) {
         current = nil
         //TODO: Add auto-reconnect
+    }
+
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        current = peripheral
     }
 }
 
