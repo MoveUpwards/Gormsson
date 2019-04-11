@@ -42,5 +42,9 @@ class ViewController: UIViewController {
             })
         })
     }
+
+    deinit {
+        manager.disconnect()
+    }
 }
 
