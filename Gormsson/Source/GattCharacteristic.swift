@@ -709,4 +709,4 @@ public enum GattCharacteristic {
 //            return ""
         }
     }
-}
+} //swiftlint:disable:this file_length

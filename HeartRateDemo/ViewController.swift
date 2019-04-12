@@ -8,7 +8,6 @@
 
 import UIKit
 import Gormsson
-import CoreBluetooth
 
 class ViewController: UIViewController {
 
@@ -16,8 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet private var sensorLocation: UILabel!
 
     private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
-
-    var observation: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +28,8 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.heartRate.text = "\(location.description)"
                 }
+            }, error: { error in
+                print(error ?? "Unknown error")
             })
 
             self?.manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementType?) in
@@ -39,12 +38,10 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.heartRate.text = "\(rate)"
                 }
+            }, error: { error in
+                print(error ?? "Unknown error")
             })
         })
-    }
-
-    deinit {
-        manager.disconnect()
     }
 }
 

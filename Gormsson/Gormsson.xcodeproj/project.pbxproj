@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3502AB42260C55800814ECC /* GormssonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB32260C55800814ECC /* GormssonError.swift */; };
+		F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */; };
+		F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */; };
 		F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D4225E391E003804A7 /* GattCharacteristic.swift */; };
 		F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D5225E391E003804A7 /* GattRequest.swift */; };
 		F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D6225E391E003804A7 /* Gormsson.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3502AB32260C55800814ECC /* GormssonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonError.swift; sourceTree = "<group>"; };
+		F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+CentralManager.swift"; sourceTree = "<group>"; };
+		F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+Peripheral.swift"; sourceTree = "<group>"; };
 		F39E39D1225E391E003804A7 /* Gormsson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gormsson.h; sourceTree = "<group>"; };
 		F39E39D2225E391E003804A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F39E39D4225E391E003804A7 /* GattCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattCharacteristic.swift; sourceTree = "<group>"; };
@@ -44,15 +50,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3502AB92260D5A600814ECC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */,
+				F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F39E39D3225E391E003804A7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				F39E39D6225E391E003804A7 /* Gormsson.swift */,
+				F3502AB32260C55800814ECC /* GormssonError.swift */,
 				F39E39D5225E391E003804A7 /* GattRequest.swift */,
 				F39E3A12225E448C003804A7 /* GattAdvertisement.swift */,
 				F39E39D7225E391E003804A7 /* GattService.swift */,
 				F39E39D4225E391E003804A7 /* GattCharacteristic.swift */,
 				F39E39D8225E391E003804A7 /* GattCharacteristic */,
+				F3502AB92260D5A600814ECC /* Extensions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -208,6 +225,7 @@
 			files = (
 				F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */,
 				F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */,
+				F3502AB42260C55800814ECC /* GormssonError.swift in Sources */,
 				F39E39E3225E391E003804A7 /* GattService.swift in Sources */,
 				F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */,
 				F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */,
@@ -215,6 +233,8 @@
 				F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */,
 				F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */,
 				F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */,
+				F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */,
+				F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

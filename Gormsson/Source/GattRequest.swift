@@ -15,23 +15,23 @@ internal final class GattRequest {
     /// The Gormsson's characteristic.
     internal var characteristic: CharacteristicProtocol
     /// The block to call on succeed request.
-    internal var block: Any?
+    internal var success: Any?
+    /// The block to call on error request.
+    internal var error: ((Error?) -> Void)?
     /// The value to write.
     internal var value: Any?
-    /// The state to know if the request was process or not.
-    internal var isPending: Bool
 
     /// Init with some default values.
     internal init(_ property: CBCharacteristicProperties,
                   characteristic: CharacteristicProtocol,
-                  block: Any? = nil,
-                  value: Any? = nil,
-                  isPending: Bool = true) {
+                  success: Any? = nil,
+                  error: ((Error?) -> Void)? = nil,
+                  value: Any? = nil) {
         self.property = property
         self.characteristic = characteristic
-        self.block = block
+        self.success = success
+        self.error = error
         self.value = value
-        self.isPending = isPending
     }
 }
 
