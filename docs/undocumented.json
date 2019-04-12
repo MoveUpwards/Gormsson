@@ -1,0 +1,1020 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Extensions/Gormsson+CentralManager.swift",
+      "line": 48,
+      "symbol": "Gormsson.centralManager(_:didConnect:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Extensions/Gormsson+Peripheral.swift",
+      "line": 44,
+      "symbol": "Gormsson.peripheral(_:didUpdateValueFor:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Extensions/Gormsson+Peripheral.swift",
+      "line": 65,
+      "symbol": "Gormsson.peripheral(_:didUpdateNotificationStateFor:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Extensions/Gormsson+Peripheral.swift",
+      "line": 78,
+      "symbol": "Gormsson.peripheral(_:didWriteValueFor:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattAdvertisement.swift",
+      "line": 12,
+      "symbol": "GattAdvertisement",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattAdvertisement.swift",
+      "line": 18,
+      "symbol": "GattAdvertisement.init(with:rssi:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/BatteryService.swift",
+      "line": 11,
+      "symbol": "BatteryLevel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/BatteryService.swift",
+      "line": 12,
+      "symbol": "BatteryLevel.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/BatteryService.swift",
+      "line": 16,
+      "symbol": "BatteryLevel.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/BatteryService.swift",
+      "line": 20,
+      "symbol": "BatteryLevel.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 11,
+      "symbol": "ManufacturerNameString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 12,
+      "symbol": "ManufacturerNameString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 16,
+      "symbol": "ManufacturerNameString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 20,
+      "symbol": "ManufacturerNameString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 25,
+      "symbol": "ModelNumberString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 26,
+      "symbol": "ModelNumberString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 30,
+      "symbol": "ModelNumberString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 34,
+      "symbol": "ModelNumberString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 39,
+      "symbol": "SerialNumberString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 40,
+      "symbol": "SerialNumberString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 44,
+      "symbol": "SerialNumberString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 48,
+      "symbol": "SerialNumberString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 53,
+      "symbol": "HardwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 54,
+      "symbol": "HardwareRevisionString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 58,
+      "symbol": "HardwareRevisionString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 62,
+      "symbol": "HardwareRevisionString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 67,
+      "symbol": "FirmwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 68,
+      "symbol": "FirmwareRevisionString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 72,
+      "symbol": "FirmwareRevisionString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 76,
+      "symbol": "FirmwareRevisionString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 81,
+      "symbol": "SoftwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 82,
+      "symbol": "SoftwareRevisionString.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 86,
+      "symbol": "SoftwareRevisionString.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/DeviceInformation.swift",
+      "line": 90,
+      "symbol": "SoftwareRevisionString.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/GenericAccess.swift",
+      "line": 11,
+      "symbol": "DeviceName",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/GenericAccess.swift",
+      "line": 12,
+      "symbol": "DeviceName.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/GenericAccess.swift",
+      "line": 16,
+      "symbol": "DeviceName.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/GenericAccess.swift",
+      "line": 20,
+      "symbol": "DeviceName.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 11,
+      "symbol": "HeartRateMeasurement",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 12,
+      "symbol": "HeartRateMeasurement.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 16,
+      "symbol": "HeartRateMeasurement.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 20,
+      "symbol": "HeartRateMeasurement.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 25,
+      "symbol": "BodySensorLocation",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 26,
+      "symbol": "BodySensorLocation.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 30,
+      "symbol": "BodySensorLocation.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 34,
+      "symbol": "BodySensorLocation.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 41,
+      "symbol": "BodySensorLocationEnum",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 42,
+      "symbol": "BodySensorLocationEnum.other",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 43,
+      "symbol": "BodySensorLocationEnum.chest",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 44,
+      "symbol": "BodySensorLocationEnum.wrist",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 45,
+      "symbol": "BodySensorLocationEnum.finger",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 46,
+      "symbol": "BodySensorLocationEnum.hand",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 47,
+      "symbol": "BodySensorLocationEnum.earLobe",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 48,
+      "symbol": "BodySensorLocationEnum.foot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 50,
+      "symbol": "BodySensorLocationEnum.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 74,
+      "symbol": "SensorContactStatus",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 75,
+      "symbol": "SensorContactStatus.contactFail",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 76,
+      "symbol": "SensorContactStatus.contactSuccess",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 78,
+      "symbol": "SensorContactStatus.unsupported",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 82,
+      "symbol": "HeartRateMeasurementType",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 85,
+      "symbol": "HeartRateMeasurementType.heartRateValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 91,
+      "symbol": "HeartRateMeasurementType.sensorContactStatus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 102,
+      "symbol": "HeartRateMeasurementType.energyExtended",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 106,
+      "symbol": "HeartRateMeasurementType.rrInterval",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic/HeartRate.swift",
+      "line": 110,
+      "symbol": "HeartRateMeasurementType.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 11,
+      "symbol": "CharacteristicProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 12,
+      "symbol": "CharacteristicProtocol.service",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 13,
+      "symbol": "CharacteristicProtocol.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 14,
+      "symbol": "CharacteristicProtocol.format",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 17,
+      "symbol": "GattCharacteristic",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 41,
+      "symbol": "GattCharacteristic.batteryLevel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 48,
+      "symbol": "GattCharacteristic.bodySensorLocation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 79,
+      "symbol": "GattCharacteristic.deviceName",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 90,
+      "symbol": "GattCharacteristic.firmwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 102,
+      "symbol": "GattCharacteristic.hardwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 105,
+      "symbol": "GattCharacteristic.heartRateMeasurement",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 146,
+      "symbol": "GattCharacteristic.manufacturerNameString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 149,
+      "symbol": "GattCharacteristic.modelNumberString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 201,
+      "symbol": "GattCharacteristic.serialNumberString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 204,
+      "symbol": "GattCharacteristic.softwareRevisionString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattCharacteristic.swift",
+      "line": 250,
+      "symbol": "GattCharacteristic.characteristic",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 11,
+      "symbol": "GattService",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 12,
+      "symbol": "GattService.custom(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 15,
+      "symbol": "GattService.genericAccess",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 16,
+      "symbol": "GattService.alertNotificationService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 17,
+      "symbol": "GattService.automationIO",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 18,
+      "symbol": "GattService.batteryService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 19,
+      "symbol": "GattService.bloodPressure",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 20,
+      "symbol": "GattService.bodyComposition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 21,
+      "symbol": "GattService.bondManagementService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 22,
+      "symbol": "GattService.continuousGlucoseMonitoring",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 23,
+      "symbol": "GattService.currentTimeService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 24,
+      "symbol": "GattService.cyclingPower",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 25,
+      "symbol": "GattService.cyclingSpeedAndCadence",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 26,
+      "symbol": "GattService.deviceInformation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 27,
+      "symbol": "GattService.environmentalSensing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 28,
+      "symbol": "GattService.fitnessMachine",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 29,
+      "symbol": "GattService.genericAttribute",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 30,
+      "symbol": "GattService.glucose",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 31,
+      "symbol": "GattService.healthThermometer",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 32,
+      "symbol": "GattService.heartRate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 33,
+      "symbol": "GattService.httpProxy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 34,
+      "symbol": "GattService.humanInterfaceDevice",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 35,
+      "symbol": "GattService.immediateAlert",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 36,
+      "symbol": "GattService.indoorPositioning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 37,
+      "symbol": "GattService.insulinDelivery",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 38,
+      "symbol": "GattService.internetProtocolSupportService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 39,
+      "symbol": "GattService.linkLoss",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 40,
+      "symbol": "GattService.locationAndNavigation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 41,
+      "symbol": "GattService.meshProvisioningService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 42,
+      "symbol": "GattService.meshProxyService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 43,
+      "symbol": "GattService.nextDstChangeService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 44,
+      "symbol": "GattService.objectTransferService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 45,
+      "symbol": "GattService.phoneAlertStatusService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 46,
+      "symbol": "GattService.pulseOximeterService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 47,
+      "symbol": "GattService.reconnectionConfiguration",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 48,
+      "symbol": "GattService.referenceTimeUpdateService",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 49,
+      "symbol": "GattService.runningSpeedAndCadence",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 50,
+      "symbol": "GattService.scanParameters",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 51,
+      "symbol": "GattService.transportDiscovery",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 52,
+      "symbol": "GattService.txPower",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 53,
+      "symbol": "GattService.userData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 54,
+      "symbol": "GattService.weightScale",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 56,
+      "symbol": "GattService.==(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 60,
+      "symbol": "GattService.uuid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GattService.swift",
+      "line": 69,
+      "symbol": "GattService.uuidString",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 13,
+      "symbol": "GormssonState",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 29,
+      "symbol": "Gormsson.needScan",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 30,
+      "symbol": "Gormsson.services",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 31,
+      "symbol": "Gormsson.options",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 34,
+      "symbol": "Gormsson.isDiscovering",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 35,
+      "symbol": "Gormsson.discoveringService",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 36,
+      "symbol": "Gormsson.pendingRequests",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 39,
+      "symbol": "Gormsson.didDiscoverBlock",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 42,
+      "symbol": "Gormsson.currentRequests",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 143,
+      "symbol": "Gormsson.read(_:append:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 166,
+      "symbol": "Gormsson.notify(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/Gormsson.swift",
+      "line": 191,
+      "symbol": "Gormsson.write(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 11,
+      "symbol": "GormssonError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 12,
+      "symbol": "GormssonError.uncastableValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 13,
+      "symbol": "GormssonError.missingValue",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 14,
+      "symbol": "GormssonError.powerOff",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 15,
+      "symbol": "GormssonError.deviceUnconnected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 16,
+      "symbol": "GormssonError.characteristicNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lgriffie/Projects/MoveUpwards/Gormsson/Gormsson/Source/GormssonError.swift",
+      "line": 17,
+      "symbol": "GormssonError.alreadyNotifying",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/lgriffie/Projects/MoveUpwards/Gormsson"
+}
