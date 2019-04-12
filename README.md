@@ -82,7 +82,7 @@ manager.connect(peripheral)
 Let's say you want to read the `Body Sensor Location` provided by your favorite Heart Rate Monitor sensor, you simply ask the manager to read the `.bodySensorLocation` characteristic that will return a value type of `BodySensorLocationEnum`.
 
 ```swift
-self?.manager.read(.bodySensorLocation, success: { (value: BodySensorLocationEnum?) in
+manager.read(.bodySensorLocation, success: { (value: BodySensorLocationEnum?) in
     guard let location = value else { return }
 
     print("\(location.description)")
@@ -98,7 +98,7 @@ If you want to get the current Heart Rate and have all updated value, you use th
 Now any time the value change, the block will be triggered.
 
 ```swift
-self?.manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementType?) in
+manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementType?) in
     guard let rate = value?.heartRateValue else { return }
 
     print("\(rate)")
@@ -112,7 +112,7 @@ self?.manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurem
 If you want to write value to a characteristic, it's pretty straight forward. You provide the characteristic to be used and the given value to write.
 
 ```swift
-manager?.write(.setTimestamp, value: UInt8(1), success: {
+manager.write(.setTimestamp, value: UInt8(1), success: {
     print("set timestamp success")
 }, error: { error in
     print("set timestamp failure:", error ?? "nil")
@@ -168,7 +168,7 @@ public final class GPSSessionCount: CharacteristicProtocol {
 Then you can use it with read, notify or write BLE command.
 
 ```swift
-self?.manager.read(GPSSessionCount(), success: { (value: UInt?) in
+manager.read(GPSSessionCount(), success: { (value: UInt?) in
     print("GPSSessionCount read:", value ?? "nil")
 }, error: { error in
     print(error ?? "Unknown error")
