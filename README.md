@@ -222,7 +222,7 @@ For general help using Strapi, please refer to [the official Gormsson documentat
 
 We provide a full range of solutions to get better and faster results. We're always looking for the next challenge: consulting, training, develop mobile and web solution, etc.
 
-[Drop us an email](mailto:support@moveupwards.dev) to see how we can help you.
+[Drop us an email](mailto:contact@moveupwards.dev) to see how we can help you.
 
 ## License
 
