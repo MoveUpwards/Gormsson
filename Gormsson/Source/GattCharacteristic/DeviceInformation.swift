@@ -17,7 +17,7 @@ internal final class ManufacturerNameString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }
@@ -31,7 +31,7 @@ internal final class ModelNumberString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }
@@ -45,7 +45,7 @@ internal final class SerialNumberString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }
@@ -59,7 +59,7 @@ internal final class HardwareRevisionString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }
@@ -73,7 +73,7 @@ internal final class FirmwareRevisionString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }
@@ -87,7 +87,7 @@ internal final class SoftwareRevisionString: CharacteristicProtocol {
         return .deviceInformation
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }

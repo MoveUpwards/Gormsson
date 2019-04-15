@@ -17,7 +17,7 @@ internal final class DeviceName: CharacteristicProtocol {
         return .genericAccess
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return String.self
     }
 }

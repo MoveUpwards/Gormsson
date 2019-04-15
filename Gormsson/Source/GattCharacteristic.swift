@@ -11,7 +11,7 @@ import CoreBluetooth
 public protocol CharacteristicProtocol {
     var service: GattService { get }
     var uuid: CBUUID { get }
-    var format: Any.Type { get }
+    var format: DataInitializable.Type { get }
 }
 
 public enum GattCharacteristic {

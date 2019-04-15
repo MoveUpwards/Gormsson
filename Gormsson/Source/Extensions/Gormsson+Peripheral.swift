@@ -41,6 +41,8 @@ extension Gormsson: CBPeripheralDelegate {
         }
     }
 
+    /// Invoked when you retrieve a specified characteristic’s value, or when the peripheral device notifies
+    /// your app that the characteristic’s value has changed.
     public func peripheral(_ peripheral: CBPeripheral,
                            didUpdateValueFor characteristic: CBCharacteristic,
                            error: Error?) {
@@ -62,12 +64,11 @@ extension Gormsson: CBPeripheralDelegate {
         currentRequests = currentRequests.filter({ !deletedRequest.contains($0) })
     }
 
+    /// Invoked when the peripheral receives a request to start or stop providing notifications for
+    /// a specified characteristic’s value.
     public func peripheral(_ peripheral: CBPeripheral,
                            didUpdateNotificationStateFor characteristic: CBCharacteristic,
                            error: Error?) {
-        print("Update notification:", characteristic)
-        print("Update notification:", characteristic.isNotifying)
-
         currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
             .filter({ characteristic.properties.contains($0.property) && $0.property == .notify })
             .forEach { request in
@@ -75,6 +76,7 @@ extension Gormsson: CBPeripheralDelegate {
         }
     }
 
+    /// Invoked when you write data to a characteristic’s value.
     public func peripheral(_ peripheral: CBPeripheral,
                            didWriteValueFor characteristic: CBCharacteristic,
                            error: Error?) {
@@ -83,11 +85,7 @@ extension Gormsson: CBPeripheralDelegate {
         currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
             .filter({ characteristic.properties.contains($0.property) && $0.property == .write })
             .forEach { request in
-                if error != nil {
-                    request.error?(error)
-                } else if let block = request.success as? () -> Void {
-                    block()
-                }
+                error != nil ? request.error?(error) : compute(request, with: characteristic)
 
                 deletedRequest.append(request)
         }
@@ -97,70 +95,13 @@ extension Gormsson: CBPeripheralDelegate {
 
     // MARK: - Private functions
 
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
     private func compute(_ request: GattRequest, with characteristic: CBCharacteristic) {
-        guard let data = characteristic.value else { return }
-
-        switch request.characteristic.format {
-        case is Int8.Type:
-            if let block = request.success as? (Int8?) -> Void {
-                var intValue = Int8(0)
-                for (index, element) in [UInt8](data).enumerated() {
-                    intValue += Int8(element) << (8 * index)
-                }
-                block(intValue)
-                return
-            }
-        case is UInt8.Type:
-            if let block = request.success as? (UInt8?) -> Void {
-                var intValue = UInt8(0)
-                for (index, element) in [UInt8](data).enumerated() {
-                    intValue += UInt8(element) << (8 * index)
-                }
-                block(intValue)
-                return
-            }
-        case is UInt16.Type:
-            if let block = request.success as? (UInt16?) -> Void {
-                var intValue = UInt16(0)
-                for (index, element) in [UInt8](data).enumerated() {
-                    intValue += UInt16(element) << (8 * index)
-                }
-                block(intValue)
-                return
-            }
-        case is UInt.Type:
-            if let block = request.success as? (UInt?) -> Void {
-                var intValue = UInt(0)
-                for (index, element) in [UInt8](data).enumerated() {
-                    intValue += UInt(element) << (8 * index)
-                }
-                block(intValue)
-                return
-            }
-        case is UInt64.Type:
-            if let block = request.success as? (UInt64?) -> Void {
-                var intValue = UInt64(0)
-                for (index, element) in [UInt8](data).enumerated() {
-                    intValue += UInt64(element) << (8 * index)
-                }
-                block(intValue)
-                return
-            }
-        case is String.Type:
-            if let block = request.success as? (String?) -> Void {
-                block(String(bytes: [UInt8](data), encoding: .utf8))
-                return
-            }
-        case is HeartRateMeasurementType.Type:
-            if let block = request.success as? (HeartRateMeasurementType?) -> Void {
-                block(HeartRateMeasurementType(with: data))
-                return
-            }
-        default:
-            print("UNKNOWN TYPE")
+        guard let data = characteristic.value else {
+            request.success?(nil)
+            return
         }
 
-        request.error?(GormssonError.uncastableValue)
+        let value = request.characteristic.format.init(with: data)
+        request.success?(value)
     }
 }

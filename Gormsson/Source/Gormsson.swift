@@ -112,16 +112,16 @@ public final class Gormsson: NSObject {
     // MARK: - GattCharacteristic read / notify / write
 
     /// Reads the value of a characteristic.
-    public func read<T>(_ characteristic: GattCharacteristic,
-                        success: @escaping (T?) -> Void,
-                        error: @escaping (Error?) -> Void) {
+    public func read(_ characteristic: GattCharacteristic,
+                     success: @escaping (DataInitializable?) -> Void,
+                     error: @escaping (Error?) -> Void) {
         read(characteristic.characteristic, success: success, error: error)
     }
 
     /// Starts notifications or indications for the value of a specified characteristic.
-    public func notify<T>(_ characteristic: GattCharacteristic,
-                          success: @escaping (T?) -> Void,
-                          error: @escaping (Error?) -> Void) {
+    public func notify(_ characteristic: GattCharacteristic,
+                       success: @escaping (DataInitializable?) -> Void,
+                       error: @escaping (Error?) -> Void) {
         notify(characteristic.characteristic, success: success, error: error)
     }
 
@@ -131,10 +131,10 @@ public final class Gormsson: NSObject {
     }
 
     /// Writes the value of a characteristic.
-    public func write<T>(_ characteristic: GattCharacteristic,
-                         value: T,
-                         success: @escaping () -> Void,
-                         error: @escaping (Error?) -> Void) {
+    public func write(_ characteristic: GattCharacteristic,
+                      value: DataConvertible,
+                      success: @escaping (DataInitializable?) -> Void,
+                      error: @escaping (Error?) -> Void) {
         write(characteristic.characteristic, value: value, success: success, error: error)
     }
 
@@ -209,7 +209,7 @@ public final class Gormsson: NSObject {
             return
         }
 
-        current.writeValue(convert(value, from: request.characteristic.format),
+        current.writeValue(value.toData(),
                            for: cbCharacteristic,
                            type: .withResponse)
         currentRequests.append(request)
@@ -227,25 +227,12 @@ public final class Gormsson: NSObject {
         pendingRequests.removeAll()
     }
 
-    private func convert(_ value: Any, from type: Any.Type) -> Data {
-        switch type {
-        case is UInt8.Type:
-            guard let value = value as? UInt8 else {
-                return Data()
-            }
-
-            return Data(repeating: value, count: 1)
-        default:
-            return Data()
-        }
-    }
-
     // MARK: - Generics and Custom read / notify / write
 
     /// Reads the value of a characteristic.
-    public func read<T>(_ characteristic: CharacteristicProtocol,
-                        success: @escaping (T?) -> Void,
-                        error: @escaping (Error?) -> Void) {
+    public func read(_ characteristic: CharacteristicProtocol,
+                     success: @escaping (DataInitializable?) -> Void,
+                     error: @escaping (Error?) -> Void) {
         guard state == .isPoweredOn else {
             error(GormssonError.powerOff)
             return
@@ -262,9 +249,9 @@ public final class Gormsson: NSObject {
     }
 
     /// Starts notifications or indications for the value of a specified characteristic.
-    public func notify<T>(_ characteristic: CharacteristicProtocol,
-                          success: @escaping (T?) -> Void,
-                          error: @escaping (Error?) -> Void) {
+    public func notify(_ characteristic: CharacteristicProtocol,
+                       success: @escaping (DataInitializable?) -> Void,
+                       error: @escaping (Error?) -> Void) {
         guard state == .isPoweredOn else {
             error(GormssonError.powerOff)
             return
@@ -298,10 +285,10 @@ public final class Gormsson: NSObject {
     }
 
     /// Writes the value of a characteristic.
-    public func write<T>(_ characteristic: CharacteristicProtocol,
-                         value: T,
-                         success: @escaping () -> Void,
-                         error: @escaping (Error?) -> Void) {
+    public func write(_ characteristic: CharacteristicProtocol,
+                      value: DataConvertible,
+                      success: @escaping (DataInitializable?) -> Void,
+                      error: @escaping (Error?) -> Void) {
         guard state == .isPoweredOn else {
             error(GormssonError.powerOff)
             return

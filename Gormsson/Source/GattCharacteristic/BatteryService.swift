@@ -17,7 +17,7 @@ internal final class BatteryLevel: CharacteristicProtocol {
         return .batteryService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt8.self
     }
 }
