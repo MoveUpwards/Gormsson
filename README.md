@@ -46,6 +46,8 @@ carthage update
 
 ## Usage
 
+![Hear Rate Monitor Demo](Resources/HeartRateDemo.jpg)
+
 ### Start the service
 
 Gormsson init method let you define a specific queue to avoid being on `Main thread`. You can also give an optional `Dictionary` for the `CoreBluetooth` manager.
