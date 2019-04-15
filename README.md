@@ -61,20 +61,22 @@ Every peripheral scanned around are return in the `didDiscover` block along with
 In the below example, we filter peripheral that provide the `HeartRate` service.
 
 ```swift
-manager.scan([.heartRate], didDiscover: { [weak self] peripheral, advertisementData in
-    print(peripheral)
+manager.scan([.heartRate], didDiscover: { [weak self] cbPeripheral, advertisementData in
+    print(cbPeripheral)
     print(advertisementData.localName)
     print(advertisementData.txPowerLevel)
     print(advertisementData.isConnectable)
 })
 ```
 
+You can custom's advertisement datas variables. See [Custom advertisement data](https://github.com/MoveUpwards/Gormsson#custom-advertisement-data).
+
 ### Connect peripheral
 
 When you connect a peripheral, the library automaticaly stop scan for near peripherals.
 
 ```swift
-manager.connect(peripheral)
+manager.connect(cbPeripheral)
 ```
 
 ### Read characteristic
@@ -112,10 +114,10 @@ manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementTyp
 If you want to write value to a characteristic, it's pretty straight forward. You provide the characteristic to be used and the given value to write.
 
 ```swift
-manager.write(.setTimestamp, value: UInt8(1), success: {
-    print("set timestamp success")
+manager.write(.setState, value: UInt8(1), success: {
+    print("set state success")
 }, error: { error in
-    print("set timestamp failure:", error ?? "nil")
+    print("set state failure:", error ?? "nil")
 })
 ```
 
@@ -124,13 +126,13 @@ manager.write(.setTimestamp, value: UInt8(1), success: {
 In order to use custom service, you just need to create a custom `GattService`.
 
 ```swift
-let GPSService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+let gpsService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
 ```
 
 So you can use this custom service to filter the scan peripheral.
 
 ```swift
-manager.scan([GPSService], didDiscover: { [weak self] peripheral, advertisementData in
+manager.scan([gpsService], didDiscover: { [weak self] peripheral, advertisementData in
 
 })
 ```
@@ -185,7 +187,8 @@ Let's say you have the peripheral MAC address provided in the manufacturer data.
 extension GattAdvertisement {
     /// An object containing the manufacturer data of a peripheral.
     open var macAddress: String? {
-        guard let data = serviceData?[CBUUID(string: "C94E7734-F70C-4B96-BB48-F1E3CB95F79E")] else { return nil }
+        let gpsService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        guard let data = serviceData?[gpsService.uuid] else { return nil }
         return [UInt8](data).map({ String(format: "%02hhx", $0).uppercased() })
             .reversed()
             .joined(separator: ":")
@@ -195,7 +198,7 @@ extension GattAdvertisement {
 
 ### Documentation
 
-Have a look at the documentation to check all the functionnalities `Gormsson` library can provide.
+Have a look at the [Documentation](https://moveupwards.github.io/Gormsson/) to check all the functionnalities `Gormsson` library can provide.
 
 ## Contributing
 

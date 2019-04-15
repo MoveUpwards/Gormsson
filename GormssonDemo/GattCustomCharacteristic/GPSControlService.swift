@@ -9,13 +9,15 @@
 import CoreBluetooth
 import Gormsson
 
+public let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+
 public final class GPSControl: CharacteristicProtocol {
     public var uuid: CBUUID {
         return CBUUID(string: "C94E0001-F70C-4B96-BB48-F1E3CB95F79E")
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {
@@ -29,7 +31,7 @@ public final class GPSStatus: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {
@@ -43,7 +45,7 @@ public final class GPSSessionCount: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {
@@ -57,7 +59,7 @@ public final class GPSFreeMemory: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {
@@ -71,7 +73,7 @@ public final class GPSWipeMemory: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {
@@ -85,7 +87,7 @@ public final class GPSTimezone: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsControlService
     }
 
     public var format: Any.Type {

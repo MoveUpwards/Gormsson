@@ -16,7 +16,6 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
-    private let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
     private let imuService = GattService.custom("326A9000-85CB-9195-D9DD-464CFBBAE75A")
 
     var observation: NSKeyValueObservation?
