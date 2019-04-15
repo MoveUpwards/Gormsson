@@ -22,8 +22,8 @@ class ViewController: UIViewController {
         manager.scan([.heartRate], didDiscover: { [weak self] peripheral, _ in
             self?.manager.connect(peripheral)
 
-            self?.manager.read(.bodySensorLocation, success: { (value: BodySensorLocationEnum?) in
-                guard let location = value else { return }
+            self?.manager.read(.bodySensorLocation, success: { value in
+                guard let location = value as? BodySensorLocationEnum else { return }
 
                 DispatchQueue.main.async {
                     self?.heartRate.text = "\(location.description)"
@@ -32,8 +32,8 @@ class ViewController: UIViewController {
                 print(error ?? "Unknown error")
             })
 
-            self?.manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementType?) in
-                guard let rate = value?.heartRateValue else { return }
+            self?.manager.notify(.heartRateMeasurement, success: { value in
+                guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
 
                 DispatchQueue.main.async {
                     self?.heartRate.text = "\(rate)"

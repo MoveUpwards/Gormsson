@@ -17,8 +17,8 @@ internal final class HeartRateMeasurement: CharacteristicProtocol {
         return .heartRate
     }
 
-    public var format: Any.Type {
-        return String.self
+    public var format: DataInitializable.Type {
+        return HeartRateMeasurementType.self
     }
 }
 
@@ -31,7 +31,7 @@ internal final class BodySensorLocation: CharacteristicProtocol {
         return .heartRate
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return BodySensorLocationEnum.self
     }
 }
@@ -107,7 +107,10 @@ public class HeartRateMeasurementType {
         return characteristicData[0] & 0x10 == 0 ? nil : UInt16(characteristicData[4])
     }
 
-    public init(with data: Data) {
+    required public init(with data: Data) {
         characteristicData = [UInt8](data)
     }
+}
+
+extension HeartRateMeasurementType: DataInitializable {
 }

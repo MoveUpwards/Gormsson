@@ -44,8 +44,8 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func readBatteryLevel(_ sender: Any) {
-        manager?.read(.batteryLevel, success: { (value: UInt8?) in
-            guard let batteryLevel = value else { return }
+        manager?.read(.batteryLevel, success: { value in
+            guard let batteryLevel = value as? UInt8 else { return }
             print("batteryLevel:", batteryLevel)
         }, error: { error in
             print("batteryLevel error:", error ?? "nil")
@@ -53,8 +53,8 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func readStrings(_ sender: Any) {
-        manager?.read(.manufacturerNameString, success: { (value: String?) in
-            guard let manufacturerNameString = value else { return }
+        manager?.read(.manufacturerNameString, success: { value in
+            guard let manufacturerNameString = value as? String else { return }
             print("manufacturerNameString:", manufacturerNameString)
         }, error: { error in
             print("manufacturerNameString error:", error ?? "nil")
@@ -62,30 +62,30 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func freeMemory(_ sender: Any) {
-        manager?.read(GPSFreeMemory(), success: { (value: UInt?) in
-            print("GPSFreeMemory", value ?? "nil")
+        manager?.read(GPSFreeMemory(), success: { value in
+            print("GPSFreeMemory", value as? UInt ?? "nil")
         }, error: { error in
             print("GPSFreeMemory error:", error ?? "nil")
         })
     }
 
     @IBAction func gpsStatusStartNotify(_ sender: Any) {
-        manager?.notify(GPSStatus(), success: { (value: UInt8?) in
-            print("GPSStatus", value ?? "nil")
+        manager?.notify(GPSStatus(), success: { value in
+            print("GPSStatus", value as? UInt8 ?? "nil")
         }, error: { error in
             print("GPSStatus error:", error ?? "nil")
         })
     }
 
     @IBAction func gpsSessionCount(_ sender: Any) {
-        manager?.notify(GPSSessionCount(), success: { (value: UInt?) in
-            print("GPSSessionCount notify:", value ?? "nil")
+        manager?.notify(GPSSessionCount(), success: { value in
+            print("GPSSessionCount notify:", value as? UInt ?? "nil")
         }, error: { error in
             print("GPSSessionCount error:", error ?? "nil")
         })
 
-        manager?.read(GPSSessionCount(), success: { (value: UInt?) in
-            print("GPSSessionCount read:", value ?? "nil")
+        manager?.read(GPSSessionCount(), success: { value in
+            print("GPSSessionCount read:", value as? UInt ?? "nil")
         }, error: { error in
             print("GPSSessionCount error:", error ?? "nil")
         })
@@ -96,16 +96,16 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func gpsControlWriteStart(_ sender: Any) {
-        manager?.write(GPSControl(), value: UInt8(1), success: {
-            print("GPSControl start success")
+        manager?.write(GPSControl(), value: GPSControlEnum.start, success: { value in
+            print("GPSControl start success", value as? GPSControlEnum ?? "nil")
         }, error: { error in
             print("GPSControl start:", error ?? "nil")
         })
     }
 
     @IBAction func gpsControlWriteStop(_ sender: Any) {
-        manager?.write(GPSControl(), value: UInt8(0), success: {
-            print("GPSControl stop success")
+        manager?.write(GPSControl(), value: GPSControlEnum.stop, success: { value in
+            print("GPSControl stop success", value as? GPSControlEnum ?? "nil")
         }, error: { error in
             print("GPSControl stop:", error ?? "nil")
         })

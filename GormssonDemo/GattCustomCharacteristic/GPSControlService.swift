@@ -11,6 +11,30 @@ import Gormsson
 
 public let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
 
+public enum GPSControlEnum: UInt8 {
+    case stop = 0
+    case start
+}
+
+extension GPSControlEnum: DataInitializable {
+    public init?(with data: Data) {
+        var intValue = UInt8(0)
+        for (index, element) in [UInt8](data).enumerated() {
+            intValue += UInt8(element) << (8 * index)
+        }
+        guard let value = GPSControlEnum(rawValue: intValue) else {
+            return nil
+        }
+        self = value
+    }
+}
+
+extension GPSControlEnum: DataConvertible {
+    public func toData() -> Data {
+        return Data(repeating: rawValue, count: 1)
+    }
+}
+
 public final class GPSControl: CharacteristicProtocol {
     public var uuid: CBUUID {
         return CBUUID(string: "C94E0001-F70C-4B96-BB48-F1E3CB95F79E")
@@ -20,8 +44,8 @@ public final class GPSControl: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
-        return UInt8.self
+    public var format: DataInitializable.Type {
+        return GPSControlEnum.self
     }
 }
 
@@ -34,7 +58,7 @@ public final class GPSStatus: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt8.self
     }
 }
@@ -48,7 +72,7 @@ public final class GPSSessionCount: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt.self
     }
 }
@@ -62,7 +86,7 @@ public final class GPSFreeMemory: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt.self
     }
 }
@@ -76,7 +100,7 @@ public final class GPSWipeMemory: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt.self
     }
 }
@@ -90,7 +114,7 @@ public final class GPSTimezone: CharacteristicProtocol {
         return gpsControlService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return Int8.self
     }
 }
