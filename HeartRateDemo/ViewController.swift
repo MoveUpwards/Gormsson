@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                 guard let location = value as? BodySensorLocationEnum else { return }
 
                 DispatchQueue.main.async {
-                    self?.heartRate.text = "\(location.description)"
+                    self?.sensorLocation.text = "\(location.description)"
                 }
             }, error: { error in
                 print(error ?? "Unknown error")

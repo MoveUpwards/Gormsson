@@ -86,8 +86,8 @@ manager.connect(cbPeripheral)
 Let's say you want to read the `Body Sensor Location` provided by your favorite Heart Rate Monitor sensor, you simply ask the manager to read the `.bodySensorLocation` characteristic that will return a value type of `BodySensorLocationEnum`.
 
 ```swift
-manager.read(.bodySensorLocation, success: { (value: BodySensorLocationEnum?) in
-    guard let location = value else { return }
+manager.read(.bodySensorLocation, success: { value in
+    guard let location = value as? BodySensorLocationEnum else { return }
 
     print("\(location.description)")
 }, error: { error in
@@ -102,8 +102,8 @@ If you want to get the current Heart Rate and have all updated value, you use th
 Now any time the value change, the block will be triggered.
 
 ```swift
-manager.notify(.heartRateMeasurement, success: { (value: HeartRateMeasurementType?) in
-    guard let rate = value?.heartRateValue else { return }
+manager.notify(.heartRateMeasurement, success: { value in
+    guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
 
     print("\(rate)")
 }, error: { error in
@@ -147,7 +147,7 @@ In order to use custom characteristic class that conforms to `CharateristicProto
 public protocol CharacteristicProtocol {
     var service: GattService { get }
     var uuid: CBUUID { get }
-    var format: Any.Type { get }
+    var format: DataInitializable.Type { get }
 }
 ```
 
@@ -160,10 +160,10 @@ public final class GPSSessionCount: CharacteristicProtocol {
     }
 
     public var service: GattService {
-        return .custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
+        return gpsService
     }
 
-    public var format: Any.Type {
+    public var format: DataInitializable.Type {
         return UInt.self
     }
 }
@@ -172,8 +172,8 @@ public final class GPSSessionCount: CharacteristicProtocol {
 Then you can use it with read, notify or write BLE command.
 
 ```swift
-manager.read(GPSSessionCount(), success: { (value: UInt?) in
-    print("GPSSessionCount read:", value ?? "nil")
+manager.read(GPSSessionCount(), success: { value in
+    print("GPSSessionCount read:", value as? UInt ?? "nil")
 }, error: { error in
     print(error ?? "Unknown error")
 })
