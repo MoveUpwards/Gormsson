@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension BodySensorLocationEnum: DataInitializable {
     public init?(with data: Data) {
         var intValue = UInt8(0)
