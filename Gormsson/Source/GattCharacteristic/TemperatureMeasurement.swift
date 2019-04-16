@@ -100,15 +100,16 @@ public class TemperatureMeasurementType {
     }
 
     public var timestamp: Date? {
-        guard characteristicData[5] & 0x01 == 1 else { return nil }
+        guard characteristicData[0] & 0x2 == 1 else { return nil }
 
         let dateComponents = DateComponents(calendar: Calendar.current,
-                                      year: Int(UInt16(characteristicData[6] << 40)),
-                                      month: Int(UInt8(characteristicData[7] << 32)),
-                                      day: Int(UInt8(characteristicData[8] << 24)),
-                                      hour: Int(UInt8(characteristicData[9] << 16)),
-                                      minute: Int(UInt8(characteristicData[10] << 8)),
-                                      second: Int(UInt8(characteristicData[11])))
+                                            timeZone: TimeZone(secondsFromGMT: 0),
+                                            year: Int(UInt16(characteristicData[5] << 40) + UInt16(characteristicData[6] << 48)),
+                                            month: Int(UInt8(characteristicData[7] << 32)),
+                                            day: Int(UInt8(characteristicData[8] << 24)),
+                                            hour: Int(UInt8(characteristicData[9] << 16)),
+                                            minute: Int(UInt8(characteristicData[10] << 8)),
+                                            second: Int(UInt8(characteristicData[11])))
         return dateComponents.date
     }
 
