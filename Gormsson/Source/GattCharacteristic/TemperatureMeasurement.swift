@@ -104,7 +104,7 @@ public class TemperatureMeasurementType {
 
         let dateComponents = DateComponents(calendar: Calendar.current,
                                             timeZone: TimeZone(secondsFromGMT: 0),
-                                            year: Int(UInt16(characteristicData[5] << 40) + UInt16(characteristicData[6] << 48)),
+                                            year: Int(UInt16(characteristicData[5] << 48) + UInt16(characteristicData[6] << 40)),
                                             month: Int(UInt8(characteristicData[7] << 32)),
                                             day: Int(UInt8(characteristicData[8] << 24)),
                                             hour: Int(UInt8(characteristicData[9] << 16)),
