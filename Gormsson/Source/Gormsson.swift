@@ -88,6 +88,7 @@ public final class Gormsson: NSObject {
         discoveringService = 0
         manager?.connect(peripheral)
         peripheral.delegate = self
+        current = peripheral
     }
 
     /// Cancels an active or pending local connection to the current peripheral.
