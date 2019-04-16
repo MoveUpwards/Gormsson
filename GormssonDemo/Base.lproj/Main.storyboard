@@ -147,6 +147,14 @@
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
+                        <outletCollection property="buttons" destination="wco-UT-TVH" collectionClass="NSMutableArray" id="rYW-cm-xqm"/>
+                        <outletCollection property="buttons" destination="TBz-cY-0oK" collectionClass="NSMutableArray" id="yJi-ec-W4V"/>
+                        <outletCollection property="buttons" destination="Etl-1m-u3w" collectionClass="NSMutableArray" id="06r-wQ-dCa"/>
+                        <outletCollection property="buttons" destination="QDJ-90-gYk" collectionClass="NSMutableArray" id="hxN-99-7bR"/>
+                        <outletCollection property="buttons" destination="TAo-c2-A2F" collectionClass="NSMutableArray" id="f6P-h3-KWH"/>
+                        <outletCollection property="buttons" destination="Nov-nA-RMl" collectionClass="NSMutableArray" id="3So-uC-mZv"/>
+                        <outletCollection property="buttons" destination="kgi-a5-noa" collectionClass="NSMutableArray" id="3r6-Ea-fV5"/>
+                        <outletCollection property="buttons" destination="rvZ-Y7-l7a" collectionClass="NSMutableArray" id="t1H-LO-tYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
