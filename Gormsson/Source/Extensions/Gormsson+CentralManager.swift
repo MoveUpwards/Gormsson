@@ -45,6 +45,7 @@ extension Gormsson: CBCentralManagerDelegate {
         //TODO: Add auto-reconnect
     }
 
+    /// Invoked when a connection is successfully created with a peripheral.
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         current = peripheral
         current?.discoverServices(nil)

@@ -12,7 +12,7 @@ import CoreBluetooth
 
 extension GattAdvertisement {
     /// An object containing the manufacturer data of a peripheral.
-    open var macAddress: String? {
+    public var macAddress: String? {
         guard let data = serviceData?[gpsControlService.uuid] else { return nil }
         return [UInt8](data).map({ String(format: "%02hhx", $0).uppercased() })
             .reversed()

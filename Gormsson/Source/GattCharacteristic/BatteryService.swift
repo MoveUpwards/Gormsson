@@ -8,15 +8,19 @@
 
 import CoreBluetooth
 
+/// BatteryLevel's characteristic of BatteryService service
 internal final class BatteryLevel: CharacteristicProtocol {
+    /// A 128-bit UUID that identifies the characteristic.
     public var uuid: CBUUID {
         return CBUUID(string: "2A19")
     }
 
+    /// The service that this characteristic belongs to.
     public var service: GattService {
         return .batteryService
     }
 
+    /// The value's format of the characteristic.
     public var format: DataInitializable.Type {
         return UInt8.self
     }

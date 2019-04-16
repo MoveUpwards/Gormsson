@@ -8,18 +8,23 @@
 
 import CoreBluetooth
 
+/// DeviceName's characteristic of GenericAccess service
 internal final class DeviceName: CharacteristicProtocol {
+    /// A 128-bit UUID that identifies the characteristic.
     public var uuid: CBUUID {
         return CBUUID(string: "2A00")
     }
 
+    /// The service that this characteristic belongs to.
     public var service: GattService {
         return .genericAccess
     }
 
+    /// The value's format of the characteristic.
     public var format: DataInitializable.Type {
         return String.self
     }
 }
 
-// TODO: Add missing: Appearance, Peripheral Privacy Flag, Reconnection Address, Peripheral Preferred Connection Parameters
+// TODO: Add missing: Appearance, Peripheral Privacy Flag, Reconnection Address
+//      and Peripheral Preferred Connection Parameters

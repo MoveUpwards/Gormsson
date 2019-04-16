@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           Gormsson Docs
         </a>
-         (24% documented)
+         (53% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -126,10 +126,39 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UInt8.html">UInt8</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/CharacteristicProtocol.html">CharacteristicProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/DataConvertible.html">DataConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/DataInitializable.html">DataInitializable</a>
               </li>
             </ul>
           </li>
@@ -165,7 +194,7 @@
 </code></pre>
 
 <p>open your favorite terminal, go to your project root path:</p>
-<pre class="highlight shell"><code>pod install
+<pre class="highlight shell"><code>pod <span class="nb">install</span>
 </code></pre>
 <h3 id='use-a-href-https-github-com-carthage-carthage-carthage-a-with-cartfile' class='heading'>use <a href="https://github.com/Carthage/Carthage">Carthage</a> with Cartfile</h3>
 <pre class="highlight shell"><code>github <span class="s2">"MoveUpwards/Gormsson"</span>
@@ -175,6 +204,8 @@
 <pre class="highlight shell"><code>carthage update
 </code></pre>
 <h2 id='usage' class='heading'>Usage</h2>
+
+<p><img src="Resources/HeartRateDemo.jpg" alt="Hear Rate Monitor Demo"></p>
 <h3 id='start-the-service' class='heading'>Start the service</h3>
 
 <p>Gormsson init method let you define a specific queue to avoid being on <code>Main thread</code>. You can also give an optional <code>Dictionary</code> for the <code>CoreBluetooth</code> manager.</p>
@@ -185,23 +216,25 @@
 <p>Every peripheral scanned around are return in the <code>didDiscover</code> block along with the advertisement data. Check the documentation to see all <code><a href="Classes/GattAdvertisement.html">GattAdvertisement</a></code> properties available.</p>
 
 <p>In the below example, we filter peripheral that provide the <code>HeartRate</code> service.</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">scan</span><span class="p">([</span><span class="o">.</span><span class="n">heartRate</span><span class="p">],</span> <span class="nv">didDiscover</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">peripheral</span><span class="p">,</span> <span class="n">advertisementData</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">peripheral</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">scan</span><span class="p">([</span><span class="o">.</span><span class="n">heartRate</span><span class="p">],</span> <span class="nv">didDiscover</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">cbPeripheral</span><span class="p">,</span> <span class="n">advertisementData</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">cbPeripheral</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">advertisementData</span><span class="o">.</span><span class="n">localName</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">advertisementData</span><span class="o">.</span><span class="n">txPowerLevel</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">advertisementData</span><span class="o">.</span><span class="n">isConnectable</span><span class="p">)</span>
 <span class="p">})</span>
 </code></pre>
+
+<p>You can custom&rsquo;s advertisement datas variables. See <a href="https://github.com/MoveUpwards/Gormsson#custom-advertisement-data">Custom advertisement data</a>.</p>
 <h3 id='connect-peripheral' class='heading'>Connect peripheral</h3>
 
 <p>When you connect a peripheral, the library automaticaly stop scan for near peripherals.</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">peripheral</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">cbPeripheral</span><span class="p">)</span>
 </code></pre>
 <h3 id='read-characteristic' class='heading'>Read characteristic</h3>
 
 <p>Let&rsquo;s say you want to read the <code>Body Sensor Location</code> provided by your favorite Heart Rate Monitor sensor, you simply ask the manager to read the <code>.bodySensorLocation</code> characteristic that will return a value type of <code><a href="Enums/BodySensorLocationEnum.html">BodySensorLocationEnum</a></code>.</p>
-<pre class="highlight swift"><code><span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="nf">read</span><span class="p">(</span><span class="o">.</span><span class="n">bodySensorLocation</span><span class="p">,</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">BodySensorLocationEnum</span><span class="p">?)</span> <span class="k">in</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">location</span> <span class="o">=</span> <span class="n">value</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">read</span><span class="p">(</span><span class="o">.</span><span class="n">bodySensorLocation</span><span class="p">,</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">location</span> <span class="o">=</span> <span class="n">value</span> <span class="k">as?</span> <span class="kt">BodySensorLocationEnum</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
 
     <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">location</span><span class="o">.</span><span class="n">description</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">},</span> <span class="nv">error</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
@@ -213,8 +246,8 @@
 <p>If you want to get the current Heart Rate and have all updated value, you use the <code>Notify</code> capability of the characteristic. To achieve this it&rsquo;s as simple as a simply read.</p>
 
 <p>Now any time the value change, the block will be triggered.</p>
-<pre class="highlight swift"><code><span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="nf">notify</span><span class="p">(</span><span class="o">.</span><span class="n">heartRateMeasurement</span><span class="p">,</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">HeartRateMeasurementType</span><span class="p">?)</span> <span class="k">in</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">rate</span> <span class="o">=</span> <span class="n">value</span><span class="p">?</span><span class="o">.</span><span class="n">heartRateValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">notify</span><span class="p">(</span><span class="o">.</span><span class="n">heartRateMeasurement</span><span class="p">,</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="k">as?</span> <span class="kt">HeartRateMeasurementType</span><span class="p">)?</span><span class="o">.</span><span class="n">heartRateValue</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
 
     <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">rate</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
 <span class="p">},</span> <span class="nv">error</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
@@ -224,20 +257,20 @@
 <h3 id='write-characteristic' class='heading'>Write characteristic</h3>
 
 <p>If you want to write value to a characteristic, it&rsquo;s pretty straight forward. You provide the characteristic to be used and the given value to write.</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="p">?</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="o">.</span><span class="n">setTimestamp</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"set timestamp success"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="o">.</span><span class="n">setState</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">UInt8</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"set state success"</span><span class="p">)</span>
 <span class="p">},</span> <span class="nv">error</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"set timestamp failure:"</span><span class="p">,</span> <span class="n">error</span> <span class="p">??</span> <span class="s">"nil"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"set state failure:"</span><span class="p">,</span> <span class="n">error</span> <span class="p">??</span> <span class="s">"nil"</span><span class="p">)</span>
 <span class="p">})</span>
 </code></pre>
 <h3 id='custom-service' class='heading'>Custom service</h3>
 
 <p>In order to use custom service, you just need to create a custom <code><a href="Enums/GattService.html">GattService</a></code>.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">GPSService</span> <span class="o">=</span> <span class="kt">GattService</span><span class="o">.</span><span class="nf">custom</span><span class="p">(</span><span class="s">"C94E7734-F70C-4B96-BB48-F1E3CB95F79E"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">gpsService</span> <span class="o">=</span> <span class="kt">GattService</span><span class="o">.</span><span class="nf">custom</span><span class="p">(</span><span class="s">"C94E7734-F70C-4B96-BB48-F1E3CB95F79E"</span><span class="p">)</span>
 </code></pre>
 
 <p>So you can use this custom service to filter the scan peripheral.</p>
-<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">scan</span><span class="p">([</span><span class="kt">GPSService</span><span class="p">],</span> <span class="nv">didDiscover</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">peripheral</span><span class="p">,</span> <span class="n">advertisementData</span> <span class="k">in</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">scan</span><span class="p">([</span><span class="n">gpsService</span><span class="p">],</span> <span class="nv">didDiscover</span><span class="p">:</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">peripheral</span><span class="p">,</span> <span class="n">advertisementData</span> <span class="k">in</span>
 
 <span class="p">})</span>
 </code></pre>
@@ -247,7 +280,7 @@
 <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CharacteristicProtocol</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">service</span><span class="p">:</span> <span class="kt">GattService</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
     <span class="k">var</span> <span class="nv">uuid</span><span class="p">:</span> <span class="kt">CBUUID</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
-    <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">Any</span><span class="o">.</span><span class="k">Type</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">DataInitializable</span><span class="o">.</span><span class="k">Type</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -258,18 +291,18 @@
     <span class="p">}</span>
 
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">service</span><span class="p">:</span> <span class="kt">GattService</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">.</span><span class="nf">custom</span><span class="p">(</span><span class="s">"C94E7734-F70C-4B96-BB48-F1E3CB95F79E"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gpsService</span>
     <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">Any</span><span class="o">.</span><span class="k">Type</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">format</span><span class="p">:</span> <span class="kt">DataInitializable</span><span class="o">.</span><span class="k">Type</span> <span class="p">{</span>
         <span class="k">return</span> <span class="kt">UInt</span><span class="o">.</span><span class="k">self</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>Then you can use it with read, notify or write BLE command.</p>
-<pre class="highlight swift"><code><span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="nf">read</span><span class="p">(</span><span class="kt">GPSSessionCount</span><span class="p">(),</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">?)</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"GPSSessionCount read:"</span><span class="p">,</span> <span class="n">value</span> <span class="p">??</span> <span class="s">"nil"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">manager</span><span class="o">.</span><span class="nf">read</span><span class="p">(</span><span class="kt">GPSSessionCount</span><span class="p">(),</span> <span class="nv">success</span><span class="p">:</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"GPSSessionCount read:"</span><span class="p">,</span> <span class="n">value</span> <span class="k">as?</span> <span class="kt">UInt</span> <span class="p">??</span> <span class="s">"nil"</span><span class="p">)</span>
 <span class="p">},</span> <span class="nv">error</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span> <span class="p">??</span> <span class="s">"Unknown error"</span><span class="p">)</span>
 <span class="p">})</span>
@@ -282,7 +315,8 @@
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">GattAdvertisement</span> <span class="p">{</span>
     <span class="c1">/// An object containing the manufacturer data of a peripheral.</span>
     <span class="kd">open</span> <span class="k">var</span> <span class="nv">macAddress</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span>
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">serviceData</span><span class="p">?[</span><span class="kt">CBUUID</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"C94E7734-F70C-4B96-BB48-F1E3CB95F79E"</span><span class="p">)]</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+        <span class="k">let</span> <span class="nv">gpsService</span> <span class="o">=</span> <span class="kt">GattService</span><span class="o">.</span><span class="nf">custom</span><span class="p">(</span><span class="s">"C94E7734-F70C-4B96-BB48-F1E3CB95F79E"</span><span class="p">)</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">serviceData</span><span class="p">?[</span><span class="n">gpsService</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
         <span class="k">return</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">](</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">({</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="s">"%02hhx"</span><span class="p">,</span> <span class="nv">$0</span><span class="p">)</span><span class="o">.</span><span class="nf">uppercased</span><span class="p">()</span> <span class="p">})</span>
             <span class="o">.</span><span class="nf">reversed</span><span class="p">()</span>
             <span class="o">.</span><span class="nf">joined</span><span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="s">":"</span><span class="p">)</span>
@@ -291,7 +325,7 @@
 </code></pre>
 <h3 id='documentation' class='heading'>Documentation</h3>
 
-<p>Have a look at the documentation to check all the functionnalities <code><a href="Classes/Gormsson.html">Gormsson</a></code> library can provide.</p>
+<p>Have a look at the <a href="https://moveupwards.github.io/Gormsson/">Documentation</a> to check all the functionnalities <code><a href="Classes/Gormsson.html">Gormsson</a></code> library can provide.</p>
 <h2 id='contributing' class='heading'>Contributing</h2>
 
 <p>Please read our <a href="https://raw.githubusercontent.com/MoveUpwards/Gormsson/master/CONTRIBUTING.md">Contributing Guide</a> before submitting a Pull Request to the project.</p>
@@ -326,8 +360,8 @@ See <a href="https://raw.githubusercontent.com/MoveUpwards/Gormsson/master/LICEN
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://moveupwards.dev" target="_blank" rel="external">MoveUpwards</a>. All rights reserved. (Last updated: 2019-04-12)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2019 <a class="link" href="https://moveupwards.dev" target="_blank" rel="external">MoveUpwards</a>. All rights reserved. (Last updated: 2019-04-16)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
