@@ -8,38 +8,27 @@
 
 import CoreBluetooth
 
-@objc
-/// The manager’s state.
-public enum GormssonState: Int {
-    /// Uninitialized, wait for a valid state.
-    case unknown
-    /// BLE is powered on.
-    case isPoweredOn
-    /// You need to turn on BLE.
-    case needBluetooth
-    /// BLE was lost or disconnected.
-    case didLostBluetooth
-}
-
 /// Gormsson is a BLE manager with blocks and auto cast type.
 public final class Gormsson: NSObject {
     private var manager: CBCentralManager?
 
-    // Auto scan if needed
-    internal var needScan = false
-    internal var services: [GattService]?
-    internal var options: [String: Any]?
+    // Auto scan logic if needed
+    private var needScan = false
+    private var scanServices: [GattService]?
+    private var scanOptions: [String: Any]?
 
     // Discovering services and characteristics
+    /// The current peripheral is discovering his services and characteristics.
     internal var isDiscovering = false
+    /// Number of services that are currently discovering.
     internal var discoveringService = 0
+    /// The pending requests that wait to be resolved.
     internal var pendingRequests = [GattRequest]()
-
-    // Block for => didDiscover peripheral:
-    internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
-
-    // Current requests
+    /// The current active requests (notify requests).
     internal var currentRequests = [GattRequest]()
+
+    /// The block to call each time a peripheral is found.
+    internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
     /// The current connected peripheral.
     public var current: CBPeripheral?
@@ -75,8 +64,8 @@ public final class Gormsson: NSObject {
         didDiscoverBlock = didDiscover
         guard state == .isPoweredOn else {
             needScan = true
-            self.services = services
-            self.options = options
+            scanServices = services
+            scanOptions = options
             return
         }
 
@@ -96,6 +85,7 @@ public final class Gormsson: NSObject {
             stopScan()
         }
         isDiscovering = true
+        discoveringService = 0
         manager?.connect(peripheral)
         peripheral.delegate = self
     }
@@ -109,37 +99,25 @@ public final class Gormsson: NSObject {
         }
     }
 
-    // MARK: - GattCharacteristic read / notify / write
-
-    /// Reads the value of a characteristic.
-    public func read(_ characteristic: GattCharacteristic,
-                     success: @escaping (DataInitializable?) -> Void,
-                     error: @escaping (Error?) -> Void) {
-        read(characteristic.characteristic, success: success, error: error)
-    }
-
-    /// Starts notifications or indications for the value of a specified characteristic.
-    public func notify(_ characteristic: GattCharacteristic,
-                       success: @escaping (DataInitializable?) -> Void,
-                       error: @escaping (Error?) -> Void) {
-        notify(characteristic.characteristic, success: success, error: error)
-    }
-
-    /// Stops notifications or indications for the value of a specified characteristic.
-    public func stopNotify(_ characteristic: GattCharacteristic) {
-        stopNotify(characteristic.characteristic)
-    }
-
-    /// Writes the value of a characteristic.
-    public func write(_ characteristic: GattCharacteristic,
-                      value: DataConvertible,
-                      success: @escaping (DataInitializable?) -> Void,
-                      error: @escaping (Error?) -> Void) {
-        write(characteristic.characteristic, value: value, success: success, error: error)
-    }
-
     // MARK: - Internal functions
 
+    /// Send a new scan if the first one was too early.
+    internal func rescan() {
+        if needScan, let block = didDiscoverBlock {
+            scan(scanServices, options: scanOptions, didDiscover: block)
+            needScan = false
+            scanServices = nil
+            scanOptions = nil
+        }
+    }
+
+    /// Gets the CBCharacteristic of the current peripheral or nil if not in.
+    internal func get(_ characteristic: CharacteristicProtocol) -> CBCharacteristic? {
+        return current?.services?.first(where: { $0.uuid == characteristic.service.uuid })?
+            .characteristics?.first(where: { $0.uuid == characteristic.uuid })
+    }
+
+    /// Reads the value of a characteristic from a request.
     internal func read(_ request: GattRequest, append: Bool = true) {
        guard state == .isPoweredOn else {
             request.error?(GormssonError.powerOff)
@@ -163,6 +141,7 @@ public final class Gormsson: NSObject {
         }
     }
 
+    /// Starts notifications for the value of a characteristic from a request.
     internal func notify(_ request: GattRequest) {
         guard state == .isPoweredOn else {
             request.error?(GormssonError.powerOff)
@@ -188,6 +167,7 @@ public final class Gormsson: NSObject {
         currentRequests.append(request)
     }
 
+    /// Writes the value of a characteristic from a request.
     internal func write(_ request: GattRequest) {
         guard state == .isPoweredOn else {
             request.error?(GormssonError.powerOff)
@@ -217,94 +197,8 @@ public final class Gormsson: NSObject {
 
     // MARK: - Private functions
 
-    private func get(_ characteristic: CharacteristicProtocol) -> CBCharacteristic? {
-        return current?.services?.first(where: { $0.uuid == characteristic.service.uuid })?
-            .characteristics?.first(where: { $0.uuid == characteristic.uuid })
-    }
-
     private func cleanPeripheral() {
         currentRequests.removeAll()
         pendingRequests.removeAll()
-    }
-
-    // MARK: - Generics and Custom read / notify / write
-
-    /// Reads the value of a characteristic.
-    public func read(_ characteristic: CharacteristicProtocol,
-                     success: @escaping (DataInitializable?) -> Void,
-                     error: @escaping (Error?) -> Void) {
-        guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
-            return
-        }
-
-        let request = GattRequest(.read, characteristic: characteristic, success: success, error: error)
-
-        guard !isDiscovering else {
-            pendingRequests.append(request)
-            return
-        }
-
-        read(request)
-    }
-
-    /// Starts notifications or indications for the value of a specified characteristic.
-    public func notify(_ characteristic: CharacteristicProtocol,
-                       success: @escaping (DataInitializable?) -> Void,
-                       error: @escaping (Error?) -> Void) {
-        guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
-            return
-        }
-
-        let request = GattRequest(.notify, characteristic: characteristic, success: success, error: error)
-
-        guard !isDiscovering else {
-            guard !pendingRequests.contains(request) else {
-                request.error?(GormssonError.alreadyNotifying)
-                return
-            }
-
-            pendingRequests.append(request)
-            return
-        }
-
-        notify(request)
-    }
-
-    /// Stops notifications or indications for the value of a specified characteristic.
-    public func stopNotify(_ characteristic: CharacteristicProtocol) {
-        currentRequests = currentRequests
-            .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) })
-        pendingRequests = pendingRequests
-            .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) })
-
-        guard let cbCharacteristic = get(characteristic), cbCharacteristic.isNotifying else { return }
-
-        current?.setNotifyValue(false, for: cbCharacteristic)
-    }
-
-    /// Writes the value of a characteristic.
-    public func write(_ characteristic: CharacteristicProtocol,
-                      value: DataConvertible,
-                      success: @escaping (DataInitializable?) -> Void,
-                      error: @escaping (Error?) -> Void) {
-        guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
-            return
-        }
-
-        let request = GattRequest(.write,
-                                  characteristic: characteristic,
-                                  success: success,
-                                  error: error,
-                                  value: value)
-
-        guard !isDiscovering else {
-            pendingRequests.append(request)
-            return
-        }
-
-        write(request)
     }
 }

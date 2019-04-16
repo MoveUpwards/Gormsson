@@ -14,12 +14,7 @@ extension Gormsson: CBCentralManagerDelegate {
         switch central.state {
         case .poweredOn:
             state = .isPoweredOn
-            if needScan, let block = didDiscoverBlock {
-                scan(services, options: options, didDiscover: block)
-                needScan = false
-                services = nil
-                options = nil
-            }
+            rescan()
         default:
             if state == .isPoweredOn {
                 current = nil
