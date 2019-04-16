@@ -8,9 +8,8 @@
 
 import Foundation
 
-@objc
 /// The manager’s state.
-public enum GormssonState: Int {
+@objc public enum GormssonState: Int {
     /// Uninitialized, wait for a valid state.
     case unknown
     /// BLE is powered on.
