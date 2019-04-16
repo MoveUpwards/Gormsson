@@ -88,7 +88,7 @@ public class HeartRateMeasurementType {
             (UInt16(characteristicData[1]) << 8) + UInt16(characteristicData[2])
     }
 
-    public var sensorContactStatus: SensorContactStatus {
+    public var contactStatus: SensorContactStatus {
         switch characteristicData[0] & 0x06 {
         case 2:
             return .contactFail
@@ -99,7 +99,7 @@ public class HeartRateMeasurementType {
         }
     }
 
-    public var energyExtended: UInt16? {
+    public var energyExpended: UInt16? {
         return characteristicData[0] & 0x08 == 0 ? nil : UInt16(characteristicData[3])
     }
 
