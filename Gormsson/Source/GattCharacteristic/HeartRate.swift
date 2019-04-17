@@ -99,7 +99,7 @@ public class HeartRateMeasurementType {
         }
     }
 
-    public var energyExtended: UInt16? {
+    public var energyExpended: UInt16? {
         return characteristicData[0] & 0x08 == 0 ? nil : UInt16(characteristicData[3])
     }
 

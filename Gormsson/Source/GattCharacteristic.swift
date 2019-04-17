@@ -218,7 +218,7 @@ public enum GattCharacteristic {
 //    case temperature
 //    case temperatureCelsius
 //    case temperatureFahrenheit
-//    case temperatureMeasurement
+    case temperatureMeasurement
 //    case temperatureType
 //    case threeZoneHeartRateLimits
 //    case timeAccuracy
@@ -651,8 +651,8 @@ public enum GattCharacteristic {
 //            return ""
 //        case .temperatureFahrenheit:
 //            return ""
-//        case .temperatureMeasurement:
-//            return ""
+        case .temperatureMeasurement:
+            return TemperatureMeasurement()
 //        case .temperatureType:
 //            return ""
 //        case .threeZoneHeartRateLimits:
