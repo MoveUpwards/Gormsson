@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>HeartRateMeasurementType Class Reference</title>
+    <title>TemperatureMeasurementTypeEnum Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/HeartRateMeasurementType" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Enum/TemperatureMeasurementTypeEnum" class="dashAnchor"></a>
 
-    <a title="HeartRateMeasurementType Class Reference"></a>
+    <a title="TemperatureMeasurementTypeEnum Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -50,7 +50,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">Gormsson Reference</a>
       <img class="carat" src="../img/carat.png" />
-      HeartRateMeasurementType Class Reference
+      TemperatureMeasurementTypeEnum Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -184,14 +184,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>HeartRateMeasurementType</h1>
+            <h1>TemperatureMeasurementTypeEnum</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">HeartRateMeasurementType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DataInitializable.html">DataInitializable</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TemperatureMeasurementTypeEnum</span> <span class="p">:</span> <span class="kt">UInt8</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
 
                 </div>
               </div>
-            <p>HeartRateMeasurementType define the values of HeartRateMeasurement characteristic.</p>
+            <p>TemperatureMeasurementTypeEnum define the values of unit in TemperatureMeasurementType.</p>
 
           </div>
         </section>
@@ -203,9 +203,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Gormsson24HeartRateMeasurementTypeC05heartC5Values6UInt16Vvp"></a>
-                    <a name="//apple_ref/swift/Property/heartRateValue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Gormsson24HeartRateMeasurementTypeC05heartC5Values6UInt16Vvp">heartRateValue</a>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO6armpityA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/armpit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO6armpityA2CmF">armpit</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -213,14 +213,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Current heart rate value.</p>
+                        <p>Measurement location in armpit</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">heartRateValue</span><span class="p">:</span> <span class="kt">UInt16</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">armpit</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
 
                         </div>
                       </div>
@@ -230,9 +230,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Gormsson24HeartRateMeasurementTypeC19sensorContactStatusAA06SensorgH0Ovp"></a>
-                    <a name="//apple_ref/swift/Property/sensorContactStatus" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Gormsson24HeartRateMeasurementTypeC19sensorContactStatusAA06SensorgH0Ovp">sensorContactStatus</a>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO4bodyyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO4bodyyA2CmF">body</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,14 +240,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Define the current status of the sensor contact.</p>
+                        <p>Measurement location on body</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sensorContactStatus</span><span class="p">:</span> <span class="kt"><a href="../Enums/SensorContactStatus.html">SensorContactStatus</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">body</span></code></pre>
 
                         </div>
                       </div>
@@ -257,9 +257,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Gormsson24HeartRateMeasurementTypeC14energyExtendeds6UInt16VSgvp"></a>
-                    <a name="//apple_ref/swift/Property/energyExtended" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Gormsson24HeartRateMeasurementTypeC14energyExtendeds6UInt16VSgvp">energyExtended</a>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO3earyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/ear" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO3earyA2CmF">ear</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,14 +267,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current energy extended in Joule</p>
+                        <p>Measurement location on ear lobe</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">energyExtended</span><span class="p">:</span> <span class="kt">UInt16</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">ear</span></code></pre>
 
                         </div>
                       </div>
@@ -284,9 +284,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Gormsson24HeartRateMeasurementTypeC10rrIntervals6UInt16VSgvp"></a>
-                    <a name="//apple_ref/swift/Property/rrInterval" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Gormsson24HeartRateMeasurementTypeC10rrIntervals6UInt16VSgvp">rrInterval</a>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO6fingeryA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/finger" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO6fingeryA2CmF">finger</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -294,14 +294,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current RR-interval in 1/1024s.</p>
+                        <p>Measurement location on finger</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rrInterval</span><span class="p">:</span> <span class="kt">UInt16</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">finger</span></code></pre>
 
                         </div>
                       </div>
@@ -311,9 +311,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8Gormsson24HeartRateMeasurementTypeC4withAC10Foundation4DataV_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8Gormsson24HeartRateMeasurementTypeC4withAC10Foundation4DataV_tcfc">init(with:)</a>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO21gastroIntestinalTractyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/gastroIntestinalTract" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO21gastroIntestinalTractyA2CmF">gastroIntestinalTract</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -321,14 +321,176 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>DataInitializable init.</p>
+                        <p>Measurement location in intestinal tract</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">gastroIntestinalTract</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO5mouthyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/mouth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO5mouthyA2CmF">mouth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Measurement location in mouth</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">mouth</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO6rectumyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/rectum" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO6rectumyA2CmF">rectum</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Measurement location in rectum</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">rectum</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO3toeyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/toe" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO3toeyA2CmF">toe</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Measurement location on toe</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">toe</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO8tympanumyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/tympanum" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO8tympanumyA2CmF">tympanum</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Measurement location in tympanum</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tympanum</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO11unsupportedyA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/unsupported" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO11unsupportedyA2CmF">unsupported</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>MeasurementType not supported on the current peripheral.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unsupported</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8Gormsson30TemperatureMeasurementTypeEnumO11descriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8Gormsson30TemperatureMeasurementTypeEnumO11descriptionSSvp">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A textual representation of this instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
