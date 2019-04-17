@@ -15,35 +15,24 @@ class MasterViewController: UITableViewController {
     var detailViewController: DetailViewController? = nil
     var objects = [CBPeripheral]()
 
+    // ## Added for Gormsson
     private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
-    private let imuService = GattService.custom("326A9000-85CB-9195-D9DD-464CFBBAE75A")
 
-    var observation: NSKeyValueObservation?
+    var observation: NSKeyValueObservation? // ## Optional to observe state's changes
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // ### Gormsson ###
-        manager.scan([gpsControlService], didDiscover: didDiscover)
-
-        // ### Gormsson ###
-
         // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
+        manager.scan([gpsControlService], didDiscover: didDiscover) // ## Added for Gormsson
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
 
-        // ### Gormsson ###
+        // ## Optional to observe state's changes
         observation = manager.observe(\.state, options: [.initial, .new], changeHandler: { [weak self] manager, change in
             switch manager.state {
             case .unknown:
@@ -77,14 +66,14 @@ class MasterViewController: UITableViewController {
                 }
             }
         })
-        // ### Gormsson ###
     }
 
     deinit {
-        observation?.invalidate()
+        observation?.invalidate() // ## Optional to observe state's changes
     }
 
-    func didDiscover(_ peripheral: CBPeripheral, _ advertisementData: GattAdvertisement) {
+    // ## Added for Gormsson
+    private func didDiscover(_ peripheral: CBPeripheral, _ advertisementData: GattAdvertisement) {
         print("rssi:", advertisementData.rssi)
         print("localName:", advertisementData.localName ?? "nil")
         print("isConnectable:", advertisementData.isConnectable)
@@ -97,13 +86,6 @@ class MasterViewController: UITableViewController {
         }
     }
 
-    @objc
-    func insertNewObject(_ sender: Any) {
-//        objects.insert(NSDate(), at: 0)
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        tableView.insertRows(at: [indexPath], with: .automatic)
-    }
-
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,10 +94,10 @@ class MasterViewController: UITableViewController {
                 let peripheral = objects[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = peripheral.name
-                // ### Gormsson ###
-                controller.manager = manager
-                manager.connect(peripheral)
-                // ### Gormsson ###
+
+                controller.manager = manager // ## Added for Gormsson
+                manager.connect(peripheral) // ## Added for Gormsson
+
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
