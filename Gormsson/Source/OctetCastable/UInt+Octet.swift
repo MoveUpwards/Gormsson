@@ -8,6 +8,13 @@
 
 import Foundation
 
+extension Bool {
+    /// Init with a UInt8 bit.
+    init(with bit: UInt8) {
+        self = (bit == 0x01) ? true : false
+    }
+}
+
 extension UInt16 {
     /// Init with an octets' array.
     init(with octets: [UInt8]) {
