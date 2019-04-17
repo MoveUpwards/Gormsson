@@ -8,33 +8,114 @@
 
 import CoreBluetooth
 
+// MARK: - Characteristics
+
+/// TemperatureMeasurement's characteristic of healthThermometer service
 internal final class TemperatureMeasurement: CharacteristicProtocol {
+    /// A 128-bit UUID that identifies the characteristic.
     public var uuid: CBUUID {
         return CBUUID(string: "2A1C")
     }
 
+    /// The service that this characteristic belongs to.
     public var service: GattService {
         return .healthThermometer
     }
 
+    /// The value's format of the characteristic.
     public var format: DataInitializable.Type {
         return TemperatureMeasurementType.self
     }
 }
 
-public enum TemperatureMeasurementTypeEnum: UInt8, CustomStringConvertible {
-    case armpit = 1
-    case body
-    case ear
-    case finger
-    case gastroIntestinalTract
-    case mouth
-    case rectum
-    case toe
-    case tympanum
+//swiftlint:disable:next line_length
+// See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.temperature_measurement.xml
 
+/// TemperatureMeasurementType define the values of TemperatureMeasurement characteristic.
+public class TemperatureMeasurementType: DataInitializable {
+    private let characteristicData: [UInt8]
+
+    /// Temperature measurement value.
+    public var value: Float {
+        return Float(bitPattern: UInt32(with: Array(characteristicData[1...4])))
+    }
+
+    /// Temperature measurement unit.
+    public var unit: TemperatureMeasurementUnitEnum {
+        return characteristicData[0] & 0x01 == 0 ? .celsius : .fahrenheit
+    }
+
+    /// Temperature measurement location.
+    public var type: TemperatureMeasurementTypeEnum {
+        switch characteristicData[0] & 0x02 {
+        case 1:
+            return .armpit
+        case 2:
+            return .body
+        case 3:
+            return .ear
+        case 4:
+            return .finger
+        case 5:
+            return .gastroIntestinalTract
+        case 6:
+            return .mouth
+        case 7:
+            return .rectum
+        case 8:
+            return .toe
+        case 9:
+            return .tympanum
+        default:
+            return .unsupported
+        }
+    }
+
+    /// Temperature measurement date.
+    public var timestamp: Date? {
+        guard characteristicData[0] & 0x2 > 0 else { return nil }
+
+        let dateComponents = DateComponents(calendar: Calendar.current,
+                                            timeZone: TimeZone(secondsFromGMT: 0),
+                                            year: Int(UInt16(with: Array(characteristicData[5...6]))),
+                                            month: Int(characteristicData[7]),
+                                            day: Int(characteristicData[8]),
+                                            hour: Int(characteristicData[9]),
+                                            minute: Int(characteristicData[10]),
+                                            second: Int(characteristicData[11]))
+        return dateComponents.date
+    }
+
+    /// DataInitializable init.
+    required public init(with data: Data) {
+        characteristicData = [UInt8](data)
+    }
+}
+
+/// TemperatureMeasurementTypeEnum define the values of unit in TemperatureMeasurementType.
+public enum TemperatureMeasurementTypeEnum: UInt8, CustomStringConvertible {
+    /// Measurement location in armpit
+    case armpit = 1
+    /// Measurement location on body
+    case body
+    /// Measurement location on ear lobe
+    case ear
+    /// Measurement location on finger
+    case finger
+    /// Measurement location in intestinal tract
+    case gastroIntestinalTract
+    /// Measurement location in mouth
+    case mouth
+    /// Measurement location in rectum
+    case rectum
+    /// Measurement location on toe
+    case toe
+    /// Measurement location in tympanum
+    case tympanum
+    /// MeasurementType not supported on the current peripheral.
     case unsupported
 
+    /// A textual representation of this instance.
     public var description: String {
         switch self {
         case .armpit:
@@ -61,10 +142,14 @@ public enum TemperatureMeasurementTypeEnum: UInt8, CustomStringConvertible {
     }
 }
 
+/// TemperatureMeasurementUnitEnum define the values of unit in TemperatureMeasurementType.
 public enum TemperatureMeasurementUnitEnum: UInt8, CustomStringConvertible {
+    /// Measurement in celsius
     case celsius = 0
+    /// Measurement in fahrenheit
     case fahrenheit
 
+    /// A textual representation of this instance.
     public var description: String {
         switch self {
         case .celsius:
@@ -74,65 +159,3 @@ public enum TemperatureMeasurementUnitEnum: UInt8, CustomStringConvertible {
         }
     }
 }
-
-// See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.temperature_measurement.xml
-public class TemperatureMeasurementType {
-    private let characteristicData: [UInt8]
-
-    public var value: Float {
-        let bitValue = UInt32(characteristicData[1] << 24) +
-            UInt32(characteristicData[2] << 16) +
-            UInt32(characteristicData[3] << 8) +
-            UInt32(characteristicData[4])
-        return Float(bitPattern: bitValue)
-    }
-
-    public var unit: TemperatureMeasurementUnitEnum {
-        return characteristicData[0] & 0x01 == 0 ? .celsius : .fahrenheit
-    }
-
-    public var type: TemperatureMeasurementTypeEnum {
-        switch characteristicData[0] & 0x02 {
-        case 1:
-            return .armpit
-        case 2:
-            return .body
-        case 3:
-            return .ear
-        case 4:
-            return .finger
-        case 5:
-            return .gastroIntestinalTract
-        case 6:
-            return .mouth
-        case 7:
-            return .rectum
-        case 8:
-            return .toe
-        case 9:
-            return .tympanum
-        default:
-            return .unsupported
-        }
-    }
-
-    public var timestamp: Date? {
-        guard characteristicData[0] & 0x2 > 0 else { return nil }
-
-        let dateComponents = DateComponents(calendar: Calendar.current,
-                                            timeZone: TimeZone(secondsFromGMT: 0),
-                                            year: Int(UInt16(characteristicData[5]) + UInt16(characteristicData[6] << 8)),
-                                            month: Int(characteristicData[7]),
-                                            day: Int(characteristicData[8]),
-                                            hour: Int(characteristicData[9]),
-                                            minute: Int(characteristicData[10]),
-                                            second: Int(characteristicData[11]))
-        return dateComponents.date
-    }
-
-    required public init(with data: Data) {
-        characteristicData = [UInt8](data)
-    }
-}
-
-extension TemperatureMeasurementType: DataInitializable { }
