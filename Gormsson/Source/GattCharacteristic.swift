@@ -230,6 +230,7 @@ public enum GattCharacteristic {
 //    case temperature
 //    case temperatureCelsius
 //    case temperatureFahrenheit
+    /// Temperature Measurement String (0x2A1C)
     case temperatureMeasurement
 //    case temperatureType
 //    case threeZoneHeartRateLimits
