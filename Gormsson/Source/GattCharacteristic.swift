@@ -8,16 +8,18 @@
 
 import CoreBluetooth
 
+/// Gormsson protocol for a characteristic.
 public protocol CharacteristicProtocol {
-    var service: GattService { get }
+    /// A 128-bit UUID that identifies the characteristic.
     var uuid: CBUUID { get }
+    /// The service that this characteristic belongs to.
+    var service: GattService { get }
+    /// The value's format of the characteristic.
     var format: DataInitializable.Type { get }
 }
 
+/// All the base characteristics from: https://www.bluetooth.com/specifications/gatt/characteristics
 public enum GattCharacteristic {
-//    case custom(String)
-
-    // From: https://www.bluetooth.com/specifications/gatt/characteristics
 //    case aerobicHeartRateLowerLimit
 //    case aerobicHeartRateUpperLimit
 //    case aerobicThreshold
@@ -38,6 +40,7 @@ public enum GattCharacteristic {
 //    case apparentWindSpeed
 //    case appearance
 //    case barometricPressureTrend
+    /// Battery Level (0x2A19)
     case batteryLevel
 //    case batteryLevelState
 //    case batteryPowerState
@@ -45,6 +48,7 @@ public enum GattCharacteristic {
 //    case bloodPressureMeasurement
 //    case bodyCompositionFeature
 //    case bodyCompositionMeasurement
+    /// Body Sensor Location (0x2A38)
     case bodySensorLocation
 //    case bondManagementControlPoint
 //    case bondManagementFeatures
@@ -76,6 +80,7 @@ public enum GattCharacteristic {
 //    case dayDateTime
 //    case dayofWeek
 //    case descriptorValueChanged
+    /// Device Name (0x2A00)
     case deviceName
 //    case dewPoint
 //    case digital
@@ -87,6 +92,7 @@ public enum GattCharacteristic {
 //    case exactTime256
 //    case fatBurnHeartRateLowerLimit
 //    case fatBurnHeartRateUpperLimit
+    /// Firmware Revision String (0x2A26)
     case firmwareRevisionString
 //    case firstName
 //    case fitnessMachineControlPoint
@@ -99,9 +105,11 @@ public enum GattCharacteristic {
 //    case glucoseMeasurement
 //    case glucoseMeasurementContext
 //    case gustFactor
+    /// Hardware Revision String (0x2A27)
     case hardwareRevisionString
 //    case heartRateControlPoint
 //    case heartRateMax
+    /// Heart Rate Measurement (0x2A37)
     case heartRateMeasurement
 //    case heatIndex
 //    case height
@@ -143,9 +151,11 @@ public enum GattCharacteristic {
 //    case magneticDeclination
 //    case magneticFluxDensity_2D
 //    case magneticFluxDensity_3D
+    /// Manufacturer Name String (0x2A29)
     case manufacturerNameString
 //    case maximumRecommendedHeartRate
 //    case measurementInterval
+    /// Model Number String (0x2A24)
     case modelNumberString
 //    case navigation
 //    case networkAvailability
@@ -198,9 +208,11 @@ public enum GattCharacteristic {
 //    case scientificTemperatureCelsius
 //    case secondaryTimeZone
 //    case sensorLocation
+    /// Serial Number String (0x2A25)
     case serialNumberString
 //    case serviceChanged
 //    case serviceRequired
+    /// Software Revision String (0x2A28)
     case softwareRevisionString
 //    case sportTypeforAerobicandAnaerobicThresholds
 //    case stairClimberData
@@ -247,6 +259,7 @@ public enum GattCharacteristic {
 //    case weightScaleFeature
 //    case windChill
 
+    /// CharacteristicProtocol from the enum.
     internal var characteristic: CharacteristicProtocol {
         switch self {
 //        case let .custom(arg):

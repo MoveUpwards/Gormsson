@@ -14,12 +14,7 @@ extension Gormsson: CBCentralManagerDelegate {
         switch central.state {
         case .poweredOn:
             state = .isPoweredOn
-            if needScan, let block = didDiscoverBlock {
-                scan(services, options: options, didDiscover: block)
-                needScan = false
-                services = nil
-                options = nil
-            }
+            rescan()
         default:
             if state == .isPoweredOn {
                 current = nil
@@ -45,8 +40,8 @@ extension Gormsson: CBCentralManagerDelegate {
         //TODO: Add auto-reconnect
     }
 
+    /// Invoked when a connection is successfully created with a peripheral.
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        current = peripheral
         current?.discoverServices(nil)
     }
 }
