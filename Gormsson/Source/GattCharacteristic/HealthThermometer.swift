@@ -33,7 +33,7 @@ public enum TemperatureMeasurementTypeEnum: UInt8, CustomStringConvertible {
     case toe
     case tympanum
 
-    case unknown
+    case unsupported
 
     public var description: String {
         switch self {
@@ -65,16 +65,12 @@ public enum TemperatureMeasurementUnitEnum: UInt8, CustomStringConvertible {
     case celsius = 0
     case fahrenheit
 
-    case unknown
-
     public var description: String {
         switch self {
         case .celsius:
             return "Celsius"
         case .fahrenheit:
             return "Fahrenheit"
-        default:
-            return "Reserved for future use"
         }
     }
 }
@@ -96,20 +92,41 @@ public class TemperatureMeasurementType {
     }
 
     public var type: TemperatureMeasurementTypeEnum {
-        return TemperatureMeasurementTypeEnum.init(rawValue: UInt8(characteristicData[2])) ?? .unknown
+        switch characteristicData[0] & 0x02 {
+        case 1:
+            return .armpit
+        case 2:
+            return .body
+        case 3:
+            return .ear
+        case 4:
+            return .finger
+        case 5:
+            return .gastroIntestinalTract
+        case 6:
+            return .mouth
+        case 7:
+            return .rectum
+        case 8:
+            return .toe
+        case 9:
+            return .tympanum
+        default:
+            return .unsupported
+        }
     }
 
     public var timestamp: Date? {
-        guard characteristicData[0] & 0x2 == 1 else { return nil }
+        guard characteristicData[0] & 0x2 > 0 else { return nil }
 
         let dateComponents = DateComponents(calendar: Calendar.current,
                                             timeZone: TimeZone(secondsFromGMT: 0),
-                                            year: Int(UInt16(characteristicData[5] << 48) + UInt16(characteristicData[6] << 40)),
-                                            month: Int(UInt8(characteristicData[7] << 32)),
-                                            day: Int(UInt8(characteristicData[8] << 24)),
-                                            hour: Int(UInt8(characteristicData[9] << 16)),
-                                            minute: Int(UInt8(characteristicData[10] << 8)),
-                                            second: Int(UInt8(characteristicData[11])))
+                                            year: Int(UInt16(characteristicData[5]) + UInt16(characteristicData[6] << 8)),
+                                            month: Int(characteristicData[7]),
+                                            day: Int(characteristicData[8]),
+                                            hour: Int(characteristicData[9]),
+                                            minute: Int(characteristicData[10]),
+                                            second: Int(characteristicData[11]))
         return dateComponents.date
     }
 

@@ -88,7 +88,7 @@ public class HeartRateMeasurementType {
             (UInt16(characteristicData[1]) << 8) + UInt16(characteristicData[2])
     }
 
-    public var contactStatus: SensorContactStatus {
+    public var sensorContactStatus: SensorContactStatus {
         switch characteristicData[0] & 0x06 {
         case 2:
             return .contactFail
