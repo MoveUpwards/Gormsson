@@ -19,7 +19,7 @@ public final class CustomDateTime: DataInitializable {
         characteristicData = octets
     }
 
-    /// The current energy extended in Joule
+    /// The current timestamp for the measure.
     public var timestamp: TimeInterval? {
         let dateComponents = DateComponents(calendar: Calendar.current,
                                             timeZone: TimeZone(secondsFromGMT: 0),
