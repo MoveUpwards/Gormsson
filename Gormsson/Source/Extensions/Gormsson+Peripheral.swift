@@ -101,7 +101,7 @@ extension Gormsson: CBPeripheralDelegate {
             return
         }
 
-        let value = request.characteristic.format.init(with: data)
+        let value = request.characteristic.format.init(with: data.toOctets)
         request.success?(value)
     }
 }
