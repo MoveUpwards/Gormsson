@@ -70,7 +70,7 @@ public enum SensorContactStatus: UInt8 {
 // See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml
 
 /// HeartRateMeasurementType define the values of HeartRateMeasurement characteristic.
-public class HeartRateMeasurementType: DataInitializable {
+public final class HeartRateMeasurementType: DataInitializable {
     private let characteristicData: [UInt8]
 
     /// DataInitializable init.
@@ -86,19 +86,12 @@ public class HeartRateMeasurementType: DataInitializable {
     }
 
     /// Define the current status of the sensor contact.
-    public var sensorContactStatus: SensorContactStatus {
-        switch characteristicData[0].value(at: 1, length: 2) {
-        case 2:
-            return .contactFail
-        case 3:
-            return .contactSuccess
-        default:
-            return .unsupported
-        }
+    public var sensorContactStatus: SensorContactStatus? {
+        return SensorContactStatus(rawValue: characteristicData[0].value(at: 1, length: 2))
     }
 
-    /// The current energy extended in Joule
-    public var energyExtended: UInt16? {
+    /// The current energy expended in Joule
+    public var energyExpended: UInt16? {
         guard characteristicData[0].bool(at: 3) else { return nil }
 
         var firstIndex = 2 // 0 for Flags and 1 for HRM
