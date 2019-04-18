@@ -17,12 +17,9 @@ public enum GPSControlEnum: UInt8 {
 }
 
 extension GPSControlEnum: DataInitializable {
-    public init?(with data: Data) {
-        var intValue = UInt8(0)
-        for (index, element) in [UInt8](data).enumerated() {
-            intValue += UInt8(element) << (8 * index)
-        }
-        guard let value = GPSControlEnum(rawValue: intValue) else {
+    /// DataInitializable init.
+    public init?(with octets: [UInt8]) {
+        guard let value = GPSControlEnum(rawValue: UInt8(with: octets)) else {
             return nil
         }
         self = value
