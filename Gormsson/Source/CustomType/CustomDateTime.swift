@@ -8,7 +8,6 @@
 
 import Foundation
 
-//swiftlint:disable:next line_length
 // See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.date_time.xml
 
 /// The Date Time characteristic is used to represent time.
