@@ -105,29 +105,14 @@ public final class TemperatureMeasurementType: DataInitializable {
     }
 
     /// Temperature measurement location.
-    public var type: TemperatureMeasurementTypeEnum {
-        switch characteristicData[0].value(at: 2, length: 1) {
-        case 1:
-            return .armpit
-        case 2:
-            return .body
-        case 3:
-            return .ear
-        case 4:
-            return .finger
-        case 5:
-            return .gastroIntestinalTract
-        case 6:
-            return .mouth
-        case 7:
-            return .rectum
-        case 8:
-            return .toe
-        case 9:
-            return .tympanum
-        default:
-            return .unsupported
+    public var type: TemperatureMeasurementTypeEnum? {
+        guard characteristicData[0].bool(at: 2) else { return nil }
+
+        guard characteristicData[0].bool(at: 1) else {
+            return TemperatureMeasurementTypeEnum(rawValue: characteristicData[5])
         }
+
+        return TemperatureMeasurementTypeEnum(rawValue: characteristicData[12])
     }
 
     /// Temperature measurement date.
