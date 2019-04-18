@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6DE3E6832264C5C2004BCFFA /* DataInitializable+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6822264C5C2004BCFFA /* DataInitializable+String.swift */; };
 		6DE3E6852264C5D0004BCFFA /* DataInitializable+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6842264C5D0004BCFFA /* DataInitializable+BinaryInteger.swift */; };
-		6DE3E6872264C5E0004BCFFA /* DataInitializable+BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6862264C5E0004BCFFA /* DataInitializable+BinaryFloatingPoint.swift */; };
 		6DE3E6892264C5F1004BCFFA /* DataInitializable+HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6882264C5F1004BCFFA /* DataInitializable+HeartRate.swift */; };
 		6DE3E68C2264CB09004BCFFA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E68B2264CB09004BCFFA /* DataConvertible.swift */; };
 		6DE3E68E2264D0BB004BCFFA /* DataConvertible+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E68D2264D0BB004BCFFA /* DataConvertible+UInt.swift */; };
@@ -323,8 +322,6 @@
 				F3502ABB2265C8E900814ECC /* HealthThermometer.swift in Sources */,
 				F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */,
 				F3C366062268692A00B09E14 /* CharacteristicProtocol.swift in Sources */,
-				6DE3E6872264C5E0004BCFFA /* DataInitializable+UInt.swift in Sources */,
-				6DE3E6872264C5E0004BCFFA /* DataInitializable+BinaryFloatingPoint.swift in Sources */,
 				F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */,
 				F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */,
 				6DE3E6902265DC69004BCFFA /* GormssonState.swift in Sources */,
