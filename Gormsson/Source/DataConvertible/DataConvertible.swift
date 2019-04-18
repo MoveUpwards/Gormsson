@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Protocol to cast your own type to BLE Data
+/// Protocol to cast your own type to BLE Data.
 public protocol DataConvertible {
-    /// Return Data of the object
+    /// Return Data of the object.
     func toData() -> Data
 }
