@@ -10,6 +10,7 @@ import Foundation
 
 extension UInt8: DataConvertible {
     public func toData() -> Data {
+        /// Return Data of the object.
         return Data(repeating: self, count: 1)
     }
 }
