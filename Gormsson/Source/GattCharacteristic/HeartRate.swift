@@ -146,8 +146,8 @@ public class HeartRateMeasurementType: DataInitializable {
     }
 
     /// DataInitializable init.
-    required public init(with data: Data) {
-        characteristicData = [UInt8](data)
+    required public init(with octets: [UInt8]) {
+        characteristicData = octets
     }
 }
 

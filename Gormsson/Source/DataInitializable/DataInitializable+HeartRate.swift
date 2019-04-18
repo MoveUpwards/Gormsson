@@ -9,12 +9,9 @@
 import Foundation
 
 extension BodySensorLocationEnum: DataInitializable {
-    public init?(with data: Data) {
-        var intValue = UInt8(0)
-        for (index, element) in [UInt8](data).enumerated() {
-            intValue += UInt8(element) << (8 * index)
-        }
-        guard let value = BodySensorLocationEnum(rawValue: intValue) else {
+    /// DataInitializable init.
+    public init?(with octets: [UInt8]) {
+        guard let value = BodySensorLocationEnum(rawValue: UInt8(with: octets)) else {
             return nil
         }
         self = value
