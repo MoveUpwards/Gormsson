@@ -28,7 +28,7 @@ public final class Gormsson: NSObject {
     internal var currentRequests = [GattRequest]()
 
     /// The block to call each time a peripheral is found.
-    internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
+    internal var didDiscoverBlock: ((CBPeripheral, AdvertisementProtocol) -> Void)?
 
     /// The current connected peripheral.
     public var current: CBPeripheral?
@@ -60,7 +60,7 @@ public final class Gormsson: NSObject {
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     didDiscover: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
+                     didDiscover: @escaping (CBPeripheral, AdvertisementProtocol) -> Void) {
         didDiscoverBlock = didDiscover
         guard state == .isPoweredOn else {
             needScan = true

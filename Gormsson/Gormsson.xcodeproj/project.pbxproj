@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6DE3E6812264BA25004BCFFA /* DataInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6802264BA25004BCFFA /* DataInitializable.swift */; };
 		6DE3E6832264C5C2004BCFFA /* DataInitializable+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6822264C5C2004BCFFA /* DataInitializable+String.swift */; };
 		6DE3E6852264C5D0004BCFFA /* DataInitializable+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6842264C5D0004BCFFA /* DataInitializable+Int.swift */; };
 		6DE3E6872264C5E0004BCFFA /* DataInitializable+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6862264C5E0004BCFFA /* DataInitializable+UInt.swift */; };
@@ -32,10 +31,12 @@
 		F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DB225E391E003804A7 /* GenericAccess.swift */; };
 		F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A12225E448C003804A7 /* GattAdvertisement.swift */; };
 		F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A16225F3271003804A7 /* HeartRate.swift */; };
+		F3C366062268692A00B09E14 /* CharacteristicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C366042268692A00B09E14 /* CharacteristicProtocol.swift */; };
+		F3C366072268692A00B09E14 /* AdvertisementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C366052268692A00B09E14 /* AdvertisementProtocol.swift */; };
+		F3C366092268697D00B09E14 /* DataInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C366082268697D00B09E14 /* DataInitializable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6DE3E6802264BA25004BCFFA /* DataInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializable.swift; sourceTree = "<group>"; };
 		6DE3E6822264C5C2004BCFFA /* DataInitializable+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInitializable+String.swift"; sourceTree = "<group>"; };
 		6DE3E6842264C5D0004BCFFA /* DataInitializable+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInitializable+Int.swift"; sourceTree = "<group>"; };
 		6DE3E6862264C5E0004BCFFA /* DataInitializable+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInitializable+UInt.swift"; sourceTree = "<group>"; };
@@ -62,6 +63,9 @@
 		F39E39DB225E391E003804A7 /* GenericAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericAccess.swift; sourceTree = "<group>"; };
 		F39E3A12225E448C003804A7 /* GattAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattAdvertisement.swift; sourceTree = "<group>"; };
 		F39E3A16225F3271003804A7 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
+		F3C366042268692A00B09E14 /* CharacteristicProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharacteristicProtocol.swift; path = Protocol/CharacteristicProtocol.swift; sourceTree = "<group>"; };
+		F3C366052268692A00B09E14 /* AdvertisementProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvertisementProtocol.swift; path = Protocol/AdvertisementProtocol.swift; sourceTree = "<group>"; };
+		F3C366082268697D00B09E14 /* DataInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInitializable.swift; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,7 +83,7 @@
 		6DE3E67F2264B9F9004BCFFA /* DataInitializable */ = {
 			isa = PBXGroup;
 			children = (
-				6DE3E6802264BA25004BCFFA /* DataInitializable.swift */,
+				F3C366082268697D00B09E14 /* DataInitializable.swift */,
 				6DE3E6822264C5C2004BCFFA /* DataInitializable+String.swift */,
 				6DE3E6842264C5D0004BCFFA /* DataInitializable+Int.swift */,
 				6DE3E6862264C5E0004BCFFA /* DataInitializable+UInt.swift */,
@@ -120,6 +124,7 @@
 		F39E39D3225E391E003804A7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F3C36601226868FE00B09E14 /* Protocol */,
 				F39E39D6225E391E003804A7 /* Gormsson.swift */,
 				F3502AB32260C55800814ECC /* GormssonError.swift */,
 				6DE3E68F2265DC69004BCFFA /* GormssonState.swift */,
@@ -146,6 +151,15 @@
 				F3502ABA2265C8E900814ECC /* HealthThermometer.swift */,
 			);
 			path = GattCharacteristic;
+			sourceTree = "<group>";
+		};
+		F3C36601226868FE00B09E14 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F3C366042268692A00B09E14 /* CharacteristicProtocol.swift */,
+				F3C366052268692A00B09E14 /* AdvertisementProtocol.swift */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 		F3DD4E3B224E15F000D515E3 = {
@@ -303,10 +317,12 @@
 				6DE3E6962265E02F004BCFFA /* Gormsson+Write.swift in Sources */,
 				F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */,
 				6DE3E68C2264CB09004BCFFA /* DataConvertible.swift in Sources */,
+				F3C366092268697D00B09E14 /* DataInitializable.swift in Sources */,
 				F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */,
-				6DE3E6812264BA25004BCFFA /* DataInitializable.swift in Sources */,
+				F3C366072268692A00B09E14 /* AdvertisementProtocol.swift in Sources */,
 				F3502ABB2265C8E900814ECC /* HealthThermometer.swift in Sources */,
 				F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */,
+				F3C366062268692A00B09E14 /* CharacteristicProtocol.swift in Sources */,
 				6DE3E6872264C5E0004BCFFA /* DataInitializable+UInt.swift in Sources */,
 				F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */,
 				F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */,

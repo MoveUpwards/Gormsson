@@ -8,16 +8,6 @@
 
 import CoreBluetooth
 
-/// Gormsson protocol for a characteristic.
-public protocol CharacteristicProtocol {
-    /// A 128-bit UUID that identifies the characteristic.
-    var uuid: CBUUID { get }
-    /// The service that this characteristic belongs to.
-    var service: GattService { get }
-    /// The value's format of the characteristic.
-    var format: DataInitializable.Type { get }
-}
-
 /// All the base characteristics from: https://www.bluetooth.com/specifications/gatt/characteristics
 public enum GattCharacteristic {
 //    case aerobicHeartRateLowerLimit

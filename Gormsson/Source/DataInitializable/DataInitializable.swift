@@ -2,7 +2,7 @@
 //  DataInitializable.swift
 //  Gormsson
 //
-//  Created by Damien Noël Dubuisson on 15/04/2019.
+//  Created by Loïc GRIFFIE on 18/04/2019.
 //  Copyright © 2019 Loïc GRIFFIE. All rights reserved.
 //
 

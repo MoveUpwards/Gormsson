@@ -21,7 +21,9 @@ public final class GattAdvertisement {
         self.advertisementData = advertisementData
         self.rssi = rssi
     }
+}
 
+extension GattAdvertisement: AdvertisementProtocol {
     /// Local name of a peripheral.
     public var localName: String? {
         return advertisementData[CBAdvertisementDataLocalNameKey] as? String
