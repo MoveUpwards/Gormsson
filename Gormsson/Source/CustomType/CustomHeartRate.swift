@@ -70,7 +70,7 @@ public enum SensorContactStatus: UInt8 {
 // See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml
 
 /// HeartRateMeasurementType define the values of HeartRateMeasurement characteristic.
-public class HeartRateMeasurementType: DataInitializable {
+public final class HeartRateMeasurementType: DataInitializable {
     private let characteristicData: [UInt8]
 
     /// DataInitializable init.
