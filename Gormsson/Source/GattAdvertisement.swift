@@ -17,7 +17,7 @@ public final class GattAdvertisement {
     public let rssi: Int
 
     /// Creates GattAdvertisement from advertisement dictionary and rssi value.
-    internal init(with advertisementData: [String: Any], rssi: Int) {
+    public init(with advertisementData: [String: Any], rssi: Int) {
         self.advertisementData = advertisementData
         self.rssi = rssi
     }
