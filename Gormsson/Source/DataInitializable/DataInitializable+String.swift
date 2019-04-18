@@ -9,7 +9,7 @@
 import Foundation
 
 extension String: DataInitializable {
-    /// Initialize the object from octets' array
+    /// Initialize the object from octets' array.
     public init?(with octets: [UInt8]) {
         guard let value = String(bytes: octets, encoding: .utf8) else {
             return nil

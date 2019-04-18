@@ -9,7 +9,7 @@
 import Foundation
 
 extension BinaryInteger where Self: DataInitializable {
-    /// Initialize the object from octets' array
+    /// Initialize the object from octets' array.
     public init(with data: [UInt8]) {
         var returnValue = Self(0)
         for (index, element) in data.enumerated() {
