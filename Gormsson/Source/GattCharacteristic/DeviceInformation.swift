@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// ManufacturerNameString's characteristic of DeviceInformation service
 internal final class ManufacturerNameString: CharacteristicProtocol {

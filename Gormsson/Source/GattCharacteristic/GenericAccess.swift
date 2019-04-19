@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// DeviceName's characteristic of GenericAccess service
 internal final class DeviceName: CharacteristicProtocol {

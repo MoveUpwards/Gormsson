@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// BatteryLevel's characteristic of BatteryService service
 internal final class BatteryLevel: CharacteristicProtocol {

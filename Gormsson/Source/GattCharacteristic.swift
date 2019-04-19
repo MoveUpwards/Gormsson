@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// Gormsson protocol for a characteristic.
 public protocol CharacteristicProtocol {

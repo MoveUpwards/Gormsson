@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// A class that represent a request on a characteristic.
 internal final class GattRequest {

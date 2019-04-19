@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Nevanlinna
 
 extension BodySensorLocationEnum: DataInitializable {
     /// DataInitializable init.

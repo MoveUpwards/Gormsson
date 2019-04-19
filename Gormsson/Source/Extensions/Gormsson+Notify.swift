@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Nevanlinna
 
 extension Gormsson {
     /// Starts notifications or indications for the value of a base characteristic.

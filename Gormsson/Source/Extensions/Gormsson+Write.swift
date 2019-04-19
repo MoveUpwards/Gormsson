@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Nevanlinna
 
 extension Gormsson {
     /// Writes the value of a base characteristic.
