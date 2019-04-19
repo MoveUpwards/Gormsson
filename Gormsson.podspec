@@ -17,4 +17,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'Foundation'
   s.frameworks = 'CoreBluetooth'
+
+  s.dependency = 'Nevanlinna'
 end
