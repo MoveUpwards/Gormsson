@@ -1,16 +1,21 @@
 PODS:
+  - Gormsson (0.3.5):
+    - Nevanlinna
   - Nevanlinna (0.1.0)
 
 DEPENDENCIES:
+  - Gormsson
   - Nevanlinna
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Gormsson
     - Nevanlinna
 
 SPEC CHECKSUMS:
+  Gormsson: f7f7a2e67d7b6fdd396a2520396b8c1044fc753c
   Nevanlinna: 7712e0a241b6ee68e4c9a213d2a754d3c83e479f
 
-PODFILE CHECKSUM: 5f3cf41d91ac910864de3da6d69a5b0341256aa0
+PODFILE CHECKSUM: a9f3a8297ed8a1fafd0995d98174e14f28fb23bb
 
 COCOAPODS: 1.7.0.beta.2
