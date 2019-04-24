@@ -14,6 +14,8 @@
 		F3502AAB225F980200814ECC /* Gormsson.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F3502AA9225F980200814ECC /* Gormsson.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F3502AB1225F980D00814ECC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3502AAD225F980D00814ECC /* LaunchScreen.storyboard */; };
 		F3502AB2225F980D00814ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3502AAF225F980D00814ECC /* Main.storyboard */; };
+		F3643646227073FE005D6C70 /* Nevanlinna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3643645227073FE005D6C70 /* Nevanlinna.framework */; };
+		F3643647227073FE005D6C70 /* Nevanlinna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F3643645227073FE005D6C70 /* Nevanlinna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +25,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F3643647227073FE005D6C70 /* Nevanlinna.framework in Embed Frameworks */,
 				F3502AAB225F980200814ECC /* Gormsson.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -40,6 +43,7 @@
 		F3502AA9225F980200814ECC /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3502AAE225F980D00814ECC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3502AB0225F980D00814ECC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F3643645227073FE005D6C70 /* Nevanlinna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nevanlinna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3643646227073FE005D6C70 /* Nevanlinna.framework in Frameworks */,
 				F3502AAA225F980200814ECC /* Gormsson.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +62,7 @@
 		F3502A75225F97A600814ECC = {
 			isa = PBXGroup;
 			children = (
+				F3643645227073FE005D6C70 /* Nevanlinna.framework */,
 				F3502AA9225F980200814ECC /* Gormsson.framework */,
 				F3502A99225F97E200814ECC /* HeartRateDemo-Bridging-Header.h */,
 				F3502AA1225F97E300814ECC /* Info.plist */,
