@@ -32,8 +32,6 @@ extension Gormsson: CBPeripheralDelegate {
                     read(request)
                 case .notify:
                     notify(request)
-                case .write:
-                    write(request)
                 default:
                     break
                 }
