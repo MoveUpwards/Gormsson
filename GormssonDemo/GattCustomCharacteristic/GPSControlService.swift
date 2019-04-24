@@ -8,6 +8,7 @@
 
 import CoreBluetooth
 import Gormsson
+import Nevanlinna
 
 public let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
 

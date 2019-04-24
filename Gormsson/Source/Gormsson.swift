@@ -192,7 +192,7 @@ public final class Gormsson: NSObject {
 
         current.writeValue(value.toData(),
                            for: cbCharacteristic,
-                           type: .withResponse)
+                           type: .withoutResponse)
         currentRequests.append(request)
     }
 
