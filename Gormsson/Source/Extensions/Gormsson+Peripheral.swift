@@ -33,7 +33,11 @@ extension Gormsson: CBPeripheralDelegate {
                 case .notify:
                     notify(request)
                 case .write:
-                    write(request)
+                    print("did write", request)
+//                    write(request)
+                case .writeWithoutResponse:
+                    print("did write without response", request)
+//                    write(request, type: .withoutResponse)
                 default:
                     break
                 }

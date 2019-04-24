@@ -19,20 +19,20 @@ internal final class GattRequest {
     internal var success: ((DataInitializable?) -> Void)?
     /// The block to call on error request.
     internal var error: ((Error?) -> Void)?
-    /// The value to write.
-    internal var value: DataConvertible?
+//    /// The value to write.
+//    internal var value: DataConvertible?
 
     /// Init with some default values.
     internal init(_ property: CBCharacteristicProperties,
                   characteristic: CharacteristicProtocol,
                   success: ((DataInitializable?) -> Void)? = nil,
-                  error: ((Error?) -> Void)? = nil,
-                  value: DataConvertible? = nil) {
+                  error: ((Error?) -> Void)? = nil/*,
+                  value: DataConvertible? = nil*/) {
         self.property = property
         self.characteristic = characteristic
         self.success = success
         self.error = error
-        self.value = value
+//        self.value = value
     }
 }
 

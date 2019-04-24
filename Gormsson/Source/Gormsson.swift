@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 /// Gormsson is a BLE manager with blocks and auto cast type.
 public final class Gormsson: NSObject {
@@ -169,7 +170,9 @@ public final class Gormsson: NSObject {
     }
 
     /// Writes the value of a characteristic from a request.
-    internal func write(_ request: GattRequest) {
+    internal func write(_ request: GattRequest,
+                        value: DataConvertible,
+                        type: CBCharacteristicWriteType = .withResponse) {
         guard state == .isPoweredOn else {
             request.error?(GormssonError.powerOff)
             return
@@ -185,14 +188,14 @@ public final class Gormsson: NSObject {
             return
         }
 
-        guard let value = request.value else {
-            request.error?(GormssonError.missingValue)
-            return
-        }
+//        guard let value = request.value else {
+//            request.error?(GormssonError.missingValue)
+//            return
+//        }
 
         current.writeValue(value.toData(),
                            for: cbCharacteristic,
-                           type: .withResponse)
+                           type: type)
         currentRequests.append(request)
     }
 
