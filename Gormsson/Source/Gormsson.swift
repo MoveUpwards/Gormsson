@@ -188,11 +188,6 @@ public final class Gormsson: NSObject {
             return
         }
 
-//        guard let value = request.value else {
-//            request.error?(GormssonError.missingValue)
-//            return
-//        }
-
         current.writeValue(value.toData(),
                            for: cbCharacteristic,
                            type: type)

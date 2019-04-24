@@ -34,14 +34,13 @@ extension Gormsson {
         let request = GattRequest(.write,
                                   characteristic: characteristic,
                                   success: success,
-                                  error: error/*,
-                                  value: value*/)
+                                  error: error)
 
         guard !isDiscovering else {
             pendingRequests.append(request)
             return
         }
 
-        write(request, value: value)
+        write(request, value: value, type: type)
     }
 }
