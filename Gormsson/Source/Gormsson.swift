@@ -188,12 +188,7 @@ public final class Gormsson: NSObject {
             return
         }
 
-        // TODO: Remove this workaround to support set timestamp done by ob'do.
-        // This has to be rollback to little endian usage conformance
-        print("Data to be written:", value.toData().map({ String(format: "%02hhx", $0).uppercased() }))
-        print("Data to be written:", value.toData().toOctets.reversed().map({ String(format: "%02hhx", $0).uppercased() }))
-
-        current.writeValue(Data(value.toData().toOctets.reversed()),
+        current.writeValue(value.toData(),
                            for: cbCharacteristic,
                            type: type)
 

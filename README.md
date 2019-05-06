@@ -113,10 +113,10 @@ manager.notify(.heartRateMeasurement, success: { value in
 
 ### Write characteristic
 
-If you want to write value to a characteristic, it's pretty straight forward. You provide the characteristic to be used and the given value to write.
+If you want to write value to a characteristic, it's pretty straight forward. You provide the characteristic to be used and the given value to write and optionaly provide BLE write type. Default is `.withResponse`
 
 ```swift
-manager.write(.setState, value: UInt8(1), success: {
+manager.write(.setState, value: UInt8(1), type: .withoutResponse, success: {
     print("set state success")
 }, error: { error in
     print("set state failure:", error ?? "nil")
