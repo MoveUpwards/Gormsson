@@ -12,21 +12,19 @@ import Nevanlinna
 extension Gormsson {
     /// Reads the value of a base characteristic.
     public func read(_ characteristic: GattCharacteristic,
-                     success: @escaping (DataInitializable?) -> Void,
-                     error: @escaping (Error?) -> Void) {
-        read(characteristic.characteristic, success: success, error: error)
+                     result: @escaping (Result<DataInitializable?, Error>) -> Void) {
+        read(characteristic.characteristic, result: result)
     }
 
     /// Reads the value of a custom characteristic.
     public func read(_ characteristic: CharacteristicProtocol,
-                     success: @escaping (DataInitializable?) -> Void,
-                     error: @escaping (Error?) -> Void) {
+                     result: @escaping (Result<DataInitializable?, Error>) -> Void) {
         guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
+            result(.failure(GormssonError.powerOff))
             return
         }
 
-        let request = GattRequest(.read, characteristic: characteristic, success: success, error: error)
+        let request = GattRequest(.read, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             pendingRequests.append(request)

@@ -122,17 +122,17 @@ public final class Gormsson: NSObject {
     /// Reads the value of a characteristic from a request.
     internal func read(_ request: GattRequest, append: Bool = true) {
        guard state == .isPoweredOn else {
-            request.error?(GormssonError.powerOff)
+            request.result?(.failure(GormssonError.powerOff))
             return
         }
 
         guard let current = current else {
-            request.error?(GormssonError.deviceUnconnected)
+            request.result?(.failure(GormssonError.deviceUnconnected))
             return
         }
 
         guard let cbCharacteristic = get(request.characteristic) else {
-            request.error?(GormssonError.characteristicNotFound)
+            request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
@@ -146,22 +146,22 @@ public final class Gormsson: NSObject {
     /// Starts notifications for the value of a characteristic from a request.
     internal func notify(_ request: GattRequest) {
         guard state == .isPoweredOn else {
-            request.error?(GormssonError.powerOff)
+            request.result?(.failure(GormssonError.powerOff))
             return
         }
 
         guard let current = current else {
-            request.error?(GormssonError.deviceUnconnected)
+            request.result?(.failure(GormssonError.deviceUnconnected))
             return
         }
 
         guard let cbCharacteristic = get(request.characteristic) else {
-            request.error?(GormssonError.characteristicNotFound)
+            request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
         guard !cbCharacteristic.isNotifying, !currentRequests.contains(request) else {
-            request.error?(GormssonError.alreadyNotifying)
+            request.result?(.failure(GormssonError.alreadyNotifying))
             return
         }
 
@@ -174,17 +174,17 @@ public final class Gormsson: NSObject {
                         value: DataConvertible,
                         type: CBCharacteristicWriteType = .withResponse) {
         guard state == .isPoweredOn else {
-            request.error?(GormssonError.powerOff)
+            request.result?(.failure(GormssonError.powerOff))
             return
         }
 
         guard let current = current else {
-            request.error?(GormssonError.deviceUnconnected)
+            request.result?(.failure(GormssonError.deviceUnconnected))
             return
         }
 
         guard let cbCharacteristic = get(request.characteristic) else {
-            request.error?(GormssonError.characteristicNotFound)
+            request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
