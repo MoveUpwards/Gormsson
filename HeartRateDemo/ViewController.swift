@@ -8,6 +8,7 @@
 
 import UIKit
 import Gormsson
+import Nevanlinna
 
 class ViewController: UIViewController {
 
@@ -22,24 +23,30 @@ class ViewController: UIViewController {
         manager.scan([.heartRate], didDiscover: { [weak self] peripheral, _ in
             self?.manager.connect(peripheral)
 
-            self?.manager.read(.bodySensorLocation, success: { value in
-                guard let location = value as? BodySensorLocationEnum else { return }
+            self?.manager.read(.bodySensorLocation, result: { (result: Result<DataInitializable, Error>) in
+                switch result {
+                case .success(let value):
+                    guard let location = value as? BodySensorLocationEnum else { return }
 
-                DispatchQueue.main.async {
-                    self?.sensorLocation.text = "\(location.description)"
+                    DispatchQueue.main.async {
+                        self?.sensorLocation.text = "\(location.description)"
+                    }
+                case .failure(let error):
+                    print(error)
                 }
-            }, error: { error in
-                print(error ?? "Unknown error")
             })
 
-            self?.manager.notify(.heartRateMeasurement, success: { value in
-                guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
+            self?.manager.notify(.heartRateMeasurement, result: { (result: Result<DataInitializable, Error>) in
+                switch result {
+                case .success(let value):
+                    guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
 
                 DispatchQueue.main.async {
                     self?.heartRate.text = "\(rate)"
                 }
-            }, error: { error in
-                print(error ?? "Unknown error")
+                case .failure(let error):
+                    print(error)
+                }
             })
         })
     }

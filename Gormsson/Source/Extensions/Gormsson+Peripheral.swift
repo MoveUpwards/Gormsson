@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the peripheral’s available services.
@@ -49,7 +50,11 @@ extension Gormsson: CBPeripheralDelegate {
         currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
             .filter({ characteristic.properties.contains($0.property) })
             .forEach { request in
-                error != nil ? request.error?(error) : compute(request, with: characteristic)
+                if let error = error {
+                    request.result?(.failure(error))
+                } else {
+                    compute(request, with: characteristic)
+                }
 
                 switch request.property {
                 case .read:
@@ -70,7 +75,11 @@ extension Gormsson: CBPeripheralDelegate {
         currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
             .filter({ characteristic.properties.contains($0.property) && $0.property == .notify })
             .forEach { request in
-                error != nil ? request.error?(error) : read(request, append: false)
+                if let error = error {
+                    request.result?(.failure(error))
+                } else {
+                    read(request, append: false)
+                }
         }
     }
 
@@ -83,7 +92,11 @@ extension Gormsson: CBPeripheralDelegate {
         currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
             .filter({ characteristic.properties.contains($0.property) && $0.property == .write })
             .forEach { request in
-                error != nil ? request.error?(error) : compute(request, with: characteristic)
+                if let error = error {
+                    request.result?(.failure(error))
+                } else {
+                     compute(request, with: characteristic)
+                }
 
                 deletedRequest.append(request)
         }
@@ -95,11 +108,15 @@ extension Gormsson: CBPeripheralDelegate {
 
     private func compute(_ request: GattRequest, with characteristic: CBCharacteristic) {
         guard let data = characteristic.value else {
-            request.success?(nil)
+            request.result?(.success(GormssonEmpty()))
             return
         }
 
-        let value = request.characteristic.format.init(with: data.toOctets)
-        request.success?(value)
+        guard let value = request.characteristic.format.init(with: data.toOctets) else {
+            request.result?(.failure(GormssonError.uncastableValue))
+            return
+        }
+
+        request.result?(.success(value))
     }
 }

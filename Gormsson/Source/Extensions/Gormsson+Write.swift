@@ -15,26 +15,21 @@ extension Gormsson {
     public func write(_ characteristic: GattCharacteristic,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
-                      success: @escaping (DataInitializable?) -> Void,
-                      error: @escaping (Error?) -> Void) {
-        write(characteristic.characteristic, value: value, type: type, success: success, error: error)
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        write(characteristic.characteristic, value: value, type: type, result: result)
     }
 
     /// Writes the value of a custom characteristic.
     public func write(_ characteristic: CharacteristicProtocol,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
-                      success: @escaping (DataInitializable?) -> Void,
-                      error: @escaping (Error?) -> Void) {
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
+            result(.failure(GormssonError.powerOff))
             return
         }
 
-        let request = GattRequest(.write,
-                                  characteristic: characteristic,
-                                  success: success,
-                                  error: error)
+        let request = GattRequest(.write, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             pendingRequests.append(request)

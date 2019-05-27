@@ -12,25 +12,23 @@ import Nevanlinna
 extension Gormsson {
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: GattCharacteristic,
-                       success: @escaping (DataInitializable?) -> Void,
-                       error: @escaping (Error?) -> Void) {
-        notify(characteristic.characteristic, success: success, error: error)
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        notify(characteristic.characteristic, result: result)
     }
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: CharacteristicProtocol,
-                       success: @escaping (DataInitializable?) -> Void,
-                       error: @escaping (Error?) -> Void) {
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
-            error(GormssonError.powerOff)
+            result(.failure(GormssonError.powerOff))
             return
         }
 
-        let request = GattRequest(.notify, characteristic: characteristic, success: success, error: error)
+        let request = GattRequest(.notify, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             guard !pendingRequests.contains(request) else {
-                request.error?(GormssonError.alreadyNotifying)
+                request.result?(.failure(GormssonError.alreadyNotifying))
                 return
             }
 
