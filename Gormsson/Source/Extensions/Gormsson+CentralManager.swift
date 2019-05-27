@@ -42,6 +42,7 @@ extension Gormsson: CBCentralManagerDelegate {
 
     /// Invoked when a connection is successfully created with a peripheral.
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        didConnectBlock?(peripheral)
         current?.discoverServices(nil)
     }
 }

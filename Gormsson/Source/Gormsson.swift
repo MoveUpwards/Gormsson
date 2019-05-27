@@ -28,6 +28,9 @@ public final class Gormsson: NSObject {
     /// The current active requests (notify requests).
     internal var currentRequests = [GattRequest]()
 
+    /// The block to call each time a peripheral is connected.
+    internal var didConnectBlock: ((CBPeripheral) -> Void)?
+
     /// The block to call each time a peripheral is found.
     internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
@@ -81,10 +84,11 @@ public final class Gormsson: NSObject {
     /// Establishes a local connection to a peripheral.
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
-    public func connect(_ peripheral: CBPeripheral) {
+    public func connect(_ peripheral: CBPeripheral, success: ((CBPeripheral) -> Void)? = nil) {
         if manager?.isScanning ?? false {
             stopScan()
         }
+        didConnectBlock = success
         isDiscovering = true
         discoveringService = 0
         manager?.connect(peripheral)
