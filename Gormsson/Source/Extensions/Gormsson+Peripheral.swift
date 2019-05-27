@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import Nevanlinna
 
 extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the peripheral’s available services.
@@ -107,11 +108,15 @@ extension Gormsson: CBPeripheralDelegate {
 
     private func compute(_ request: GattRequest, with characteristic: CBCharacteristic) {
         guard let data = characteristic.value else {
-            request.result?(.success(nil))
+            request.result?(.success(GormssonEmpty()))
             return
         }
 
-        let value = request.characteristic.format.init(with: data.toOctets)
+        guard let value = request.characteristic.format.init(with: data.toOctets) else {
+            request.result?(.failure(GormssonError.uncastableValue))
+            return
+        }
+
         request.result?(.success(value))
     }
 }

@@ -15,7 +15,7 @@ extension Gormsson {
     public func write(_ characteristic: GattCharacteristic,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
-                      result: @escaping (Result<DataInitializable?, Error>) -> Void) {
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
         write(characteristic.characteristic, value: value, type: type, result: result)
     }
 
@@ -23,7 +23,7 @@ extension Gormsson {
     public func write(_ characteristic: CharacteristicProtocol,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
-                      result: @escaping (Result<DataInitializable?, Error>) -> Void) {
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
             result(.failure(GormssonError.powerOff))
             return

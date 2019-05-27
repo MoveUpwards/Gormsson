@@ -12,13 +12,13 @@ import Nevanlinna
 extension Gormsson {
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: GattCharacteristic,
-                       result: @escaping (Result<DataInitializable?, Error>) -> Void) {
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
         notify(characteristic.characteristic, result: result)
     }
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: CharacteristicProtocol,
-                       result: @escaping (Result<DataInitializable?, Error>) -> Void) {
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
             result(.failure(GormssonError.powerOff))
             return
