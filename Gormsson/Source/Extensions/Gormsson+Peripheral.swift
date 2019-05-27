@@ -108,7 +108,7 @@ extension Gormsson: CBPeripheralDelegate {
 
     private func compute(_ request: GattRequest, with characteristic: CBCharacteristic) {
         guard let data = characteristic.value else {
-            request.result?(.success(GormssonEmpty()))
+            request.result?(.success(Empty()))
             return
         }
 
