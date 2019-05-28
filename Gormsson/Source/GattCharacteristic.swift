@@ -247,7 +247,7 @@ public enum GattCharacteristic {
 //    case trueWindDirection
 //    case trueWindSpeed
 //    case twoZoneHeartRateLimit
-//    case txPowerLevel
+    case txPowerLevel
 //    case uncertainty
 //    case unreadAlertStatus
 //    case uri
@@ -696,8 +696,8 @@ public enum GattCharacteristic {
 //            return ""
 //        case .twoZoneHeartRateLimit:
 //            return ""
-//        case .txPowerLevel:
-//            return ""
+        case .txPowerLevel:
+            return TxPowerLevel()
 //        case .uncertainty:
 //            return ""
 //        case .unreadAlertStatus:
