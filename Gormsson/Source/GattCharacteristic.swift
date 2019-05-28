@@ -82,6 +82,10 @@ public enum GattCharacteristic {
 //    case dayofWeek
 //    case descriptorValueChanged
     /// Device Name (0x2A00)
+    @available(swift, obsoleted: 1.0, message: """
+    Use: Gormsson.current.name
+    see - https://lists.apple.com/archives/bluetooth-dev/2016/Feb/msg00018.html
+    """)
     case deviceName
 //    case dewPoint
 //    case digital
