@@ -45,26 +45,8 @@ extension Gormsson: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral,
                            didUpdateValueFor characteristic: CBCharacteristic,
                            error: Error?) {
-        var deletedRequest = [GattRequest]()
-
-        currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
-            .filter({ characteristic.properties.contains($0.property) })
-            .forEach { request in
-                if let error = error {
-                    request.result?(.failure(error))
-                } else {
-                    compute(request, with: characteristic)
-                }
-
-                switch request.property {
-                case .read:
-                    deletedRequest.append(request)
-                default:
-                    break
-                }
-        }
-
-        currentRequests = currentRequests.filter({ !deletedRequest.contains($0) })
+        let property = characteristic.isNotifying ? CBCharacteristicProperties.notify : .read
+        request(for: peripheral, with: characteristic, property: property, error: error)
     }
 
     /// Invoked when the peripheral receives a request to start or stop providing notifications for
@@ -72,41 +54,53 @@ extension Gormsson: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral,
                            didUpdateNotificationStateFor characteristic: CBCharacteristic,
                            error: Error?) {
-        currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
-            .filter({ characteristic.properties.contains($0.property) && $0.property == .notify })
-            .forEach { request in
-                if let error = error {
-                    request.result?(.failure(error))
-                } else {
-                    read(request, append: false)
-                }
-        }
+        request(for: peripheral, with: characteristic, property: .notify, error: error)
     }
 
     /// Invoked when you write data to a characteristic’s value.
     public func peripheral(_ peripheral: CBPeripheral,
                            didWriteValueFor characteristic: CBCharacteristic,
                            error: Error?) {
-        var deletedRequest = [GattRequest]()
-
-        currentRequests.filter({ $0.characteristic.uuid == characteristic.uuid })
-            .filter({ characteristic.properties.contains($0.property) && $0.property == .write })
-            .forEach { request in
-                if let error = error {
-                    request.result?(.failure(error))
-                } else {
-                     compute(request, with: characteristic)
-                }
-
-                deletedRequest.append(request)
-        }
-
-        currentRequests = currentRequests.filter({ !deletedRequest.contains($0) })
+        request(for: peripheral, with: characteristic, property: .write, error: error)
     }
 
     // MARK: - Private functions
 
-    private func compute(_ request: GattRequest, with characteristic: CBCharacteristic) {
+    private func request(for peripheral: CBPeripheral,
+                         with characteristic: CBCharacteristic,
+                         property: CBCharacteristicProperties,
+                         error: Error?) {
+        let filter: (GattRequest) -> Bool = { $0.characteristic.uuid == characteristic.uuid &&
+            characteristic.properties.contains($0.property) && $0.property == property }
+
+        guard property != .notify else {
+            currentRequests.filter(filter).forEach { request in
+                if let error = error {
+                    request.result?(.failure(error))
+                } else {
+                    compute(request, for: characteristic)
+                }
+            }
+            return
+        }
+
+        guard let request = currentRequests.first(where: filter) else { return }
+
+        if property.contains(.read) || property.contains(.write) {
+            currentRequests.removeAll(where: { $0 === request })
+        }
+
+        guard error == nil else {
+            if let error = error {
+                request.result?(.failure(error))
+            }
+            return
+        }
+
+        compute(request, for: characteristic)
+    }
+
+    private func compute(_ request: GattRequest, for characteristic: CBCharacteristic) {
         guard let data = characteristic.value else {
             request.result?(.success(Empty()))
             return
