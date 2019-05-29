@@ -13,4 +13,7 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:GormssonDemo/GormssonDemo.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -68,47 +68,47 @@ class DetailViewController: UIViewController {
     // MARK: - ## Added for Gormsson
 
     @IBAction private func readBatteryLevel(_ sender: Any) {
-        manager?.read(.batteryLevel, result: { (result: Result<DataInitializable, Error>) in
+        manager?.read(.batteryLevel) { result in
             switch result {
             case .success(let value):
                 print("batteryLevel:", value as? UInt8 ?? "nil")
             case .failure(let error):
                 print("batteryLevel error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func readStrings(_ sender: Any) {
-        manager?.read(.manufacturerNameString, result: { (result: Result<DataInitializable, Error>) in
+        manager?.read(.manufacturerNameString) { result in
             switch result {
             case .success(let value):
                 print("manufacturerNameString:", value as? String ?? "nil")
             case .failure(let error):
                 print("manufacturerNameString error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func freeMemory(_ sender: Any) {
-        manager?.read(GPSFreeMemory(), result: { (result: Result<DataInitializable, Error>) in
+        manager?.read(GPSFreeMemory()) { result in
             switch result {
             case .success(let value):
                 print("GPSFreeMemory:", value as? UInt ?? "nil")
             case .failure(let error):
                 print("GPSFreeMemory error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func gpsStatusStartNotify(_ sender: Any) {
-        manager?.read(GPSStatus(), result: { (result: Result<DataInitializable, Error>) in
+        manager?.read(GPSStatus()) { result in
             switch result {
             case .success(let value):
                 print("GPSStatus:", value as? UInt ?? "nil")
             case .failure(let error):
                 print("GPSStatus error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func gpsStatusStopNotify(_ sender: Any) {
@@ -116,35 +116,35 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsSessionCount(_ sender: Any) {
-        manager?.read(GPSSessionCount(), result: { (result: Result<DataInitializable, Error>) in
+        manager?.read(GPSSessionCount()) { result in
             switch result {
             case .success(let value):
                 print("GPSSessionCount:", value as? UInt ?? "nil")
             case .failure(let error):
                 print("GPSSessionCount error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func gpsControlWriteStart(_ sender: Any) {
-        manager?.write(GPSControl(), value: GPSControlEnum.start, result: { (result: Result<DataInitializable, Error>) in
+        manager?.write(GPSControl(), value: GPSControlEnum.start) { result in
             switch result {
             case .success(let value):
                 print("GPSControl start:", value as? GPSControlEnum ?? "nil")
             case .failure(let error):
                 print("GPSControl start error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func gpsControlWriteStop(_ sender: Any) {
-        manager?.write(GPSControl(), value: GPSControlEnum.stop, result: { (result: Result<DataInitializable, Error>) in
+        manager?.write(GPSControl(), value: GPSControlEnum.stop) { result in
             switch result {
             case .success(let value):
                 print("GPSControl stop:", value as? GPSControlEnum ?? "nil")
             case .failure(let error):
                 print("GPSControl stop error:", error)
             }
-        })
+        }
     }
 }
