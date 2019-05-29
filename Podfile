@@ -7,7 +7,7 @@ target 'Gormsson' do
   use_frameworks!
 
   # Pods for Gormsson
-  pod 'Nevanlinna'
+  pod 'Nevanlinna'#, :path => '~/Projects/MoveUpwards/Nevanlinna'
 end
 
 target 'GormssonDemo' do
