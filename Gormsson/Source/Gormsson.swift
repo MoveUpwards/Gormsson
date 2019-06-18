@@ -35,7 +35,7 @@ public final class Gormsson: NSObject {
     internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
     /// The current connected peripheral.
-    public var current: CBPeripheral?
+    public var current: (CBPeripheral, GattAdvertisement)?
 
     /// The current state of the manager.
     @objc public dynamic var state: GormssonState = .unknown
@@ -84,22 +84,22 @@ public final class Gormsson: NSObject {
     /// Establishes a local connection to a peripheral.
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
-    public func connect(_ peripheral: CBPeripheral, success: ((CBPeripheral) -> Void)? = nil) {
+    public func connect(_ peripheral: (CBPeripheral, GattAdvertisement), success: ((CBPeripheral) -> Void)? = nil) {
         if manager?.isScanning ?? false {
             stopScan()
         }
         didConnectBlock = success
         isDiscovering = true
         discoveringService = 0
-        manager?.connect(peripheral)
-        peripheral.delegate = self
+        manager?.connect(peripheral.0)
+        peripheral.0.delegate = self
         current = peripheral
     }
 
     /// Cancels an active or pending local connection to the current peripheral.
     public func disconnect() {
         if let peripheral = current {
-            manager?.cancelPeripheralConnection(peripheral)
+            manager?.cancelPeripheralConnection(peripheral.0)
             cleanPeripheral()
             current = nil
         }
@@ -119,7 +119,7 @@ public final class Gormsson: NSObject {
 
     /// Gets the CBCharacteristic of the current peripheral or nil if not in.
     internal func get(_ characteristic: CharacteristicProtocol) -> CBCharacteristic? {
-        return current?.services?.first(where: { $0.uuid == characteristic.service.uuid })?
+        return current?.0.services?.first(where: { $0.uuid == characteristic.service.uuid })?
             .characteristics?.first(where: { $0.uuid == characteristic.uuid })
     }
 
@@ -140,7 +140,7 @@ public final class Gormsson: NSObject {
             return
         }
 
-        current.readValue(for: cbCharacteristic)
+        current.0.readValue(for: cbCharacteristic)
 
         if append {
             currentRequests.append(request)
@@ -169,7 +169,7 @@ public final class Gormsson: NSObject {
             return
         }
 
-        current.setNotifyValue(true, for: cbCharacteristic)
+        current.0.setNotifyValue(true, for: cbCharacteristic)
         currentRequests.append(request)
     }
 
@@ -192,7 +192,7 @@ public final class Gormsson: NSObject {
             return
         }
 
-        current.writeValue(value.toData(),
+        current.0.writeValue(value.toData(),
                            for: cbCharacteristic,
                            type: type)
 
