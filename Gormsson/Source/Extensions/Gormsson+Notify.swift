@@ -53,6 +53,6 @@ extension Gormsson {
 
         guard let cbCharacteristic = get(characteristic), cbCharacteristic.isNotifying else { return }
 
-        current?.0.setNotifyValue(false, for: cbCharacteristic)
+        current?.setNotifyValue(false, for: cbCharacteristic)
     }
 }
