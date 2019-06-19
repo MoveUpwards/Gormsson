@@ -30,7 +30,9 @@ extension Gormsson: CBCentralManagerDelegate {
                                didDiscover peripheral: CBPeripheral,
                                advertisementData: [String: Any],
                                rssi RSSI: NSNumber) {
-        didDiscoverBlock?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
+        let advertisement = GattAdvertisement(with: advertisementData, rssi: RSSI.intValue)
+        lastAdvertisement = advertisement
+        didDiscoverBlock?(peripheral, advertisement)
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.
@@ -43,6 +45,6 @@ extension Gormsson: CBCentralManagerDelegate {
     /// Invoked when a connection is successfully created with a peripheral.
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         didConnectBlock?(peripheral)
-        current?.0.discoverServices(nil)
+        current?.discoverServices(nil)
     }
 }
