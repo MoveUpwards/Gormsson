@@ -147,4 +147,16 @@ class DetailViewController: UIViewController {
             }
         }
     }
+
+    @IBAction private func gpsControlCustomWrite(_ sender: Any) {
+        let cmd: [UInt8] = [0xFB, 0xFA, 0xF1, 0xFB, UInt8.random(in: 0..<255)]
+        manager?.write(GPSArrayData(), value: GPSArrayType(with: cmd)) { result in
+            switch result {
+            case .success(let value):
+                print("GPSControl custom:", value as? Int ?? "nil")
+            case .failure(let error):
+                print("GPSControl custom error:", error)
+            }
+        }
+    }
 }

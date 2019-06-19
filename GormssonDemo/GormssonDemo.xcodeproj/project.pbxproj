@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7E8EECD14EA0C3992B484D69 /* Pods_GormssonDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55232D52432EEBDE316CD86C /* Pods_GormssonDemo.framework */; };
+		F380472422BA90B70051C311 /* GPSArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380472322BA90B70051C311 /* GPSArrayType.swift */; };
+		F380472722BA91140051C311 /* GPSControlEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380472622BA91140051C311 /* GPSControlEnum.swift */; };
 		F39E39FF225E3A6A003804A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39F6225E3A69003804A7 /* AppDelegate.swift */; };
 		F39E3A00225E3A6A003804A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39E39F7225E3A69003804A7 /* Assets.xcassets */; };
 		F39E3A02225E3A6A003804A7 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39F9225E3A69003804A7 /* DetailViewController.swift */; };
@@ -25,6 +27,8 @@
 		6D5037F62256092300D8CB7A /* GormssonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GormssonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4068E18E7484FB61921E947 /* Pods-GormssonDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.release.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F364363422707298005D6C70 /* Nevanlinna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nevanlinna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F380472322BA90B70051C311 /* GPSArrayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArrayType.swift; sourceTree = "<group>"; };
+		F380472622BA91140051C311 /* GPSControlEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSControlEnum.swift; sourceTree = "<group>"; };
 		F39E39F0225E3A69003804A7 /* GormssonDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GormssonDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		F39E39F6225E3A69003804A7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F39E39F7225E3A69003804A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 				F39E39F9225E3A69003804A7 /* DetailViewController.swift */,
 				F39E3A14225E4F8C003804A7 /* GattCustomAdvertisement.swift */,
 				F39E39FA225E3A69003804A7 /* GattCustomCharacteristic */,
+				F380472522BA90D40051C311 /* CustomType */,
 				F39E3A0C225E3AD0003804A7 /* LaunchScreen.storyboard */,
 				F39E3A0E225E3AD0003804A7 /* Main.storyboard */,
 				F39E39F7225E3A69003804A7 /* Assets.xcassets */,
@@ -94,6 +99,15 @@
 				4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		F380472522BA90D40051C311 /* CustomType */ = {
+			isa = PBXGroup;
+			children = (
+				F380472322BA90B70051C311 /* GPSArrayType.swift */,
+				F380472622BA91140051C311 /* GPSControlEnum.swift */,
+			);
+			path = CustomType;
 			sourceTree = "<group>";
 		};
 		F39E39FA225E3A69003804A7 /* GattCustomCharacteristic */ = {
@@ -232,9 +246,11 @@
 			files = (
 				F39E3A04225E3A6A003804A7 /* MasterViewController.swift in Sources */,
 				F39E3A15225E4F8C003804A7 /* GattCustomAdvertisement.swift in Sources */,
+				F380472722BA91140051C311 /* GPSControlEnum.swift in Sources */,
 				F39E3A03225E3A6A003804A7 /* GPSControlService.swift in Sources */,
 				F39E39FF225E3A6A003804A7 /* AppDelegate.swift in Sources */,
 				F39E3A02225E3A6A003804A7 /* DetailViewController.swift in Sources */,
+				F380472422BA90B70051C311 /* GPSArrayType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

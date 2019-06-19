@@ -12,27 +12,6 @@ import Nevanlinna
 
 public let gpsControlService = GattService.custom("C94E7734-F70C-4B96-BB48-F1E3CB95F79E")
 
-public enum GPSControlEnum: UInt8 {
-    case stop = 0
-    case start
-}
-
-extension GPSControlEnum: DataInitializable {
-    /// DataInitializable init.
-    public init?(with octets: [UInt8]) {
-        guard let value = GPSControlEnum(rawValue: UInt8(with: octets)) else {
-            return nil
-        }
-        self = value
-    }
-}
-
-extension GPSControlEnum: DataConvertible {
-    public func toData() -> Data {
-        return Data(repeating: rawValue, count: 1)
-    }
-}
-
 public final class GPSControl: CharacteristicProtocol {
     public var uuid: CBUUID {
         return CBUUID(string: "C94E0001-F70C-4B96-BB48-F1E3CB95F79E")
@@ -114,5 +93,19 @@ public final class GPSTimezone: CharacteristicProtocol {
 
     public var format: DataInitializable.Type {
         return Int8.self
+    }
+}
+
+public final class GPSArrayData: CharacteristicProtocol {
+    public var uuid: CBUUID {
+        return CBUUID(string: "E001")
+    }
+
+    public var service: GattService {
+        return .custom("1010")
+    }
+
+    public var format: DataInitializable.Type {
+        return GPSArrayType.self
     }
 }
