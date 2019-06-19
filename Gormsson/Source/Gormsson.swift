@@ -35,12 +35,12 @@ public final class Gormsson: NSObject {
     internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
     /// The current connected peripheral.
-    public var current: CBPeripheral?
+    public internal(set) var current: CBPeripheral?
     /// The last advertisement of the current peripheral
-    public var lastAdvertisement: GattAdvertisement?
+    public internal(set) var lastAdvertisement: GattAdvertisement?
 
     /// The current state of the manager.
-    @objc public dynamic var state: GormssonState = .unknown
+    @objc public internal(set) dynamic var state: GormssonState = .unknown
 
     /// Init a new Gormsson manager
     ///
