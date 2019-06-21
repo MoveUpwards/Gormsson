@@ -81,6 +81,17 @@ public final class Gormsson: NSObject {
         manager?.stopScan()
     }
 
+    /// Via peripheral identifier a local connection to a peripheral.
+    ///
+    /// - parameter peripheralIdentifier:     The peripheral identifier to which the central is attempting to connect.
+    public func connect(_ peripheralIdentifier: UUID, success: ((CBPeripheral) -> Void)? = nil) {
+        let peripherals = manager?.retrievePeripherals(withIdentifiers: [peripheralIdentifier])
+        guard let peripheral = peripherals?.first else {
+            return
+        }
+        connect(peripheral, success: success)
+    }
+    
     /// Establishes a local connection to a peripheral.
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
