@@ -9,6 +9,7 @@
 import UIKit
 import Gormsson
 import Nevanlinna
+import CoreBluetooth
 
 class DetailViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private var buttons: [UIButton]!
 
     public var manager: Gormsson?
+    public var peripheral: CBPeripheral?
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -158,5 +160,21 @@ class DetailViewController: UIViewController {
                 print("GPSControl custom error:", error)
             }
         }
+    }
+    
+    
+    @IBAction func connetPeripheral(_ sender: Any) {
+        guard let identifier = peripheral?.identifier else {
+            return
+        }
+        manager?.connect(identifier, success: { cbPeripheral in
+            print("connect success: ", cbPeripheral.name ?? "nil")
+        })
+    }
+    
+    
+    @IBAction func disconnectPeripheral(_ sender: Any) {
+        manager?.disconnect()
+        print("disconnect Peripheral")
     }
 }

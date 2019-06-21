@@ -95,6 +95,7 @@ class MasterViewController: UITableViewController {
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = peripheral.name
 
+                controller.peripheral = peripheral
                 controller.manager = manager // ## Added for Gormsson
                 manager.connect(peripheral) // ## Added for Gormsson
 

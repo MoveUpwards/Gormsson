@@ -94,6 +94,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nov-nA-RMl">
                                 <rect key="frame" x="20" y="192" width="119" height="26"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="ZG6-UN-SFM"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="8" minY="2" maxX="8" maxY="2"/>
                                 <state key="normal" title="Read Strings"/>
                                 <connections>
@@ -118,16 +121,48 @@
                                     <action selector="gpsSessionCount:" destination="JEX-9P-axG" eventType="touchUpInside" id="6v9-as-cMa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvv-O7-hXT" userLabel="connetPeripheral">
+                                <rect key="frame" x="20" y="234" width="160" height="28"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="PdO-Of-vdD" userLabel="width = 130"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="h8d-Qx-iJ9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="2" maxX="8" maxY="2"/>
+                                <state key="normal" title="connet Peripheral"/>
+                                <connections>
+                                    <action selector="connetPeripheral:" destination="JEX-9P-axG" eventType="touchUpInside" id="Q8A-NI-5Z8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsw-4N-f4r" userLabel="disconnectPeripheral">
+                                <rect key="frame" x="201" y="234" width="203" height="28"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="WJ0-j6-2Xw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="2" maxX="8" maxY="2"/>
+                                <state key="normal" title="disconnect Peripheral"/>
+                                <connections>
+                                    <action selector="disconnectPeripheral:" destination="JEX-9P-axG" eventType="touchUpInside" id="RV9-u8-HwH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kgi-a5-noa" firstAttribute="top" secondItem="Nov-nA-RMl" secondAttribute="top" id="2YL-eH-g2P"/>
                             <constraint firstItem="Nov-nA-RMl" firstAttribute="top" secondItem="QDJ-90-gYk" secondAttribute="bottom" constant="20" id="874-85-E9L"/>
                             <constraint firstItem="Etl-1m-u3w" firstAttribute="leading" secondItem="TBz-cY-0oK" secondAttribute="trailing" constant="10" id="Asi-TP-NjC"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="gsw-4N-f4r" secondAttribute="trailing" constant="10" id="B4m-qg-lAC"/>
                             <constraint firstItem="Etl-1m-u3w" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="20" id="DhY-T8-UJ4"/>
+                            <constraint firstItem="gsw-4N-f4r" firstAttribute="leading" secondItem="uvv-O7-hXT" secondAttribute="trailing" constant="21" id="Lor-U5-WSf"/>
                             <constraint firstItem="TAo-c2-A2F" firstAttribute="top" secondItem="wco-UT-TVH" secondAttribute="bottom" constant="20" id="NOx-ql-tIe"/>
                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
+                            <constraint firstItem="uvv-O7-hXT" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="Unj-TA-PS6"/>
+                            <constraint firstItem="gsw-4N-f4r" firstAttribute="top" secondItem="kgi-a5-noa" secondAttribute="bottom" constant="16" id="W0O-s8-U3R"/>
                             <constraint firstItem="wco-UT-TVH" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="20" id="Xuu-YI-Ksr"/>
+                            <constraint firstItem="uvv-O7-hXT" firstAttribute="top" secondItem="Nov-nA-RMl" secondAttribute="bottom" constant="16" id="ZH0-32-Kna"/>
                             <constraint firstItem="QDJ-90-gYk" firstAttribute="top" secondItem="wco-UT-TVH" secondAttribute="bottom" constant="20" id="ZzX-Oo-fCo"/>
                             <constraint firstItem="kgi-a5-noa" firstAttribute="leading" secondItem="Nov-nA-RMl" secondAttribute="trailing" constant="20" id="e1u-AP-KMk"/>
                             <constraint firstItem="wco-UT-TVH" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="fvx-21-wNg"/>
@@ -159,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="129"/>
+            <point key="canvasLocation" x="708.69565217391312" y="128.57142857142856"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
