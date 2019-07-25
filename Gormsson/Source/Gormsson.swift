@@ -87,11 +87,14 @@ public final class Gormsson: NSObject {
     /// Establishes a local connection to a peripheral.
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
-    public func connect(_ peripheral: CBPeripheral, success: ((CBPeripheral) -> Void)? = nil) {
+    public func connect(_ peripheral: CBPeripheral,
+                        success: ((CBPeripheral) -> Void)? = nil,
+                        didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
         if manager?.isScanning ?? false {
             stopScan()
         }
         didConnect = success
+        didDisconnect = didDisconnectHandler
         isDiscovering = true
         discoveringService = 0
         manager?.connect(peripheral)
@@ -104,6 +107,11 @@ public final class Gormsson: NSObject {
         if let peripheral = current {
             manager?.cancelPeripheralConnection(peripheral)
         }
+    }
+
+    /// Update did disconnect handler
+    public func set(_ didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
+        didDisconnect = didDisconnectHandler
     }
 
     // MARK: - Internal functions
