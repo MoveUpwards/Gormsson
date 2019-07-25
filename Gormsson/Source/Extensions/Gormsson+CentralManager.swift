@@ -37,7 +37,9 @@ extension Gormsson: CBCentralManagerDelegate {
     public func centralManager(_ central: CBCentralManager,
                                didDisconnectPeripheral peripheral: CBPeripheral,
                                error: Error?) {
-        //TODO: Add auto-reconnect
+        didDisconnectBlock?(peripheral, error)
+        cleanPeripheral()
+        current = nil
     }
 
     /// Invoked when a connection is successfully created with a peripheral.

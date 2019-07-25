@@ -31,6 +31,9 @@ public final class Gormsson: NSObject {
     /// The block to call each time a peripheral is connected.
     internal var didConnectBlock: ((CBPeripheral) -> Void)?
 
+    /// The block to call each time a peripheral is disconnect.
+    internal var didDisconnectBlock: ((CBPeripheral, Error?) -> Void)?
+
     /// The block to call each time a peripheral is found.
     internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
 
@@ -100,8 +103,6 @@ public final class Gormsson: NSObject {
     public func disconnect() {
         if let peripheral = current {
             manager?.cancelPeripheralConnection(peripheral)
-            cleanPeripheral()
-            current = nil
         }
     }
 
@@ -201,9 +202,7 @@ public final class Gormsson: NSObject {
         }
     }
 
-    // MARK: - Private functions
-
-    private func cleanPeripheral() {
+    internal func cleanPeripheral() {
         currentRequests.removeAll()
         pendingRequests.removeAll()
     }
