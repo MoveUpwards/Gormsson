@@ -29,13 +29,13 @@ public final class Gormsson: NSObject {
     internal var currentRequests = [GattRequest]()
 
     /// The block to call each time a peripheral is connected.
-    internal var didConnectBlock: ((CBPeripheral) -> Void)?
+    internal var didConnect: ((CBPeripheral) -> Void)?
 
     /// The block to call each time a peripheral is disconnect.
-    internal var didDisconnectBlock: ((CBPeripheral, Error?) -> Void)?
+    internal var didDisconnect: ((CBPeripheral, Error?) -> Void)?
 
     /// The block to call each time a peripheral is found.
-    internal var didDiscoverBlock: ((CBPeripheral, GattAdvertisement) -> Void)?
+    internal var didDiscover: ((CBPeripheral, GattAdvertisement) -> Void)?
 
     /// The current connected peripheral.
     internal var current: CBPeripheral?
@@ -67,8 +67,8 @@ public final class Gormsson: NSObject {
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     didDiscover: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
-        didDiscoverBlock = didDiscover
+                     didDiscoverHandler: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
+        didDiscover = didDiscoverHandler
         guard state == .isPoweredOn else {
             needScan = true
             scanServices = services
@@ -91,7 +91,7 @@ public final class Gormsson: NSObject {
         if manager?.isScanning ?? false {
             stopScan()
         }
-        didConnectBlock = success
+        didConnect = success
         isDiscovering = true
         discoveringService = 0
         manager?.connect(peripheral)
@@ -110,8 +110,8 @@ public final class Gormsson: NSObject {
 
     /// Send a new scan if the first one was too early.
     internal func rescan() {
-        if needScan, let block = didDiscoverBlock {
-            scan(scanServices, options: scanOptions, didDiscover: block)
+        if needScan, let block = didDiscover {
+            scan(scanServices, options: scanOptions, didDiscoverHandler: block)
             needScan = false
             scanServices = nil
             scanOptions = nil

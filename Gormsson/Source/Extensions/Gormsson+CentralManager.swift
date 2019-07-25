@@ -30,21 +30,21 @@ extension Gormsson: CBCentralManagerDelegate {
                                didDiscover peripheral: CBPeripheral,
                                advertisementData: [String: Any],
                                rssi RSSI: NSNumber) {
-        didDiscoverBlock?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
+        didDiscover?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.
     public func centralManager(_ central: CBCentralManager,
                                didDisconnectPeripheral peripheral: CBPeripheral,
                                error: Error?) {
-        didDisconnectBlock?(peripheral, error)
+        didDisconnect?(peripheral, error)
         cleanPeripheral()
         current = nil
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        didConnectBlock?(peripheral)
+        didConnect?(peripheral)
         current?.discoverServices(nil)
     }
 }

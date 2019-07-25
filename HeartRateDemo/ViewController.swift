@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        manager.scan([.heartRate], didDiscover: { [weak self] peripheral, _ in
+        manager.scan([.heartRate]) { [weak self] peripheral, _ in
             self?.manager.connect(peripheral)
 
             self?.manager.read(.bodySensorLocation, result: { (result: Result<DataInitializable, Error>) in
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
                     print(error)
                 }
             })
-        })
+        }
     }
 }
 

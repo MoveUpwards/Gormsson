@@ -25,7 +25,7 @@ class MasterViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
 
-        manager.scan([gpsControlService], didDiscover: didDiscover) // ## Added for Gormsson
+        manager.scan([gpsControlService], didDiscoverHandler: didDiscover) // ## Added for Gormsson
     }
 
     override func viewWillAppear(_ animated: Bool) {
