@@ -11,7 +11,8 @@ import Nevanlinna
 
 extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the peripheral’s available services.
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral,
+                           didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
 
         discoveringService = services.count
@@ -23,7 +24,6 @@ extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the characteristics of a specified service.
     public func peripheral(_ peripheral: CBPeripheral,
                            didDiscoverCharacteristicsFor service: CBService,
-                           didReady: (() -> Void)? = nil,
                            error: Error?) {
         discoveringService -= 1
         if discoveringService <= 0 {

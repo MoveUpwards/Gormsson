@@ -92,11 +92,13 @@ public final class Gormsson: NSObject {
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
     public func connect(_ peripheral: CBPeripheral,
                         success: ((CBPeripheral) -> Void)? = nil,
+                        didReadyHandler: (() -> Void)? = nil,
                         didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
         if manager?.isScanning ?? false {
             stopScan()
         }
         didConnect = success
+        didReady = didReadyHandler
         didDisconnect = didDisconnectHandler
         isDiscovering = true
         discoveringService = 0
