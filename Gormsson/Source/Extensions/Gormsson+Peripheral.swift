@@ -23,9 +23,11 @@ extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the characteristics of a specified service.
     public func peripheral(_ peripheral: CBPeripheral,
                            didDiscoverCharacteristicsFor service: CBService,
+                           didReady: (() -> Void)? = nil,
                            error: Error?) {
         discoveringService -= 1
         if discoveringService <= 0 {
+            didReady?()
             isDiscovering = false
             pendingRequests.forEach { request in
                 switch request.property {

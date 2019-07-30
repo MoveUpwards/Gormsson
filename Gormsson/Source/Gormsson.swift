@@ -31,6 +31,9 @@ public final class Gormsson: NSObject {
     /// The block to call each time a peripheral is connected.
     internal var didConnect: ((CBPeripheral) -> Void)?
 
+    /// The block to call once all custom services and characterics.
+    internal var didReady: (() -> Void)?
+
     /// The block to call each time a peripheral is disconnect.
     internal var didDisconnect: ((CBPeripheral, Error?) -> Void)?
 
