@@ -111,6 +111,7 @@ public final class Gormsson: NSObject {
     public func disconnect() {
         if let peripheral = current {
             manager?.cancelPeripheralConnection(peripheral)
+            cleanPeripheral()
         }
     }
 
@@ -216,6 +217,13 @@ public final class Gormsson: NSObject {
     }
 
     internal func cleanPeripheral() {
+        currentRequests.forEach { req in
+            req.result?(.failure(GormssonError.deviceUnconnected))
+        }
+        pendingRequests.forEach { req in
+            req.result?(.failure(GormssonError.deviceUnconnected))
+        }
+
         currentRequests.removeAll()
         pendingRequests.removeAll()
     }

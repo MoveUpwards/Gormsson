@@ -1,5 +1,5 @@
 PODS:
-  - Gormsson (0.4.3):
+  - Gormsson (0.5.2):
     - Nevanlinna
   - Nevanlinna (0.3.2)
 
@@ -13,9 +13,9 @@ SPEC REPOS:
     - Nevanlinna
 
 SPEC CHECKSUMS:
-  Gormsson: 491f0e1dc33b8c65b77ffb0ccc12a1780ec53305
+  Gormsson: 5efa2f695b0ee04f3c5e1758ccdd7e4b614d852e
   Nevanlinna: 4e01e872aad671c3a4f191086f9c518243f79491
 
 PODFILE CHECKSUM: 3e25da26a4f25482d801aaf92aa06029635b97e1
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.7.2
