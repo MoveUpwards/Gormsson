@@ -10,6 +10,7 @@ import CoreBluetooth
 import Nevanlinna
 
 /// Gormsson is a BLE manager with blocks and auto cast type.
+@available(iOS 9.0, *)
 public final class Gormsson: NSObject {
     private var manager: CBCentralManager?
 

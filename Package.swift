@@ -1,9 +1,12 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 
 import PackageDescription
 
 let package = Package(
     name: "Gormsson",
+    platforms: [
+        .iOS(.v9),
+    ],
     products: [
         .library(
             name: "Gormsson",
@@ -16,7 +19,7 @@ let package = Package(
     targets: [
         .target(
             name: "Gormsson",
-            dependencies: [],
+            dependencies: ["Nevanlinna"],
             path: "Gormsson/Source"
         ),
     ]
