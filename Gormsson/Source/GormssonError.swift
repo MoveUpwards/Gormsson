@@ -22,4 +22,6 @@ public enum GormssonError: Error {
     case characteristicNotFound
     /// The manager accept only one notify per characteristic.
     case alreadyNotifying
+    /// The characteristic's notify was stop.
+    case stopNotifying
 }

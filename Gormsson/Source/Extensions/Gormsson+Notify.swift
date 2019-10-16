@@ -46,11 +46,6 @@ extension Gormsson {
 
     /// Stops notifications or indications for the value of a custom characteristic.
     public func stopNotify(_ characteristic: CharacteristicProtocol) {
-        currentRequests = currentRequests
-            .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) })
-        pendingRequests = pendingRequests
-            .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) })
-
         guard let cbCharacteristic = get(characteristic), cbCharacteristic.isNotifying else { return }
 
         current?.setNotifyValue(false, for: cbCharacteristic)
