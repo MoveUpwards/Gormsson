@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Gormsson'
-  s.version = '0.1.0'
+  s.version = '0.6.1'
   s.license = 'MIT'
   s.summary = 'Gormsson is a framework that expose reusable components.'
   s.description  = <<-DESC
