@@ -39,6 +39,7 @@ extension Gormsson: CBPeripheralDelegate {
                     break
                 }
             }
+            pendingRequests.removeAll()
         }
     }
 
@@ -56,7 +57,25 @@ extension Gormsson: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral,
                            didUpdateNotificationStateFor characteristic: CBCharacteristic,
                            error: Error?) {
-        request(for: peripheral, with: characteristic, property: .notify, error: error)
+        let reqFilter = filter(for: characteristic, and: .notify)
+
+        if let error = error {
+            currentRequests.filter(reqFilter).forEach { request in
+                request.result?(.failure(error))
+            }
+            return
+        }
+
+        guard !characteristic.isNotifying else { return } // No error and isNotifying, all good.
+
+        // Notify all requests that the characteristic notification is ended
+        currentRequests.filter(reqFilter).forEach { request in
+            request.result?(.failure(GormssonError.stopNotifying))
+        }
+
+        // Remove all unused request
+        currentRequests = currentRequests
+            .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) })
     }
 
     /// Invoked when you write data to a characteristic’s value.
@@ -72,11 +91,10 @@ extension Gormsson: CBPeripheralDelegate {
                          with characteristic: CBCharacteristic,
                          property: CBCharacteristicProperties,
                          error: Error?) {
-        let filter: (GattRequest) -> Bool = { $0.characteristic.uuid == characteristic.uuid &&
-            characteristic.properties.contains($0.property) && $0.property == property }
+        let reqFilter = filter(for: characteristic, and: property)
 
         guard property != .notify else {
-            currentRequests.filter(filter).forEach { request in
+            currentRequests.filter(reqFilter).forEach { request in
                 if let error = error {
                     request.result?(.failure(error))
                 } else {
@@ -86,7 +104,7 @@ extension Gormsson: CBPeripheralDelegate {
             return
         }
 
-        guard let request = currentRequests.first(where: filter) else { return }
+        guard let request = currentRequests.first(where: reqFilter) else { return }
 
         if property.contains(.read) || property.contains(.write) {
             currentRequests.removeAll(where: { $0 === request })

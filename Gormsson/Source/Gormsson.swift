@@ -228,4 +228,10 @@ public final class Gormsson: NSObject {
         currentRequests.removeAll()
         pendingRequests.removeAll()
     }
+
+    internal func filter(for characteristic: CBCharacteristic,
+                         and property: CBCharacteristicProperties) -> (GattRequest) -> Bool {
+        return { $0.characteristic.uuid == characteristic.uuid &&
+            characteristic.properties.contains($0.property) && $0.property == property }
+    }
 }

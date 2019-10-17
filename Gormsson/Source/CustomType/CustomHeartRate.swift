@@ -82,8 +82,8 @@ public final class HeartRateMeasurementType: DataInitializable {
     /// Current heart rate value.
     public var heartRateValue: UInt16 {
         return characteristicData[0].bool(at: 0) ?
-            UInt16(characteristicData[1]) :
-            UInt16(with: Array(characteristicData[1...2]))
+            UInt16(with: Array(characteristicData[1...2])) : // if 1 or true
+            UInt16(characteristicData[1]) // if 0 or false
     }
 
     /// Define the current status of the sensor contact.

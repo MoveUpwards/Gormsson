@@ -40,10 +40,10 @@ class ViewController: UIViewController {
                 switch result {
                 case .success(let value):
                     guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
-
-                DispatchQueue.main.async {
-                    self?.heartRate.text = "\(rate)"
-                }
+                    
+                    DispatchQueue.main.async {
+                        self?.heartRate.text = "\(rate)"
+                    }
                 case .failure(let error):
                     print(error)
                 }

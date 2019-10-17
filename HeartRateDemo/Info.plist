@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Need authorization to be able to connect your device and retrieve session datas</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Need authorization to be able to connect your device</string>
 </dict>
 </plist>
