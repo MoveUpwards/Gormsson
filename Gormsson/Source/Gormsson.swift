@@ -11,7 +11,7 @@ import Nevanlinna
 
 /// Gormsson is a BLE manager with blocks and auto cast type.
 @available(iOS 9.0, *)
-public final class Gormsson: NSObject {
+open class Gormsson: NSObject {
     private var manager: CBCentralManager?
 
     // Auto scan logic if needed
