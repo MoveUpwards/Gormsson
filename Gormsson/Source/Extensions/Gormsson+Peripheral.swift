@@ -11,7 +11,7 @@ import Nevanlinna
 
 extension Gormsson: CBPeripheralDelegate {
     /// Invoked when you discover the peripheral’s available services.
-    public func peripheral(_ peripheral: CBPeripheral,
+    open func peripheral(_ peripheral: CBPeripheral,
                            didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
 
@@ -22,7 +22,7 @@ extension Gormsson: CBPeripheralDelegate {
     }
 
     /// Invoked when you discover the characteristics of a specified service.
-    public func peripheral(_ peripheral: CBPeripheral,
+    open func peripheral(_ peripheral: CBPeripheral,
                            didDiscoverCharacteristicsFor service: CBService,
                            error: Error?) {
         discoveringService -= 1
@@ -45,7 +45,7 @@ extension Gormsson: CBPeripheralDelegate {
 
     /// Invoked when you retrieve a specified characteristic’s value, or when the peripheral device notifies
     /// your app that the characteristic’s value has changed.
-    public func peripheral(_ peripheral: CBPeripheral,
+    open func peripheral(_ peripheral: CBPeripheral,
                            didUpdateValueFor characteristic: CBCharacteristic,
                            error: Error?) {
         let property = characteristic.isNotifying ? CBCharacteristicProperties.notify : .read
@@ -54,7 +54,7 @@ extension Gormsson: CBPeripheralDelegate {
 
     /// Invoked when the peripheral receives a request to start or stop providing notifications for
     /// a specified characteristic’s value.
-    public func peripheral(_ peripheral: CBPeripheral,
+    open func peripheral(_ peripheral: CBPeripheral,
                            didUpdateNotificationStateFor characteristic: CBCharacteristic,
                            error: Error?) {
         let reqFilter = filter(for: characteristic, and: .notify)
@@ -79,7 +79,7 @@ extension Gormsson: CBPeripheralDelegate {
     }
 
     /// Invoked when you write data to a characteristic’s value.
-    public func peripheral(_ peripheral: CBPeripheral,
+    open func peripheral(_ peripheral: CBPeripheral,
                            didWriteValueFor characteristic: CBCharacteristic,
                            error: Error?) {
         request(for: peripheral, with: characteristic, property: .write, error: error)
