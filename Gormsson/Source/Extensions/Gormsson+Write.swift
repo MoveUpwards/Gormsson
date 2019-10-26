@@ -12,7 +12,7 @@ import Nevanlinna
 
 extension Gormsson {
     /// Writes the value of a base characteristic.
-    public func write(_ characteristic: GattCharacteristic,
+    open func write(_ characteristic: GattCharacteristic,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
@@ -20,7 +20,7 @@ extension Gormsson {
     }
 
     /// Writes the value of a custom characteristic.
-    public func write(_ characteristic: CharacteristicProtocol,
+    open func write(_ characteristic: CharacteristicProtocol,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {

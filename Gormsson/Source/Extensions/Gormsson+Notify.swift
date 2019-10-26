@@ -11,13 +11,13 @@ import Nevanlinna
 
 extension Gormsson {
     /// Starts notifications or indications for the value of a base characteristic.
-    public func notify(_ characteristic: GattCharacteristic,
+    open func notify(_ characteristic: GattCharacteristic,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
         notify(characteristic.characteristic, result: result)
     }
 
     /// Starts notifications or indications for the value of a base characteristic.
-    public func notify(_ characteristic: CharacteristicProtocol,
+    open func notify(_ characteristic: CharacteristicProtocol,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
             result(.failure(GormssonError.powerOff))
@@ -40,12 +40,12 @@ extension Gormsson {
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: GattCharacteristic) {
+    open func stopNotify(_ characteristic: GattCharacteristic) {
         stopNotify(characteristic.characteristic)
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: CharacteristicProtocol) {
+    open func stopNotify(_ characteristic: CharacteristicProtocol) {
         guard let cbCharacteristic = get(characteristic), cbCharacteristic.isNotifying else { return }
 
         current?.setNotifyValue(false, for: cbCharacteristic)
