@@ -47,4 +47,11 @@ extension Gormsson: CBCentralManagerDelegate {
         didConnect?(peripheral)
         current?.discoverServices(nil)
     }
+
+    /// Invoked when a connection with a peripheral did fail.
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        didFailConnect?(peripheral, error)
+        cleanPeripheral()
+        current = nil
+    }
 }
