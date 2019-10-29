@@ -6,11 +6,10 @@
 //  Copyright © 2019 Loïc GRIFFIE. All rights reserved.
 //
 
-import Foundation
 import CoreBluetooth
 
 /// Class that provide all advertisement datas with direct access variables.
-public final class GattAdvertisement {
+public final class GattAdvertisement: GattAdvertisementProtocol {
     private let advertisementData: [String: Any]
 
     /// The current received signal strength indicator (RSSI) of the peripheral, in decibels.
