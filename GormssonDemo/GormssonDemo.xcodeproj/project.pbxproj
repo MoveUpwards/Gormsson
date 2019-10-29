@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E8EECD14EA0C3992B484D69 /* Pods_GormssonDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55232D52432EEBDE316CD86C /* Pods_GormssonDemo.framework */; };
+		4905D6E7CFE486B14E1001B0 /* Pods_GormssonDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDB914A7621C80E80917561 /* Pods_GormssonDemo.framework */; };
 		F380472422BA90B70051C311 /* GPSArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380472322BA90B70051C311 /* GPSArrayType.swift */; };
 		F380472722BA91140051C311 /* GPSControlEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F380472622BA91140051C311 /* GPSControlEnum.swift */; };
 		F39E39FF225E3A6A003804A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39F6225E3A69003804A7 /* AppDelegate.swift */; };
@@ -21,11 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		400E909231ECB56A9829541A /* Pods-GormssonDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.debug.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55232D52432EEBDE316CD86C /* Pods_GormssonDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GormssonDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BA03C57CAF636E060E57DCB /* Pods-GormssonDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.debug.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		26AD6008097A7C02B689C39B /* Pods-GormssonDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.release.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6D5037F62256092300D8CB7A /* GormssonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GormssonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4068E18E7484FB61921E947 /* Pods-GormssonDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.release.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F364363422707298005D6C70 /* Nevanlinna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nevanlinna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F380472322BA90B70051C311 /* GPSArrayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArrayType.swift; sourceTree = "<group>"; };
 		F380472622BA91140051C311 /* GPSControlEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSControlEnum.swift; sourceTree = "<group>"; };
@@ -40,6 +38,7 @@
 		F39E3A0D225E3AD0003804A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39E3A0F225E3AD0003804A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F39E3A14225E4F8C003804A7 /* GattCustomAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattCustomAdvertisement.swift; sourceTree = "<group>"; };
+		FBDB914A7621C80E80917561 /* Pods_GormssonDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GormssonDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,23 +46,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E8EECD14EA0C3992B484D69 /* Pods_GormssonDemo.framework in Frameworks */,
+				4905D6E7CFE486B14E1001B0 /* Pods_GormssonDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3AF4FA94F1F52571935B869D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				400E909231ECB56A9829541A /* Pods-GormssonDemo.debug.xcconfig */,
-				A4068E18E7484FB61921E947 /* Pods-GormssonDemo.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
-			sourceTree = "<group>";
-		};
 		6D5037ED2256092300D8CB7A = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +70,7 @@
 				6D5037F72256092300D8CB7A /* Products */,
 				F39E3A05225E3A8E003804A7 /* Frameworks */,
 				F364361D227071F1005D6C70 /* Recovered References */,
-				3AF4FA94F1F52571935B869D /* Pods */,
+				96374D48281D9BF017A46465 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,10 +82,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		96374D48281D9BF017A46465 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0BA03C57CAF636E060E57DCB /* Pods-GormssonDemo.debug.xcconfig */,
+				26AD6008097A7C02B689C39B /* Pods-GormssonDemo.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		F364361D227071F1005D6C70 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -123,7 +121,7 @@
 			children = (
 				F364363422707298005D6C70 /* Nevanlinna.framework */,
 				F39E3A06225E3A8E003804A7 /* Gormsson.framework */,
-				55232D52432EEBDE316CD86C /* Pods_GormssonDemo.framework */,
+				FBDB914A7621C80E80917561 /* Pods_GormssonDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,11 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D50380A2256092500D8CB7A /* Build configuration list for PBXNativeTarget "GormssonDemo" */;
 			buildPhases = (
-				E712B63B0556F4E80FEB1BD3 /* [CP] Check Pods Manifest.lock */,
+				4431573AB4859AC7318E2B58 /* [CP] Check Pods Manifest.lock */,
 				6D5037F22256092300D8CB7A /* Sources */,
 				6D5037F32256092300D8CB7A /* Frameworks */,
 				6D5037F42256092300D8CB7A /* Resources */,
-				40541C22B9D56E82C3271673 /* [CP] Embed Pods Frameworks */,
+				5735145E82AAAE342D76A33E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,24 +196,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		40541C22B9D56E82C3271673 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E712B63B0556F4E80FEB1BD3 /* [CP] Check Pods Manifest.lock */ = {
+		4431573AB4859AC7318E2B58 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,6 +216,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5735145E82AAAE342D76A33E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -394,7 +392,7 @@
 		};
 		6D50380B2256092500D8CB7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 400E909231ECB56A9829541A /* Pods-GormssonDemo.debug.xcconfig */;
+			baseConfigurationReference = 0BA03C57CAF636E060E57DCB /* Pods-GormssonDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -417,7 +415,7 @@
 		};
 		6D50380C2256092500D8CB7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4068E18E7484FB61921E947 /* Pods-GormssonDemo.release.xcconfig */;
+			baseConfigurationReference = 26AD6008097A7C02B689C39B /* Pods-GormssonDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
