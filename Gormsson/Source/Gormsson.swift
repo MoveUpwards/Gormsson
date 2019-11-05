@@ -29,15 +29,13 @@ public final class Gormsson: NSObject {
     /// The current active requests (notify requests).
     internal var currentRequests = [GattRequest]()
 
+    // Optional block to send event change
     /// The block to call each time a peripheral is connected.
     internal var didConnect: ((CBPeripheral) -> Void)?
-
     /// The block to call once all custom services and characterics.
     internal var didReady: (() -> Void)?
-
     /// The block to call each time a peripheral is disconnect.
     internal var didDisconnect: ((CBPeripheral, Error?) -> Void)?
-
     /// The block to call each time a peripheral is found.
     internal var didDiscover: ((CBPeripheral, GattAdvertisement) -> Void)?
 
