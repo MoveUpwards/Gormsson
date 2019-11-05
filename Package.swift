@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Gormsson",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v9), .macOS(.v10_13)
     ],
     products: [
         .library(

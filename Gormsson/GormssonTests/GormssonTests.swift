@@ -20,14 +20,16 @@ class GormssonTests: XCTestCase {
             self?.aNumber = 1
             weakGormsson?.connect(peripheral, success: { _ in
                 self?.aNumber = 2
-            }, didReadyHandler: {
+            }, failure: { _, _ in
                 self?.aNumber = 3
-            }, didDisconnectHandler: { _, _ in
+            }, didReadyHandler: {
                 self?.aNumber = 4
+            }, didDisconnectHandler: { _, _ in
+                self?.aNumber = 5
             })
         }
         weakGormsson?.set({ [weak self] _, _ in
-            self?.aNumber = 5 // Replace 4
+            self?.aNumber = 6 // Replace 5
         })
 
         weakGormsson = nil
@@ -38,14 +40,16 @@ class GormssonTests: XCTestCase {
             self.aNumber = 1
             strongGormsson?.connect(peripheral, success: { _ in
                 self.aNumber = 2
-            }, didReadyHandler: {
+            }, failure: { _, _ in
                 self.aNumber = 3
-            }, didDisconnectHandler: { _, _ in
+            }, didReadyHandler: {
                 self.aNumber = 4
+            }, didDisconnectHandler: { _, _ in
+                self.aNumber = 5
             })
         }
         strongGormsson?.set({ _, _ in
-            self.aNumber = 5 // Replace 4
+            self.aNumber = 6 // Replace 5
         })
 
         strongGormsson = nil

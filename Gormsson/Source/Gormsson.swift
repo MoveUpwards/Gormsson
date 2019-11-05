@@ -11,7 +11,7 @@ import Nevanlinna
 
 /// Gormsson is a BLE manager with blocks and auto cast type.
 @available(iOS 9.0, *)
-public final class Gormsson: NSObject {
+open class Gormsson: NSObject {
     private var manager: CBCentralManager?
 
     // Auto scan logic if needed
@@ -32,6 +32,8 @@ public final class Gormsson: NSObject {
     // Optional block to send event change
     /// The block to call each time a peripheral is connected.
     internal var didConnect: ((CBPeripheral) -> Void)?
+    /// The block to call when a peripheral fails to connect.
+    internal var didFailConnect: ((CBPeripheral, Error?) -> Void)?
     /// The block to call once all custom services and characterics.
     internal var didReady: (() -> Void)?
     /// The block to call each time a peripheral is disconnect.
@@ -90,13 +92,16 @@ public final class Gormsson: NSObject {
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
     public func connect(_ peripheral: CBPeripheral,
+                        shouldStopScan: Bool = false,
                         success: ((CBPeripheral) -> Void)? = nil,
+                        failure: ((CBPeripheral, Error?) -> Void)? = nil,
                         didReadyHandler: (() -> Void)? = nil,
                         didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
-        if manager?.isScanning ?? false {
+        if shouldStopScan, manager?.isScanning ?? false {
             stopScan()
         }
         didConnect = success
+        didFailConnect = failure
         didReady = didReadyHandler
         didDisconnect = didDisconnectHandler
         isDiscovering = true

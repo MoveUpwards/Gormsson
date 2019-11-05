@@ -10,27 +10,30 @@
 		048E2B672371B78B00D1AECF /* GormssonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B662371B78B00D1AECF /* GormssonTests.swift */; };
 		048E2B692371B78B00D1AECF /* Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD4E45224E15F000D515E3 /* Gormsson.framework */; };
 		6DE3E6892264C5F1004BCFFA /* DataInitializable+HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6882264C5F1004BCFFA /* DataInitializable+HeartRate.swift */; };
-		6DE3E6902265DC69004BCFFA /* GormssonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E68F2265DC69004BCFFA /* GormssonState.swift */; };
-		6DE3E6922265DEA4004BCFFA /* Gormsson+Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6912265DEA4004BCFFA /* Gormsson+Read.swift */; };
-		6DE3E6942265DF3B004BCFFA /* Gormsson+Notify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6932265DF3B004BCFFA /* Gormsson+Notify.swift */; };
-		6DE3E6962265E02F004BCFFA /* Gormsson+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6952265E02F004BCFFA /* Gormsson+Write.swift */; };
 		6DF480952268A9F5006504BF /* CustomHeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF480942268A9F5006504BF /* CustomHeartRate.swift */; };
 		B694B63D7AA0FE0D4F39AFE5 /* Pods_Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */; };
 		D4ABC625ABCFA4822D7F2EFB /* Pods_GormssonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC0D6E3629A6560A96FB290 /* Pods_GormssonTests.framework */; };
 		F3101660229C6C1D00F25D2D /* TxPowerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F310165F229C6C1D00F25D2D /* TxPowerService.swift */; };
-		F3502AB42260C55800814ECC /* GormssonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB32260C55800814ECC /* GormssonError.swift */; };
-		F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */; };
-		F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */; };
 		F3502ABB2265C8E900814ECC /* HealthThermometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3502ABA2265C8E900814ECC /* HealthThermometer.swift */; };
-		F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D4225E391E003804A7 /* GattCharacteristic.swift */; };
 		F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D5225E391E003804A7 /* GattRequest.swift */; };
 		F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D6225E391E003804A7 /* Gormsson.swift */; };
-		F39E39E3225E391E003804A7 /* GattService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D7225E391E003804A7 /* GattService.swift */; };
 		F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39D9225E391E003804A7 /* BatteryService.swift */; };
 		F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DA225E391E003804A7 /* DeviceInformation.swift */; };
 		F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E39DB225E391E003804A7 /* GenericAccess.swift */; };
 		F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A12225E448C003804A7 /* GattAdvertisement.swift */; };
 		F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39E3A16225F3271003804A7 /* HeartRate.swift */; };
+		F3A2646E236858790081A843 /* CharacteristicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2646C236858790081A843 /* CharacteristicProtocol.swift */; };
+		F3A2646F236858790081A843 /* GattAdvertisementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2646D236858790081A843 /* GattAdvertisementProtocol.swift */; };
+		F3A26477236858A50081A843 /* Gormsson+Notify.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26471236858A50081A843 /* Gormsson+Notify.swift */; };
+		F3A26478236858A50081A843 /* GattRequest+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26472236858A50081A843 /* GattRequest+Equatable.swift */; };
+		F3A26479236858A50081A843 /* Gormsson+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26473236858A50081A843 /* Gormsson+Write.swift */; };
+		F3A2647A236858A50081A843 /* Gormsson+Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26474236858A50081A843 /* Gormsson+Peripheral.swift */; };
+		F3A2647B236858A50081A843 /* Gormsson+CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26475236858A50081A843 /* Gormsson+CentralManager.swift */; };
+		F3A2647C236858A50081A843 /* Gormsson+Read.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26476236858A50081A843 /* Gormsson+Read.swift */; };
+		F3A26482236858AB0081A843 /* GormssonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2647E236858AB0081A843 /* GormssonState.swift */; };
+		F3A26483236858AB0081A843 /* GattCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A2647F236858AB0081A843 /* GattCharacteristic.swift */; };
+		F3A26484236858AB0081A843 /* GormssonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26480236858AB0081A843 /* GormssonError.swift */; };
+		F3A26485236858AB0081A843 /* GattService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A26481236858AB0081A843 /* GattService.swift */; };
 		F3C3660F2268AECE00B09E14 /* CustomHealthThermometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C3660E2268AECE00B09E14 /* CustomHealthThermometer.swift */; };
 		F3C366112268B04500B09E14 /* CustomDateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C366102268B04500B09E14 /* CustomDateTime.swift */; };
 /* End PBXBuildFile section */
@@ -52,30 +55,33 @@
 		1C32FD83F99D9F6E957385BB /* Pods-Gormsson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.debug.xcconfig"; sourceTree = "<group>"; };
 		4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DE3E6882264C5F1004BCFFA /* DataInitializable+HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInitializable+HeartRate.swift"; sourceTree = "<group>"; };
-		6DE3E68F2265DC69004BCFFA /* GormssonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonState.swift; sourceTree = "<group>"; };
-		6DE3E6912265DEA4004BCFFA /* Gormsson+Read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+Read.swift"; sourceTree = "<group>"; };
-		6DE3E6932265DF3B004BCFFA /* Gormsson+Notify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+Notify.swift"; sourceTree = "<group>"; };
-		6DE3E6952265E02F004BCFFA /* Gormsson+Write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+Write.swift"; sourceTree = "<group>"; };
 		6DF480942268A9F5006504BF /* CustomHeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeartRate.swift; sourceTree = "<group>"; };
 		9DC0D6E3629A6560A96FB290 /* Pods_GormssonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GormssonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B729859F371A08BAB99043 /* Pods-Gormsson.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.release.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.release.xcconfig"; sourceTree = "<group>"; };
 		BF139CCE4825AF5A813CB9EC /* Pods-GormssonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonTests.release.xcconfig"; path = "Target Support Files/Pods-GormssonTests/Pods-GormssonTests.release.xcconfig"; sourceTree = "<group>"; };
 		F310165F229C6C1D00F25D2D /* TxPowerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TxPowerService.swift; sourceTree = "<group>"; };
-		F3502AB32260C55800814ECC /* GormssonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonError.swift; sourceTree = "<group>"; };
-		F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+CentralManager.swift"; sourceTree = "<group>"; };
-		F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gormsson+Peripheral.swift"; sourceTree = "<group>"; };
 		F3502ABA2265C8E900814ECC /* HealthThermometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthThermometer.swift; sourceTree = "<group>"; };
 		F39E39D1225E391E003804A7 /* Gormsson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gormsson.h; sourceTree = "<group>"; };
 		F39E39D2225E391E003804A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F39E39D4225E391E003804A7 /* GattCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattCharacteristic.swift; sourceTree = "<group>"; };
 		F39E39D5225E391E003804A7 /* GattRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattRequest.swift; sourceTree = "<group>"; };
 		F39E39D6225E391E003804A7 /* Gormsson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gormsson.swift; sourceTree = "<group>"; };
-		F39E39D7225E391E003804A7 /* GattService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattService.swift; sourceTree = "<group>"; };
 		F39E39D9225E391E003804A7 /* BatteryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryService.swift; sourceTree = "<group>"; };
 		F39E39DA225E391E003804A7 /* DeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformation.swift; sourceTree = "<group>"; };
 		F39E39DB225E391E003804A7 /* GenericAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericAccess.swift; sourceTree = "<group>"; };
 		F39E3A12225E448C003804A7 /* GattAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GattAdvertisement.swift; sourceTree = "<group>"; };
 		F39E3A16225F3271003804A7 /* HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRate.swift; sourceTree = "<group>"; };
+		F3A2646C236858790081A843 /* CharacteristicProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacteristicProtocol.swift; sourceTree = "<group>"; };
+		F3A2646D236858790081A843 /* GattAdvertisementProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattAdvertisementProtocol.swift; sourceTree = "<group>"; };
+		F3A26471236858A50081A843 /* Gormsson+Notify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gormsson+Notify.swift"; sourceTree = "<group>"; };
+		F3A26472236858A50081A843 /* GattRequest+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GattRequest+Equatable.swift"; sourceTree = "<group>"; };
+		F3A26473236858A50081A843 /* Gormsson+Write.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gormsson+Write.swift"; sourceTree = "<group>"; };
+		F3A26474236858A50081A843 /* Gormsson+Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gormsson+Peripheral.swift"; sourceTree = "<group>"; };
+		F3A26475236858A50081A843 /* Gormsson+CentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gormsson+CentralManager.swift"; sourceTree = "<group>"; };
+		F3A26476236858A50081A843 /* Gormsson+Read.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gormsson+Read.swift"; sourceTree = "<group>"; };
+		F3A2647E236858AB0081A843 /* GormssonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GormssonState.swift; sourceTree = "<group>"; };
+		F3A2647F236858AB0081A843 /* GattCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattCharacteristic.swift; sourceTree = "<group>"; };
+		F3A26480236858AB0081A843 /* GormssonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GormssonError.swift; sourceTree = "<group>"; };
+		F3A26481236858AB0081A843 /* GattService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GattService.swift; sourceTree = "<group>"; };
 		F3C3660E2268AECE00B09E14 /* CustomHealthThermometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHealthThermometer.swift; sourceTree = "<group>"; };
 		F3C366102268B04500B09E14 /* CustomDateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDateTime.swift; sourceTree = "<group>"; };
 		F3DD4E45224E15F000D515E3 /* Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,32 +157,18 @@
 			path = CustomType;
 			sourceTree = "<group>";
 		};
-		F3502AB92260D5A600814ECC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F3502AB52260D31B00814ECC /* Gormsson+CentralManager.swift */,
-				F3502AB72260D37F00814ECC /* Gormsson+Peripheral.swift */,
-				6DE3E6912265DEA4004BCFFA /* Gormsson+Read.swift */,
-				6DE3E6932265DF3B004BCFFA /* Gormsson+Notify.swift */,
-				6DE3E6952265E02F004BCFFA /* Gormsson+Write.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		F39E39D3225E391E003804A7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				F39E39D6225E391E003804A7 /* Gormsson.swift */,
-				F3502AB32260C55800814ECC /* GormssonError.swift */,
-				6DE3E68F2265DC69004BCFFA /* GormssonState.swift */,
 				F39E39D5225E391E003804A7 /* GattRequest.swift */,
 				F39E3A12225E448C003804A7 /* GattAdvertisement.swift */,
-				F39E39D7225E391E003804A7 /* GattService.swift */,
-				F39E39D4225E391E003804A7 /* GattCharacteristic.swift */,
+				F3A2647D236858AB0081A843 /* Enum */,
 				F39E39D8225E391E003804A7 /* GattCharacteristic */,
 				6DF480932268A9C3006504BF /* CustomType */,
 				6DE3E67F2264B9F9004BCFFA /* DataInitializable */,
-				F3502AB92260D5A600814ECC /* Extensions */,
+				F3A26470236858A50081A843 /* Extensions */,
+				F3A2646B236858790081A843 /* Protocol */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -192,6 +184,39 @@
 				F3502ABA2265C8E900814ECC /* HealthThermometer.swift */,
 			);
 			path = GattCharacteristic;
+			sourceTree = "<group>";
+		};
+		F3A2646B236858790081A843 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F3A2646C236858790081A843 /* CharacteristicProtocol.swift */,
+				F3A2646D236858790081A843 /* GattAdvertisementProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F3A26470236858A50081A843 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F3A26471236858A50081A843 /* Gormsson+Notify.swift */,
+				F3A26472236858A50081A843 /* GattRequest+Equatable.swift */,
+				F3A26473236858A50081A843 /* Gormsson+Write.swift */,
+				F3A26474236858A50081A843 /* Gormsson+Peripheral.swift */,
+				F3A26475236858A50081A843 /* Gormsson+CentralManager.swift */,
+				F3A26476236858A50081A843 /* Gormsson+Read.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F3A2647D236858AB0081A843 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				F3A2647E236858AB0081A843 /* GormssonState.swift */,
+				F3A2647F236858AB0081A843 /* GattCharacteristic.swift */,
+				F3A26480236858AB0081A843 /* GormssonError.swift */,
+				F3A26481236858AB0081A843 /* GattService.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		F3DD4E3B224E15F000D515E3 = {
@@ -437,28 +462,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DE3E6942265DF3B004BCFFA /* Gormsson+Notify.swift in Sources */,
+				F3A2647A236858A50081A843 /* Gormsson+Peripheral.swift in Sources */,
 				F3C366112268B04500B09E14 /* CustomDateTime.swift in Sources */,
 				F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */,
+				F3A26482236858AB0081A843 /* GormssonState.swift in Sources */,
 				F3101660229C6C1D00F25D2D /* TxPowerService.swift in Sources */,
+				F3A2646E236858790081A843 /* CharacteristicProtocol.swift in Sources */,
+				F3A26478236858A50081A843 /* GattRequest+Equatable.swift in Sources */,
 				F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */,
-				F3502AB42260C55800814ECC /* GormssonError.swift in Sources */,
-				F39E39E3225E391E003804A7 /* GattService.swift in Sources */,
-				6DE3E6922265DEA4004BCFFA /* Gormsson+Read.swift in Sources */,
+				F3A2647C236858A50081A843 /* Gormsson+Read.swift in Sources */,
 				F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */,
 				6DE3E6892264C5F1004BCFFA /* DataInitializable+HeartRate.swift in Sources */,
-				F39E39E0225E391E003804A7 /* GattCharacteristic.swift in Sources */,
 				F39E39E6225E391E003804A7 /* GenericAccess.swift in Sources */,
 				6DF480952268A9F5006504BF /* CustomHeartRate.swift in Sources */,
-				6DE3E6962265E02F004BCFFA /* Gormsson+Write.swift in Sources */,
 				F3C3660F2268AECE00B09E14 /* CustomHealthThermometer.swift in Sources */,
 				F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */,
 				F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */,
+				F3A26485236858AB0081A843 /* GattService.swift in Sources */,
+				F3A26484236858AB0081A843 /* GormssonError.swift in Sources */,
+				F3A26477236858A50081A843 /* Gormsson+Notify.swift in Sources */,
+				F3A2647B236858A50081A843 /* Gormsson+CentralManager.swift in Sources */,
 				F3502ABB2265C8E900814ECC /* HealthThermometer.swift in Sources */,
 				F39E39E5225E391E003804A7 /* DeviceInformation.swift in Sources */,
-				F3502AB62260D31B00814ECC /* Gormsson+CentralManager.swift in Sources */,
-				F3502AB82260D37F00814ECC /* Gormsson+Peripheral.swift in Sources */,
-				6DE3E6902265DC69004BCFFA /* GormssonState.swift in Sources */,
+				F3A2646F236858790081A843 /* GattAdvertisementProtocol.swift in Sources */,
+				F3A26479236858A50081A843 /* Gormsson+Write.swift in Sources */,
+				F3A26483236858AB0081A843 /* GattCharacteristic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +685,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.Gormsson;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -686,6 +715,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.Gormsson;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
