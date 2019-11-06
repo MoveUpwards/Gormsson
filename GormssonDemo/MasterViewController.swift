@@ -18,8 +18,6 @@ class MasterViewController: UITableViewController {
     // ## Added for Gormsson
     private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
 
-    var observation: NSKeyValueObservation? // ## Optional to observe state's changes
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,8 +31,8 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         // ## Optional to observe state's changes
-        observation = manager.observe(\.state, options: [.initial, .new], changeHandler: { [weak self] manager, change in
-            switch manager.state {
+        manager.observe(options: [.initial, .distinct]) { [weak self] state in
+            switch /*manager.*/state {
             case .unknown:
                 print("Gormsson is uninitialized, wait a bit.")
             case .isPoweredOn:
@@ -65,11 +63,7 @@ class MasterViewController: UITableViewController {
                     self?.tableView.reloadData()
                 }
             }
-        })
-    }
-
-    deinit {
-        observation?.invalidate() // ## Optional to observe state's changes
+        }
     }
 
     // ## Added for Gormsson
