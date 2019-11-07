@@ -28,9 +28,6 @@ class GormssonTests: XCTestCase {
                 self?.aNumber = 5
             })
         }
-        weakGormsson?.set({ [weak self] _, _ in
-            self?.aNumber = 6 // Replace 5
-        })
 
         weakGormsson = nil
         XCTAssertNil(weakGormsson)
@@ -48,9 +45,6 @@ class GormssonTests: XCTestCase {
                 self.aNumber = 5
             })
         }
-        strongGormsson?.set({ _, _ in
-            self.aNumber = 6 // Replace 5
-        })
 
         strongGormsson = nil
         XCTAssertNil(strongGormsson)
