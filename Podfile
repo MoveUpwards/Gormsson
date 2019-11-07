@@ -25,7 +25,7 @@ target 'GormssonDemo' do
   use_frameworks!
 
   # Pods for Gormsson
-  pod 'Gormsson'
+  pod 'Gormsson', :path => '../Gormsson'
 end
 
 target 'HeartRateDemo' do
@@ -34,5 +34,5 @@ target 'HeartRateDemo' do
   use_frameworks!
 
   # Pods for Gormsson
-  pod 'Gormsson'
+  pod 'Gormsson', :path => '../Gormsson'
 end
