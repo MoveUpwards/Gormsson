@@ -6,10 +6,8 @@
 //  Copyright © 2019 Loïc GRIFFIE. All rights reserved.
 //
 
-import Foundation
-
 /// The manager’s state.
-@objc public enum GormssonState: Int {
+public enum GormssonState {
     /// Uninitialized, wait for a valid state.
     case unknown
     /// BLE is powered on.

@@ -11,44 +11,13 @@ import Nevanlinna
 
 /// Gormsson is a BLE manager with blocks and auto cast type.
 @available(iOS 9.0, *)
-open class Gormsson: NSObject {
-    private var manager: CBCentralManager?
+open class Gormsson {
+    private let manager: CentralManager
 
-    // Auto scan logic if needed
-    private var needScan = false
-    private var scanServices: [GattService]?
-    private var scanOptions: [String: Any]?
-
-    // Discovering services and characteristics
-    /// The current peripheral is discovering his services and characteristics.
-    internal var isDiscovering = false
-    /// Number of services that are currently discovering.
-    internal var discoveringService = 0
-    /// The pending requests that wait to be resolved.
-    internal var pendingRequests = [GattRequest]()
-    /// The current active requests (notify requests).
-    internal var currentRequests = [GattRequest]()
-
-    /// The block to call each time a peripheral is connected.
-    internal var didConnect: ((CBPeripheral) -> Void)?
-
-    /// The block to call when a peripheral fails to connect.
-    internal var didFailConnect: ((CBPeripheral, Error?) -> Void)?
-
-    /// The block to call once all custom services and characterics.
-    internal var didReady: (() -> Void)?
-
-    /// The block to call each time a peripheral is disconnect.
-    internal var didDisconnect: ((CBPeripheral, Error?) -> Void)?
-
-    /// The block to call each time a peripheral is found.
-    internal var didDiscover: ((CBPeripheral, GattAdvertisement) -> Void)?
-
-    /// The current connected peripheral.
-    internal var current: CBPeripheral?
-
-    /// The current state of the manager.
-    @objc public internal(set) dynamic var state: GormssonState = .unknown
+    /// Device Name (0x2A00) as it is not accessible the normal way.
+    public var deviceName: String? {
+        return manager.current?.name
+    }
 
     /// Init a new Gormsson manager
     ///
@@ -56,14 +25,22 @@ open class Gormsson: NSObject {
     ///                        If nil, the main queue will be used.
     /// - parameter options:   An optional dictionary specifying options for the manager
     public init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
-        super.init()
-        manager = CBCentralManager(delegate: self, queue: queue, options: options)
+        manager = CentralManager(queue: queue, options: options)
     }
 
     /// Clean up
     deinit {
         disconnect()
     }
+
+    // MARK: - Observe
+
+    /// The block to observe manager's state.
+    public func observe(options: [ValueObservingOptions]? = nil, _ stateBlock: @escaping (GormssonState) -> Void) {
+        manager.observe(options: options, stateBlock)
+    }
+
+    // MARK: - Scan
 
     /// Scans for peripherals that are advertising services.
     ///
@@ -75,21 +52,15 @@ open class Gormsson: NSObject {
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
                      didDiscoverHandler: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
-        didDiscover = didDiscoverHandler
-        guard state == .isPoweredOn else {
-            needScan = true
-            scanServices = services
-            scanOptions = options
-            return
-        }
-
-        manager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: options)
+        manager.scan(services, options: options, didDiscoverHandler: didDiscoverHandler)
     }
 
     /// Asks the central manager to stop scanning for peripherals.
     public func stopScan() {
-        manager?.stopScan()
+        manager.stopScan()
     }
+
+    // MARK: - Connect
 
     /// Establishes a local connection to a peripheral.
     ///
@@ -100,144 +71,68 @@ open class Gormsson: NSObject {
                         failure: ((CBPeripheral, Error?) -> Void)? = nil,
                         didReadyHandler: (() -> Void)? = nil,
                         didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
-        if shouldStopScan, manager?.isScanning ?? false {
-            stopScan()
-        }
-        didConnect = success
-        didFailConnect = failure
-        didReady = didReadyHandler
-        didDisconnect = didDisconnectHandler
-        isDiscovering = true
-        discoveringService = 0
-        manager?.connect(peripheral)
-        peripheral.delegate = self
-        current = peripheral
+        manager.connect(peripheral, shouldStopScan: shouldStopScan, success: success, failure: failure,
+                        didReadyHandler: didReadyHandler, didDisconnectHandler: didDisconnectHandler)
     }
 
     /// Cancels an active or pending local connection to the current peripheral.
     public func disconnect() {
-        if let peripheral = current {
-            manager?.cancelPeripheralConnection(peripheral)
-            cleanPeripheral()
-        }
+        manager.disconnect()
     }
 
-    /// Update did disconnect handler
-    public func set(_ didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
-        didDisconnect = didDisconnectHandler
+    // MARK: - Read
+
+    /// Reads the value of a base characteristic.
+    public func read(_ characteristic: GattCharacteristic,
+                     result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.read(characteristic.characteristic, result: result)
     }
 
-    // MARK: - Internal functions
-
-    /// Send a new scan if the first one was too early.
-    internal func rescan() {
-        if needScan, let block = didDiscover {
-            scan(scanServices, options: scanOptions, didDiscoverHandler: block)
-            needScan = false
-            scanServices = nil
-            scanOptions = nil
-        }
+    /// Reads the value of a custom characteristic.
+    public func read(_ characteristic: CharacteristicProtocol,
+                     result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.read(characteristic, result: result)
     }
 
-    /// Gets the CBCharacteristic of the current peripheral or nil if not in.
-    internal func get(_ characteristic: CharacteristicProtocol) -> CBCharacteristic? {
-        return current?.services?.first(where: { $0.uuid == characteristic.service.uuid })?
-            .characteristics?.first(where: { $0.uuid == characteristic.uuid })
+    // MARK: - Notify
+
+    /// Starts notifications or indications for the value of a base characteristic.
+    public func notify(_ characteristic: GattCharacteristic,
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.notify(characteristic.characteristic, result: result)
     }
 
-    /// Reads the value of a characteristic from a request.
-    internal func read(_ request: GattRequest, append: Bool = true) {
-       guard state == .isPoweredOn else {
-            request.result?(.failure(GormssonError.powerOff))
-            return
-        }
-
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
-            request.result?(.failure(GormssonError.characteristicNotFound))
-            return
-        }
-
-        current.readValue(for: cbCharacteristic)
-
-        if append {
-            currentRequests.append(request)
-        }
+    /// Starts notifications or indications for the value of a base characteristic.
+    public func notify(_ characteristic: CharacteristicProtocol,
+                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.notify(characteristic, result: result)
     }
 
-    /// Starts notifications for the value of a characteristic from a request.
-    internal func notify(_ request: GattRequest) {
-        guard state == .isPoweredOn else {
-            request.result?(.failure(GormssonError.powerOff))
-            return
-        }
-
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
-            request.result?(.failure(GormssonError.characteristicNotFound))
-            return
-        }
-
-        guard !cbCharacteristic.isNotifying, !currentRequests.contains(request) else {
-            request.result?(.failure(GormssonError.alreadyNotifying))
-            return
-        }
-
-        current.setNotifyValue(true, for: cbCharacteristic)
-        currentRequests.append(request)
+    /// Stops notifications or indications for the value of a custom characteristic.
+    public func stopNotify(_ characteristic: GattCharacteristic) {
+        manager.stopNotify(characteristic.characteristic)
     }
 
-    /// Writes the value of a characteristic from a request.
-    internal func write(_ request: GattRequest,
-                        value: DataConvertible,
-                        type: CBCharacteristicWriteType = .withResponse) {
-        guard state == .isPoweredOn else {
-            request.result?(.failure(GormssonError.powerOff))
-            return
-        }
-
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
-            request.result?(.failure(GormssonError.characteristicNotFound))
-            return
-        }
-
-        current.writeValue(value.toData(),
-                           for: cbCharacteristic,
-                           type: type)
-
-        if type == .withResponse {
-            currentRequests.append(request)
-        }
+    /// Stops notifications or indications for the value of a custom characteristic.
+    public func stopNotify(_ characteristic: CharacteristicProtocol) {
+        manager.stopNotify(characteristic)
     }
 
-    internal func cleanPeripheral() {
-        currentRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
-        }
-        pendingRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
-        }
+    // MARK: - Write
 
-        currentRequests.removeAll()
-        pendingRequests.removeAll()
+    /// Writes the value of a base characteristic.
+    public func write(_ characteristic: GattCharacteristic,
+                      value: DataConvertible,
+                      type: CBCharacteristicWriteType = .withResponse,
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.write(characteristic.characteristic, value: value, type: type, result: result)
     }
 
-    internal func filter(for characteristic: CBCharacteristic,
-                         and property: CBCharacteristicProperties) -> (GattRequest) -> Bool {
-        return { $0.characteristic.uuid == characteristic.uuid &&
-            characteristic.properties.contains($0.property) && $0.property == property }
+    /// Writes the value of a custom characteristic.
+    public func write(_ characteristic: CharacteristicProtocol,
+                      value: DataConvertible,
+                      type: CBCharacteristicWriteType = .withResponse,
+                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
+        manager.write(characteristic, value: value, type: type, result: result)
     }
 }
