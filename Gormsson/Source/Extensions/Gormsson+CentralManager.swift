@@ -8,50 +8,60 @@
 
 import CoreBluetooth
 
-extension Gormsson: CBCentralManagerDelegate {
+extension CentralManager: CBCentralManagerDelegate {
     /// Invoked when the central manager’s state is updated.
-    open func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-        case .poweredOn:
-            state = .isPoweredOn
-            rescan()
-        default:
-            if state == .isPoweredOn {
-                current = nil
-                state = .didLostBluetooth
-            } else {
-                state = .needBluetooth
-            }
-        }
+    internal func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        updateState(with: central.state)
     }
 
     /// Invoked when the central manager discovers a peripheral while scanning.
-    open func centralManager(_ central: CBCentralManager,
-                               didDiscover peripheral: CBPeripheral,
-                               advertisementData: [String: Any],
-                               rssi RSSI: NSNumber) {
+    internal func centralManager(_ central: CBCentralManager,
+                                 didDiscover peripheral: CBPeripheral,
+                                 advertisementData: [String: Any],
+                                 rssi RSSI: NSNumber) {
         didDiscover?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.
-    open func centralManager(_ central: CBCentralManager,
-                               didDisconnectPeripheral peripheral: CBPeripheral,
-                               error: Error?) {
+    internal func centralManager(_ central: CBCentralManager,
+                                 didDisconnectPeripheral peripheral: CBPeripheral,
+                                 error: Error?) {
         didDisconnect?(peripheral, error)
         cleanPeripheral()
         current = nil
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
-    open func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         didConnect?(peripheral)
         current?.discoverServices(nil)
     }
 
     /// Invoked when a connection with a peripheral did fail.
-    open func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    internal func centralManager(_ central: CBCentralManager,
+                                 didFailToConnect peripheral: CBPeripheral,
+                                 error: Error?) {
         didFailConnect?(peripheral, error)
         cleanPeripheral()
         current = nil
+    }
+
+    internal func disconnect() {
+        cancelCurrent()
+        cleanPeripheral()
+    }
+
+    // MARK: - Private functions
+
+    private func cleanPeripheral() {
+        currentRequests.forEach { req in
+            req.result?(.failure(GormssonError.deviceUnconnected))
+        }
+        pendingRequests.forEach { req in
+            req.result?(.failure(GormssonError.deviceUnconnected))
+        }
+
+        currentRequests.removeAll()
+        pendingRequests.removeAll()
     }
 }

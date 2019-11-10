@@ -101,7 +101,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsStatusStartNotify(_ sender: Any) {
-        manager?.read(GPSStatus()) { result in
+        manager?.read(GPSStatus()) { result in // Should be notify but it's an error on our GPS
             switch result {
             case .success(let value):
                 print("GPSStatus:", value as? UInt ?? "nil")

@@ -6,8 +6,6 @@
 //  Copyright © 2019 Loïc GRIFFIE. All rights reserved.
 //
 
-import Foundation
-
 /// An enum representing all Gormsson's error that can be thrown.
 public enum GormssonError: Error {
     /// The value was uncastable to expected type (removed error).

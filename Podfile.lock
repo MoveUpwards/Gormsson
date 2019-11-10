@@ -1,21 +1,24 @@
 PODS:
-  - Gormsson (0.7.2):
+  - Gormsson (0.7.3):
     - Nevanlinna
   - Nevanlinna (0.5.0)
 
 DEPENDENCIES:
-  - Gormsson
+  - Gormsson (from `../Gormsson`)
   - Nevanlinna
 
 SPEC REPOS:
   trunk:
-    - Gormsson
     - Nevanlinna
 
+EXTERNAL SOURCES:
+  Gormsson:
+    :path: "../Gormsson"
+
 SPEC CHECKSUMS:
-  Gormsson: aded0b486a32899af9b683b534fc9a2ff580d835
+  Gormsson: eec960b469fe70e48da27ee4d31ef2fca654e2cd
   Nevanlinna: 112093bcc8601612aaeb84b1413f92c59b295ead
 
-PODFILE CHECKSUM: 3e25da26a4f25482d801aaf92aa06029635b97e1
+PODFILE CHECKSUM: 197083b1a1bed9ffb5f8a9cf5a6e9a1099d6bd7f
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.3
