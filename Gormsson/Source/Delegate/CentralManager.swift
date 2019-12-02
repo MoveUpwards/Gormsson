@@ -209,8 +209,8 @@ internal final class CentralManager: NSObject {
     internal func peripheralDidDiscoverCharacteristics() {
         discoveringService -= 1
         if discoveringService <= 0 {
-            didReady?()
             isDiscovering = false
+            didReady?()
             pendingRequests.forEach { request in
                 switch request.property {
                 case .read:
