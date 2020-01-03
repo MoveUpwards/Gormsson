@@ -159,4 +159,44 @@ class DetailViewController: UIViewController {
             }
         }
     }
+
+    @IBAction private func testNotifyRead(_ sender: Any) {
+        print("Notify Read TEST at", Date().timeIntervalSince1970)
+        manager?.notify(.batteryLevel, result: { result in
+            switch result {
+            case .success(let value):
+                print("Battery level (notify):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
+            case .failure(let error):
+                print("Battery level error:", error)
+            }
+        })
+        manager?.read(.batteryLevel, result: { result in
+            switch result {
+            case .success(let value):
+                print("Battery level (read):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
+            case .failure(let error):
+                print("Battery level error:", error)
+            }
+        })
+    }
+
+    @IBAction private func testDoubleRead(_ sender: Any) {
+        print("Double Read TEST at", Date().timeIntervalSince1970)
+        manager?.read(.batteryLevel, result: { result in
+            switch result {
+            case .success(let value):
+                print("Battery level (1):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
+            case .failure(let error):
+                print("Battery level error:", error)
+            }
+        })
+        manager?.read(.batteryLevel, result: { result in
+            switch result {
+            case .success(let value):
+                print("Battery level (2):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
+            case .failure(let error):
+                print("Battery level error:", error)
+            }
+        })
+    }
 }
