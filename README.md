@@ -44,6 +44,18 @@ open your favorite terminal, go to your project root path and run:
 carthage update
 ```
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but Alamofire does support its use on supported platforms.
+
+Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+.package(url: "https://github.com/MoveUpwards/Gormsson.git", from: "0.8.0")
+]
+```
+
 ## Usage
 
 ![Hear Rate Monitor Demo](Resources/HeartRateDemo.jpg)

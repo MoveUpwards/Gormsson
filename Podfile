@@ -1,5 +1,5 @@
 workspace 'Gormsson.xcworkspace'
-platform :ios, '9.1'
+platform :ios, '10.0'
 
 target 'Gormsson' do
   project 'Gormsson/Gormsson.xcodeproj'
