@@ -29,6 +29,7 @@ extension CentralManager: CBCentralManagerDelegate {
         didDisconnect?(peripheral, error)
         cleanPeripheral()
         current = nil
+        removeRequests()
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
@@ -44,23 +45,23 @@ extension CentralManager: CBCentralManagerDelegate {
         didFailConnect?(peripheral, error)
         cleanPeripheral()
         current = nil
+        removeRequests()
     }
 
     internal func disconnect() {
         cancelCurrent()
-        cleanPeripheral()
     }
 
-    // MARK: - Private functions
-
-    private func cleanPeripheral() {
+    internal func cleanPeripheral() {
         currentRequests.forEach { req in
             req.result?(.failure(GormssonError.deviceUnconnected))
         }
         pendingRequests.forEach { req in
             req.result?(.failure(GormssonError.deviceUnconnected))
         }
+    }
 
+    private func removeRequests() {
         currentRequests.removeAll()
         pendingRequests.removeAll()
     }
