@@ -33,7 +33,10 @@ extension PeripheralManager: CBPeripheralDelegate {
     internal func peripheral(_ peripheral: CBPeripheral,
                              didUpdateValueFor characteristic: CBCharacteristic,
                              error: Error?) {
-        request(for: peripheral, with: characteristic, error: error)
+        if characteristic.isNotifying {
+            requestNotify(for: peripheral, with: characteristic, error: error)
+        }
+        request(.read, for: peripheral, with: characteristic, error: error)
     }
 
     /// Invoked when the peripheral receives a request to start or stop providing notifications for
@@ -68,41 +71,39 @@ extension PeripheralManager: CBPeripheralDelegate {
     internal func peripheral(_ peripheral: CBPeripheral,
                              didWriteValueFor characteristic: CBCharacteristic,
                              error: Error?) {
-        request(for: peripheral, with: characteristic, error: error)
+        request(.write, for: peripheral, with: characteristic, error: error)
     }
 
     // MARK: - Private functions
 
-    private func request(for peripheral: CBPeripheral,
-                         with characteristic: CBCharacteristic,
-                         error: Error?) {
-        if characteristic.isNotifying {
-            let reqFilter = filter(for: characteristic, and: .notify)
-            manager?.currentRequests.filter(reqFilter).forEach { request in
-                if let error = error {
-                    request.result?(.failure(error))
-                } else {
-                    compute(request, for: characteristic)
-                }
-            }
-        }
-
-        let property = characteristic.properties.contains(.write) ? CBCharacteristicProperties.write : .read
-        let reqFilter = filter(for: characteristic, and: property)
-        guard let request = manager?.currentRequests.first(where: reqFilter) else { return }
-
-        if property.contains(.read) || property.contains(.write) {
-            manager?.currentRequests.removeAll(where: { $0 === request })
-        }
-
-        guard error == nil else {
+    private func requestNotify(for peripheral: CBPeripheral,
+                               with characteristic: CBCharacteristic,
+                               error: Error?) {
+        let reqFilter = filter(for: characteristic, and: .notify)
+        manager?.currentRequests.filter(reqFilter).forEach { request in
             if let error = error {
                 request.result?(.failure(error))
+            } else {
+                compute(request, for: characteristic)
             }
+        }
+    }
+
+    private func request(_ type: CBCharacteristicProperties,
+                         for peripheral: CBPeripheral,
+                         with characteristic: CBCharacteristic,
+                         error: Error?) {
+        let reqFilter = filter(for: characteristic, and: type)
+        guard let request = manager?.currentRequests.first(where: reqFilter) else { return }
+
+        manager?.currentRequests.removeAll(where: { $0 === request })
+
+        guard let error = error else {
+            compute(request, for: characteristic)
             return
         }
 
-        compute(request, for: characteristic)
+        request.result?(.failure(error))
     }
 
     private func compute(_ request: GattRequest, for characteristic: CBCharacteristic) {
