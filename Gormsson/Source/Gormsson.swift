@@ -28,11 +28,6 @@ open class Gormsson {
         manager = CentralManager(queue: queue, options: options)
     }
 
-    /// Clean up
-    deinit {
-        manager.cleanPeripheral()
-    }
-
     // MARK: - Observe
 
     /// The block to observe manager's state.
