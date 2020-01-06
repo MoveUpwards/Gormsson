@@ -30,7 +30,7 @@ open class Gormsson {
 
     /// Clean up
     deinit {
-        disconnect()
+        manager.cleanPeripheral()
     }
 
     // MARK: - Observe
