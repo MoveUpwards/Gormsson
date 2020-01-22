@@ -315,8 +315,11 @@ internal final class CentralManager: NSObject {
                            for: cbCharacteristic,
                            type: type)
 
-        if type == .withResponse {
-            currentRequests.append(request)
+        guard type == .withResponse else {
+            request.result?(.success(Empty()))
+            return
         }
+        
+        currentRequests.append(request)
     }
 }
