@@ -103,7 +103,7 @@ public final class HeartRateMeasurementType: DataInitializable {
         return UInt16(with: Array(characteristicData[firstIndex...firstIndex+1]))
     }
 
-    /// The current RR-interval in 1/1024s. (Can 0, 1 or 2 values)
+    /// The current RR-interval in 1/1024s.
     public var rrInterval: [UInt16] {
         guard characteristicData[0].bool(at: 4) else { return [] }
 
