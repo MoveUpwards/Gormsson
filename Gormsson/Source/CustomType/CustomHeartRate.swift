@@ -104,8 +104,8 @@ public final class HeartRateMeasurementType: DataInitializable {
     }
 
     /// The current RR-interval in 1/1024s.
-    public var rrInterval: UInt16? {
-        guard characteristicData[0].bool(at: 4) else { return nil }
+    public var rrInterval: [UInt16] {
+        guard characteristicData[0].bool(at: 4) else { return [] }
 
         var firstIndex = 2 // 0 for Flags and 1 for HRM
         if characteristicData[0].bool(at: 0) {
@@ -115,6 +115,13 @@ public final class HeartRateMeasurementType: DataInitializable {
             firstIndex += 2 // EnergyExtended will be 2 octets
         }
 
-        return UInt16(with: Array(characteristicData[firstIndex...firstIndex+1]))
+        let count = (characteristicData.count - firstIndex) / 2 - 1
+        var intervals = [UInt16]()
+
+        (0...count).forEach { index in
+            intervals.append(UInt16(with: Array(characteristicData[firstIndex+2*index...firstIndex+2*index+1])))
+        }
+
+        return intervals
     }
 }
