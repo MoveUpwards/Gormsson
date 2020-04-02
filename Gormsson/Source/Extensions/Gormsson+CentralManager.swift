@@ -28,14 +28,13 @@ extension CentralManager: CBCentralManagerDelegate {
                                  error: Error?) {
         didDisconnect?(peripheral, error)
         cleanPeripheral()
-        current = nil
-        removeRequests()
+        removeRequests(on: peripheral)
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         didConnect?(peripheral)
-        current?.discoverServices(nil)
+        peripheral.discoverServices(nil)
     }
 
     /// Invoked when a connection with a peripheral did fail.
@@ -44,12 +43,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  error: Error?) {
         didFailConnect?(peripheral, error)
         cleanPeripheral()
-        current = nil
-        removeRequests()
-    }
-
-    internal func disconnect() {
-        cancelCurrent()
+        removeRequests(on: peripheral)
     }
 
     internal func cleanPeripheral() {
@@ -61,8 +55,8 @@ extension CentralManager: CBCentralManagerDelegate {
         }
     }
 
-    private func removeRequests() {
-        currentRequests.removeAll()
-        pendingRequests.removeAll()
+    private func removeRequests(on peripheral: CBPeripheral) {
+        currentRequests.removeAll(where: { $0.peripheral == peripheral })
+        pendingRequests.removeAll(where: { $0.peripheral == peripheral })
     }
 }

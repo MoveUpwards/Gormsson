@@ -15,8 +15,8 @@ open class Gormsson {
     private let manager: CentralManager
 
     /// Device Name (0x2A00) as it is not accessible the normal way.
-    public var deviceName: String? {
-        return manager.current?.name
+    public func deviceName(_ peripheral: CBPeripheral) -> String? {
+        return peripheral.name // Do we keep this?
     }
 
     /// Init a new Gormsson manager
@@ -70,64 +70,70 @@ open class Gormsson {
                         didReadyHandler: didReadyHandler, didDisconnectHandler: didDisconnectHandler)
     }
 
-    /// Cancels an active or pending local connection to the current peripheral.
-    public func disconnect() {
-        manager.disconnect()
+    /// Cancels an active or pending local connection to the peripheral.
+    public func disconnect(_ peripheral: CBPeripheral) {
+        manager.cancel(peripheral)
     }
 
     // MARK: - Read
 
     /// Reads the value of a base characteristic.
     public func read(_ characteristic: GattCharacteristic,
+                     on peripheral: CBPeripheral,
                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.read(characteristic.characteristic, result: result)
+        manager.read(characteristic.characteristic, on: peripheral, result: result)
     }
 
     /// Reads the value of a custom characteristic.
     public func read(_ characteristic: CharacteristicProtocol,
+                     on peripheral: CBPeripheral,
                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.read(characteristic, result: result)
+        manager.read(characteristic, on: peripheral, result: result)
     }
 
     // MARK: - Notify
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: GattCharacteristic,
+                       on peripheral: CBPeripheral,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.notify(characteristic.characteristic, result: result)
+        manager.notify(characteristic.characteristic, on: peripheral, result: result)
     }
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: CharacteristicProtocol,
+                       on peripheral: CBPeripheral,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.notify(characteristic, result: result)
+        manager.notify(characteristic, on: peripheral, result: result)
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: GattCharacteristic) {
-        manager.stopNotify(characteristic.characteristic)
+    public func stopNotify(_ characteristic: GattCharacteristic, on peripheral: CBPeripheral) {
+        manager.stopNotify(characteristic.characteristic, on: peripheral)
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: CharacteristicProtocol) {
-        manager.stopNotify(characteristic)
+    public func stopNotify(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) {
+        manager.stopNotify(characteristic, on: peripheral)
     }
 
     // MARK: - Write
 
     /// Writes the value of a base characteristic.
     public func write(_ characteristic: GattCharacteristic,
+                      on peripheral: CBPeripheral,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.write(characteristic.characteristic, value: value, type: type, result: result)
+        manager.write(characteristic.characteristic, on: peripheral, value: value, type: type, result: result)
     }
 
     /// Writes the value of a custom characteristic.
     public func write(_ characteristic: CharacteristicProtocol,
+                      on peripheral: CBPeripheral,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.write(characteristic, value: value, type: type, result: result)
+        manager.write(characteristic, on: peripheral, value: value, type: type, result: result)
     }
 }

@@ -36,9 +36,6 @@ internal final class CentralManager: NSObject {
     /// Only notify value change if distinct
     private var distinctState = false
 
-    /// The current connected peripheral.
-    internal var current: CBPeripheral?
-
     /// The block to call each time a peripheral is connected.
     internal var didConnect: ((CBPeripheral) -> Void)?
     /// The block to call when a peripheral fails to connect.
@@ -86,7 +83,8 @@ internal final class CentralManager: NSObject {
             rescan()
         default:
             if state == .isPoweredOn {
-                current = nil
+                // TODO: See state on loading
+                //current = nil
                 state = .didLostBluetooth
             } else {
                 state = .needBluetooth
@@ -129,24 +127,24 @@ internal final class CentralManager: NSObject {
         discoveringService = 0
         cbManager?.connect(peripheral)
         peripheral.delegate = self.peripheralManager
-        current = peripheral
     }
 
     /// Gets the CBCharacteristic of the current peripheral or nil if not in.
-    internal func get(_ characteristic: CharacteristicProtocol) -> CBCharacteristic? {
-        return current?.services?.first(where: { $0.uuid == characteristic.service.uuid })?
+    internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
+        return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
             .characteristics?.first(where: { $0.uuid == characteristic.uuid })
     }
 
     /// Reads the value of a custom characteristic.
     internal func read(_ characteristic: CharacteristicProtocol,
+                       on peripheral: CBPeripheral,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
             result(.failure(GormssonError.powerOff))
             return
         }
 
-        let request = GattRequest(.read, characteristic: characteristic, result: result)
+        let request = GattRequest(.read, on: peripheral, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             pendingRequests.append(request)
@@ -158,13 +156,14 @@ internal final class CentralManager: NSObject {
 
     /// Starts notifications or indications for the value of a base characteristic.
     internal func notify(_ characteristic: CharacteristicProtocol,
+                         on peripheral: CBPeripheral,
                          result: @escaping (Result<DataInitializable, Error>) -> Void) {
         guard state == .isPoweredOn else {
             result(.failure(GormssonError.powerOff))
             return
         }
 
-        let request = GattRequest(.notify, characteristic: characteristic, result: result)
+        let request = GattRequest(.notify, on: peripheral, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             guard !pendingRequests.contains(request) else {
@@ -180,14 +179,16 @@ internal final class CentralManager: NSObject {
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    internal func stopNotify(_ characteristic: CharacteristicProtocol) {
-        guard let cbCharacteristic = get(characteristic), cbCharacteristic.isNotifying else { return }
+    internal func stopNotify(_ characteristic: CharacteristicProtocol,
+                             on peripheral: CBPeripheral) {
+        guard let cbCharacteristic = get(characteristic, on: peripheral), cbCharacteristic.isNotifying else { return }
 
-        current?.setNotifyValue(false, for: cbCharacteristic)
+        peripheral.setNotifyValue(false, for: cbCharacteristic)
     }
 
     /// Writes the value of a custom characteristic.
     internal func write(_ characteristic: CharacteristicProtocol,
+                        on peripheral: CBPeripheral,
                         value: DataConvertible,
                         type: CBCharacteristicWriteType = .withResponse,
                         result: @escaping (Result<DataInitializable, Error>) -> Void) {
@@ -196,7 +197,7 @@ internal final class CentralManager: NSObject {
             return
         }
 
-        let request = GattRequest(.write, characteristic: characteristic, result: result)
+        let request = GattRequest(.write, on: peripheral, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
             pendingRequests.append(request)
@@ -235,31 +236,25 @@ internal final class CentralManager: NSObject {
         }
     }
 
-    internal func cancelCurrent() {
-        if let peripheral = current {
-            cbManager?.cancelPeripheralConnection(peripheral)
-        }
+    internal func cancel(_ peripheral: CBPeripheral) {
+        cbManager?.cancelPeripheralConnection(peripheral)
     }
 
     // MARK: - Private functions
 
-    private func read(_ request: GattRequest, append: Bool = true) {
+    private func read(_ request: GattRequest,
+                      append: Bool = true) {
         guard state == .isPoweredOn else {
             request.result?(.failure(GormssonError.powerOff))
             return
         }
 
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
+        guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
-        current.readValue(for: cbCharacteristic)
+        request.peripheral.readValue(for: cbCharacteristic)
 
         if append {
             currentRequests.append(request)
@@ -273,12 +268,7 @@ internal final class CentralManager: NSObject {
             return
         }
 
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
+        guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
@@ -288,7 +278,7 @@ internal final class CentralManager: NSObject {
             return
         }
 
-        current.setNotifyValue(true, for: cbCharacteristic)
+        request.peripheral.setNotifyValue(true, for: cbCharacteristic)
         currentRequests.append(request)
     }
 
@@ -301,25 +291,20 @@ internal final class CentralManager: NSObject {
             return
         }
 
-        guard let current = current else {
-            request.result?(.failure(GormssonError.deviceUnconnected))
-            return
-        }
-
-        guard let cbCharacteristic = get(request.characteristic) else {
+        guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
-        current.writeValue(value.toData(),
-                           for: cbCharacteristic,
-                           type: type)
+        request.peripheral.writeValue(value.toData(),
+                              for: cbCharacteristic,
+                              type: type)
 
         guard type == .withResponse else {
             request.result?(.success(Empty()))
             return
         }
-        
+
         currentRequests.append(request)
     }
 }
