@@ -38,6 +38,7 @@ class MasterViewController: UITableViewController {
                 self?.objects.insert(peripheral, at: 0)
                 let indexPath = IndexPath(row: 0, section: 0)
                 self?.tableView.insertRows(at: [indexPath], with: .automatic)
+                guard peripheral.state == .disconnected else { return }
                 self?.manager.connect(peripheral, success: { connected in
                     print("Connect to", connected)
                 }, failure: { failed, error in
