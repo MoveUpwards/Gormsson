@@ -48,10 +48,10 @@ extension CentralManager: CBCentralManagerDelegate {
 
     internal func cleanPeripheral() {
         currentRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
+            req.result?(.failure(GormssonError.deviceDisconnected))
         }
         pendingRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
+            req.result?(.failure(GormssonError.deviceDisconnected))
         }
     }
 

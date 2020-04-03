@@ -54,7 +54,7 @@ internal final class CentralManager: NSObject {
     internal var discoveringService = 0
     /// The pending requests that wait to be resolved.
     internal var pendingRequests = [GattRequest]()
-    /// The current active requests (notify requests).
+    /// The current active requests (read / notify / write with response requests).
     internal var currentRequests = [GattRequest]()
 
     internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
@@ -200,7 +200,7 @@ internal final class CentralManager: NSObject {
         let request = GattRequest(.write, on: peripheral, characteristic: characteristic, result: result)
 
         guard !isDiscovering else {
-            pendingRequests.append(request)
+            result(.failure(GormssonError.notReady))
             return
         }
 

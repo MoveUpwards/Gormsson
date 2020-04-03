@@ -14,8 +14,10 @@ public enum GormssonError: Error {
     case missingValue
     /// The manager's state got a BLE shutdown, you should restart it.
     case powerOff
+    /// The manager is not ready for this operation.
+    case notReady
     /// The current device was disconnected or lost the BLE connection.
-    case deviceUnconnected
+    case deviceDisconnected
     /// The characteristic is not present on the peripheral (or not yet initialized).
     case characteristicNotFound
     /// The manager accept only one notify per characteristic.
