@@ -47,11 +47,6 @@ internal final class CentralManager: NSObject {
     /// The block to call each time a peripheral is found.
     internal var didDiscover: ((CBPeripheral, GattAdvertisement) -> Void)?
 
-    // Discovering services and characteristics
-    /// The current peripheral is discovering his services and characteristics.
-    internal var isDiscovering = false
-    /// Number of services that are currently discovering.
-    internal var discoveringService = 0
     /// The pending requests that wait to be resolved.
     internal var pendingRequests = [GattRequest]()
     /// The current active requests (read / notify / write with response requests).
@@ -83,8 +78,6 @@ internal final class CentralManager: NSObject {
             rescan()
         default:
             if state == .isPoweredOn {
-                // TODO: See state on loading
-                //current = nil
                 state = .didLostBluetooth
             } else {
                 state = .needBluetooth
@@ -123,8 +116,7 @@ internal final class CentralManager: NSObject {
         didFailConnect = failure
         didReady = didReadyHandler
         didDisconnect = didDisconnectHandler
-        isDiscovering = true
-        discoveringService = 0
+
         cbManager?.connect(peripheral)
         peripheral.delegate = self.peripheralManager
     }
@@ -146,7 +138,11 @@ internal final class CentralManager: NSObject {
 
         let request = GattRequest(.read, on: peripheral, characteristic: characteristic, result: result)
 
-        guard !isDiscovering else {
+        guard peripheral.state == .connected else {
+            guard peripheral.state == .connecting else {
+                result(.failure(GormssonError.deviceDisconnected))
+                return
+            }
             pendingRequests.append(request)
             return
         }
@@ -165,7 +161,11 @@ internal final class CentralManager: NSObject {
 
         let request = GattRequest(.notify, on: peripheral, characteristic: characteristic, result: result)
 
-        guard !isDiscovering else {
+        guard peripheral.state == .connected else {
+            guard peripheral.state == .connecting else {
+                result(.failure(GormssonError.deviceDisconnected))
+                return
+            }
             guard !pendingRequests.contains(request) else {
                 request.result?(.failure(GormssonError.alreadyNotifying))
                 return
@@ -199,7 +199,11 @@ internal final class CentralManager: NSObject {
 
         let request = GattRequest(.write, on: peripheral, characteristic: characteristic, result: result)
 
-        guard !isDiscovering else {
+        guard peripheral.state == .connected else {
+            guard peripheral.state == .connecting else {
+                result(.failure(GormssonError.deviceDisconnected))
+                return
+            }
             result(.failure(GormssonError.notReady))
             return
         }
@@ -207,12 +211,11 @@ internal final class CentralManager: NSObject {
         write(request, value: value, type: type)
     }
 
-    internal func peripheralDidDiscoverCharacteristics() {
-        discoveringService -= 1
-        if discoveringService <= 0 {
-            isDiscovering = false
+    internal func didDiscoverCharacteristics(on peripheral: CBPeripheral) {
+        if peripheral.state == .connected {
             didReady?()
-            pendingRequests.forEach { request in
+            let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
+            pendingRequests.filter(filter).forEach { request in
                 switch request.property {
                 case .read:
                     read(request)
@@ -222,7 +225,7 @@ internal final class CentralManager: NSObject {
                     break
                 }
             }
-            pendingRequests.removeAll()
+            pendingRequests.removeAll(where: filter)
         }
     }
 
