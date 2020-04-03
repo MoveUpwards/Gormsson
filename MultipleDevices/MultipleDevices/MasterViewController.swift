@@ -33,19 +33,24 @@ class MasterViewController: UITableViewController {
         }
 
         observeState()
-        manager.scan { [weak self] peripheral, advertisement in
-            DispatchQueue.main.async {
-                self?.objects.insert(peripheral, at: 0)
-                let indexPath = IndexPath(row: 0, section: 0)
-                self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                guard peripheral.state == .disconnected else { return }
-                self?.manager.connect(peripheral, success: { connected in
-                    print("Connect to", connected)
-                }, failure: { failed, error in
-                    print("Can't connect", failed, "\nerror:", error.debugDescription)
-                }, didDisconnectHandler: { disconnected, error in
-                    print("Disconnect", disconnected, "with error:", error.debugDescription)
-                })
+        manager.scan { result in
+            switch result {
+            case .failure(let error):
+                print("Scan error:", error)
+            case .success(let (peripheral, advertisement)):
+                DispatchQueue.main.async { [weak self] in
+                    self?.objects.insert(peripheral, at: 0)
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self?.tableView.insertRows(at: [indexPath], with: .automatic)
+                    guard peripheral.state == .disconnected else { return }
+                    self?.manager.connect(peripheral, success: {
+                        print("Connect to", peripheral, "with", advertisement)
+                    }, failure: { error in
+                        print("Can't connect", peripheral, "\nerror:", error.debugDescription)
+                    }, didDisconnectHandler: { error in
+                        print("Disconnect", peripheral, "with error:", error.debugDescription)
+                    })
+                }
             }
         } // ## Added for Gormsson
     }
@@ -147,7 +152,7 @@ class MasterViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = objects[indexPath.row].name
-        cell.textLabel?.text = object?.description
+        cell.textLabel?.text = object
         return cell
     }
 

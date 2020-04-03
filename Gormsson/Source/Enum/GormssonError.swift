@@ -16,6 +16,8 @@ public enum GormssonError: Error {
     case powerOff
     /// The manager is not ready for this operation.
     case notReady
+    /// The manager is already scanning.
+    case alreadyScanning
     /// The current device was disconnected or lost the BLE connection.
     case deviceDisconnected
     /// The characteristic is not present on the peripheral (or not yet initialized).

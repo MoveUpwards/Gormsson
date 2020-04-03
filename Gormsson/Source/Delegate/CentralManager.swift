@@ -31,21 +31,15 @@ internal final class CentralManager: NSObject {
             }
         }
     }
-    /// The block to call each time the state change
+    /// The block to call each time the state change.
     private var stateBlock: ((GormssonState) -> Void)?
-    /// Only notify value change if distinct
+    /// Only notify value change if distinct.
     private var distinctState = false
 
-    /// The block to call each time a peripheral is connected.
-    internal var didConnect: ((CBPeripheral) -> Void)?
-    /// The block to call when a peripheral fails to connect.
-    internal var didFailConnect: ((CBPeripheral, Error?) -> Void)?
-    /// The block to call once all custom services and characterics.
-    internal var didReady: (() -> Void)?
-    /// The block to call each time a peripheral is disconnect.
-    internal var didDisconnect: ((CBPeripheral, Error?) -> Void)?
+    /// Dictionary of all connect handler.
+    internal var connectHandlers = [UUID: ConnectHandler]()
     /// The block to call each time a peripheral is found.
-    internal var didDiscover: ((CBPeripheral, GattAdvertisement) -> Void)?
+    internal var didDiscover: ((Result<(CBPeripheral, GattAdvertisement), Error>) -> Void)?
 
     /// The pending requests that wait to be resolved.
     internal var pendingRequests = [GattRequest]()
@@ -87,8 +81,12 @@ internal final class CentralManager: NSObject {
 
     internal func scan(_ services: [GattService]? = nil,
                        options: [String: Any]? = nil,
-                       didDiscoverHandler: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
-        didDiscover = didDiscoverHandler
+                       didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
+        guard !(cbManager?.isScanning ?? true) else {
+            didDiscover(.failure(GormssonError.alreadyScanning))
+            return
+        }
+        self.didDiscover = didDiscover
         guard state == .isPoweredOn else {
             needScan = true
             scanServices = services
@@ -105,17 +103,17 @@ internal final class CentralManager: NSObject {
 
     internal func connect(_ peripheral: CBPeripheral,
                           shouldStopScan: Bool = false,
-                          success: ((CBPeripheral) -> Void)? = nil,
-                          failure: ((CBPeripheral, Error?) -> Void)? = nil,
+                          success: (() -> Void)? = nil,
+                          failure: ((Error?) -> Void)? = nil,
                           didReadyHandler: (() -> Void)? = nil,
-                          didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
+                          didDisconnectHandler: ((Error?) -> Void)? = nil) {
         if shouldStopScan, cbManager?.isScanning ?? false {
             stopScan()
         }
-        didConnect = success
-        didFailConnect = failure
-        didReady = didReadyHandler
-        didDisconnect = didDisconnectHandler
+        connectHandlers[peripheral.identifier] = ConnectHandler(didConnect: success,
+                                                                didFailConnect: failure,
+                                                                didReady: didReadyHandler,
+                                                                didDisconnect: didDisconnectHandler)
 
         cbManager?.connect(peripheral)
         peripheral.delegate = self.peripheralManager
@@ -213,7 +211,7 @@ internal final class CentralManager: NSObject {
 
     internal func didDiscoverCharacteristics(on peripheral: CBPeripheral) {
         if peripheral.state == .connected {
-            didReady?()
+            connectHandlers[peripheral.identifier]?.didReady?()
             let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
             pendingRequests.filter(filter).forEach { request in
                 switch request.property {
@@ -232,7 +230,7 @@ internal final class CentralManager: NSObject {
     /// Send a new scan if the first one was too early.
     internal func rescan() {
         if needScan, let block = didDiscover {
-            scan(scanServices, options: scanOptions, didDiscoverHandler: block)
+            scan(scanServices, options: scanOptions, didDiscover: block)
             needScan = false
             scanServices = nil
             scanOptions = nil

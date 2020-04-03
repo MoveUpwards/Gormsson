@@ -46,8 +46,8 @@ open class Gormsson {
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     didDiscoverHandler: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
-        manager.scan(services, options: options, didDiscoverHandler: didDiscoverHandler)
+                     didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
+        manager.scan(services, options: options, didDiscover: didDiscover)
     }
 
     /// Asks the central manager to stop scanning for peripherals.
@@ -62,10 +62,10 @@ open class Gormsson {
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
     public func connect(_ peripheral: CBPeripheral,
                         shouldStopScan: Bool = false,
-                        success: ((CBPeripheral) -> Void)? = nil,
-                        failure: ((CBPeripheral, Error?) -> Void)? = nil,
+                        success: (() -> Void)? = nil,
+                        failure: ((Error?) -> Void)? = nil,
                         didReadyHandler: (() -> Void)? = nil,
-                        didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
+                        didDisconnectHandler: ((Error?) -> Void)? = nil) {
         manager.connect(peripheral, shouldStopScan: shouldStopScan, success: success, failure: failure,
                         didReadyHandler: didReadyHandler, didDisconnectHandler: didDisconnectHandler)
     }
