@@ -14,11 +14,6 @@ import Nevanlinna
 open class Gormsson {
     private let manager: CentralManager
 
-    /// Device Name (0x2A00) as it is not accessible the normal way.
-    public func deviceName(_ peripheral: CBPeripheral) -> String? {
-        return peripheral.name // Do we keep this?
-    }
-
     /// Init a new Gormsson manager
     ///
     /// - parameter queue:     The dispatch queue on which the events will be dispatched.
