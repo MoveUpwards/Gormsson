@@ -5,15 +5,15 @@
       location = "group:Gormsson/Gormsson.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Gormsson/../GormssonDemo/GormssonDemo.xcodeproj">
+      location = "group:MultipleDevices/MultipleDevices.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:GormssonDemo/GormssonDemo.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:HeartRateDemo/HeartRateDemo.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:GormssonDemo/GormssonDemo.xcodeproj">
    </FileRef>
 </Workspace>

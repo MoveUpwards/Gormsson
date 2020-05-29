@@ -1,9 +1,9 @@
 //
 //  MasterViewController.swift
-//  GormssonDemo
+//  MultipleDevices
 //
-//  Created by Damien Noël Dubuisson on 04/04/2019.
-//  Copyright © 2019 Damien Noël Dubuisson. All rights reserved.
+//  Created by Mac on 03/04/2020.
+//  Copyright © 2020 vbkam. All rights reserved.
 //
 
 import UIKit
@@ -21,15 +21,68 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let buttonDisconnect = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(disconnectAllDevices))
+        navigationItem.leftBarButtonItem = buttonDisconnect
 
-        manager.scan([gpsControlService], didDiscoverHandler: didDiscover) // ## Added for Gormsson
+        let buttonRead = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playReadBattery(_:)))
+        navigationItem.rightBarButtonItem = buttonRead
+
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            detailViewController = (controllers[controllers.count-1] as? UINavigationController)?.topViewController as? DetailViewController
+        }
+
+        observeState()
+        manager.scan { result in
+            switch result {
+            case .failure(let error):
+                print("Scan error:", error)
+            case .success(let (peripheral, advertisement)):
+                DispatchQueue.main.async { [weak self] in
+                    self?.objects.insert(peripheral, at: 0)
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self?.tableView.insertRows(at: [indexPath], with: .automatic)
+                    guard peripheral.state == .disconnected else { return }
+                    self?.manager.connect(peripheral, success: {
+                        print("Connect to", peripheral, "with", advertisement)
+                    }, failure: { error in
+                        print("Can't connect", peripheral, "\nerror:", error.debugDescription)
+                    }, didDisconnectHandler: { error in
+                        print("Disconnect", peripheral, "with error:", error.debugDescription)
+                    })
+                }
+            }
+        } // ## Added for Gormsson
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+    }
 
+    // MARK: - Private functions
+
+    @objc
+    private func disconnectAllDevices(_ sender: Any) {
+        objects.forEach { [weak self] peripheral in
+            self?.manager.disconnect(peripheral)
+        }
+    }
+
+    @objc
+    private func playReadBattery(_ sender: Any) {
+        objects.forEach { [weak self] peripheral in
+            self?.manager.read(.batteryLevel, on: peripheral) { result in
+                print("Battery level:", result, "on", peripheral)
+            }
+            self?.manager.read(.modelNumberString, on: peripheral) { result in
+                print("Device name:", result, "on", peripheral)
+            }
+        }
+    }
+
+
+    private func observeState() {
         // ## Optional to observe state's changes
         manager.observe(options: [.initial, .distinct]) { [weak self] state in
             switch /*manager.*/state {
@@ -66,34 +119,21 @@ class MasterViewController: UITableViewController {
         }
     }
 
-    // ## Added for Gormsson
-    private func didDiscover(_ peripheral: CBPeripheral, _ advertisementData: GattAdvertisement) {
-        print("rssi:", advertisementData.rssi)
-        print("localName:", advertisementData.localName ?? "nil")
-        print("isConnectable:", advertisementData.isConnectable)
-        print("mac address:", advertisementData.macAddress ?? "nil")
-
-        DispatchQueue.main.async { [weak self] in
-            self?.objects.insert(peripheral, at: 0)
-            let indexPath = IndexPath(row: 0, section: 0)
-            self?.tableView.insertRows(at: [indexPath], with: .automatic)
-        }
-    }
-
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let peripheral = objects[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = peripheral.name
-
-                controller.manager = manager // ## Added for Gormsson
-                manager.connect(peripheral) // ## Added for Gormsson
-
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController
+                if peripheral.name == nil {
+                    controller?.detailItem = "NO NAME"
+                } else {
+                    controller?.detailItem = peripheral.name
+                }
+                controller?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                controller?.navigationItem.leftItemsSupplementBackButton = true
+                detailViewController = controller
             }
         }
     }
@@ -112,7 +152,7 @@ class MasterViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = objects[indexPath.row].name
-        cell.textLabel?.text = object?.description
+        cell.textLabel?.text = object
         return cell
     }
 

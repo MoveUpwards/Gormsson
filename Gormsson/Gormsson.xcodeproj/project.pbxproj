@@ -12,6 +12,7 @@
 		048E2B712371C0BE00D1AECF /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B702371C0BE00D1AECF /* CentralManager.swift */; };
 		048E2B732371C88A00D1AECF /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B722371C88A00D1AECF /* PeripheralManager.swift */; };
 		048E2B752372C8AA00D1AECF /* ValueObservingOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B742372C8AA00D1AECF /* ValueObservingOptions.swift */; };
+		04AF073B243778590005253E /* ConnectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF073A243778590005253E /* ConnectHandler.swift */; };
 		6DE3E6892264C5F1004BCFFA /* DataInitializable+HeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3E6882264C5F1004BCFFA /* DataInitializable+HeartRate.swift */; };
 		6DF480952268A9F5006504BF /* CustomHeartRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF480942268A9F5006504BF /* CustomHeartRate.swift */; };
 		B694B63D7AA0FE0D4F39AFE5 /* Pods_Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */; };
@@ -55,6 +56,7 @@
 		048E2B702371C0BE00D1AECF /* CentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralManager.swift; sourceTree = "<group>"; };
 		048E2B722371C88A00D1AECF /* PeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
 		048E2B742372C8AA00D1AECF /* ValueObservingOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueObservingOptions.swift; sourceTree = "<group>"; };
+		04AF073A243778590005253E /* ConnectHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectHandler.swift; sourceTree = "<group>"; };
 		1C32FD83F99D9F6E957385BB /* Pods-Gormsson.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gormsson.debug.xcconfig"; path = "Target Support Files/Pods-Gormsson/Pods-Gormsson.debug.xcconfig"; sourceTree = "<group>"; };
 		4A5E69FA962B0ACEBF88B0EF /* Pods_Gormsson.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gormsson.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DE3E6882264C5F1004BCFFA /* DataInitializable+HeartRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInitializable+HeartRate.swift"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				048E2B702371C0BE00D1AECF /* CentralManager.swift */,
 				048E2B722371C88A00D1AECF /* PeripheralManager.swift */,
+				04AF073A243778590005253E /* ConnectHandler.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3A2647A236858A50081A843 /* Gormsson+Peripheral.swift in Sources */,
+				04AF073B243778590005253E /* ConnectHandler.swift in Sources */,
 				048E2B732371C88A00D1AECF /* PeripheralManager.swift in Sources */,
 				F3C366112268B04500B09E14 /* CustomDateTime.swift in Sources */,
 				F39E39E1225E391E003804A7 /* GattRequest.swift in Sources */,
@@ -694,7 +698,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.5;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.Gormsson;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -724,7 +728,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9.5;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.Gormsson;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

@@ -15,7 +15,6 @@ extension PeripheralManager: CBPeripheralDelegate {
                              didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
 
-        manager?.discoveringService = services.count
         for service in services {
             peripheral.discoverCharacteristics(nil, for: service)
         }
@@ -25,7 +24,7 @@ extension PeripheralManager: CBPeripheralDelegate {
     internal func peripheral(_ peripheral: CBPeripheral,
                              didDiscoverCharacteristicsFor service: CBService,
                              error: Error?) {
-        manager?.peripheralDidDiscoverCharacteristics()
+        manager?.didDiscoverCharacteristics(on: peripheral)
     }
 
     /// Invoked when you retrieve a specified characteristic’s value, or when the peripheral device notifies

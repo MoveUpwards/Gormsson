@@ -1,5 +1,5 @@
 PODS:
-  - Gormsson (0.9.4):
+  - Gormsson (0.9.5):
     - Nevanlinna
   - Nevanlinna (0.5.0)
 
@@ -16,9 +16,9 @@ EXTERNAL SOURCES:
     :path: "../Gormsson"
 
 SPEC CHECKSUMS:
-  Gormsson: 6de36c75cb7f28c62f3e5e046849afb0059dc473
+  Gormsson: 974a144d2c8848c534b79961292a6095ded07c5b
   Nevanlinna: 112093bcc8601612aaeb84b1413f92c59b295ead
 
-PODFILE CHECKSUM: 9a1ec6eb90a1ac7b4529cf86343b648ed027a395
+PODFILE CHECKSUM: 39d0a27d7e851f4d817c996b275705199a308d09
 
 COCOAPODS: 1.8.4

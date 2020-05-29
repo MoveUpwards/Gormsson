@@ -14,11 +14,6 @@ import Nevanlinna
 open class Gormsson {
     private let manager: CentralManager
 
-    /// Device Name (0x2A00) as it is not accessible the normal way.
-    public var deviceName: String? {
-        return manager.current?.name
-    }
-
     /// Init a new Gormsson manager
     ///
     /// - parameter queue:     The dispatch queue on which the events will be dispatched.
@@ -46,8 +41,8 @@ open class Gormsson {
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     didDiscoverHandler: @escaping (CBPeripheral, GattAdvertisement) -> Void) {
-        manager.scan(services, options: options, didDiscoverHandler: didDiscoverHandler)
+                     didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
+        manager.scan(services, options: options, didDiscover: didDiscover)
     }
 
     /// Asks the central manager to stop scanning for peripherals.
@@ -62,72 +57,78 @@ open class Gormsson {
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
     public func connect(_ peripheral: CBPeripheral,
                         shouldStopScan: Bool = false,
-                        success: ((CBPeripheral) -> Void)? = nil,
-                        failure: ((CBPeripheral, Error?) -> Void)? = nil,
+                        success: (() -> Void)? = nil,
+                        failure: ((Error?) -> Void)? = nil,
                         didReadyHandler: (() -> Void)? = nil,
-                        didDisconnectHandler: ((CBPeripheral, Error?) -> Void)? = nil) {
+                        didDisconnectHandler: ((Error?) -> Void)? = nil) {
         manager.connect(peripheral, shouldStopScan: shouldStopScan, success: success, failure: failure,
                         didReadyHandler: didReadyHandler, didDisconnectHandler: didDisconnectHandler)
     }
 
-    /// Cancels an active or pending local connection to the current peripheral.
-    public func disconnect() {
-        manager.disconnect()
+    /// Cancels an active or pending local connection to the peripheral.
+    public func disconnect(_ peripheral: CBPeripheral) {
+        manager.cancel(peripheral)
     }
 
     // MARK: - Read
 
     /// Reads the value of a base characteristic.
     public func read(_ characteristic: GattCharacteristic,
+                     on peripheral: CBPeripheral,
                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.read(characteristic.characteristic, result: result)
+        manager.read(characteristic.characteristic, on: peripheral, result: result)
     }
 
     /// Reads the value of a custom characteristic.
     public func read(_ characteristic: CharacteristicProtocol,
+                     on peripheral: CBPeripheral,
                      result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.read(characteristic, result: result)
+        manager.read(characteristic, on: peripheral, result: result)
     }
 
     // MARK: - Notify
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: GattCharacteristic,
+                       on peripheral: CBPeripheral,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.notify(characteristic.characteristic, result: result)
+        manager.notify(characteristic.characteristic, on: peripheral, result: result)
     }
 
     /// Starts notifications or indications for the value of a base characteristic.
     public func notify(_ characteristic: CharacteristicProtocol,
+                       on peripheral: CBPeripheral,
                        result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.notify(characteristic, result: result)
+        manager.notify(characteristic, on: peripheral, result: result)
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: GattCharacteristic) {
-        manager.stopNotify(characteristic.characteristic)
+    public func stopNotify(_ characteristic: GattCharacteristic, on peripheral: CBPeripheral) {
+        manager.stopNotify(characteristic.characteristic, on: peripheral)
     }
 
     /// Stops notifications or indications for the value of a custom characteristic.
-    public func stopNotify(_ characteristic: CharacteristicProtocol) {
-        manager.stopNotify(characteristic)
+    public func stopNotify(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) {
+        manager.stopNotify(characteristic, on: peripheral)
     }
 
     // MARK: - Write
 
     /// Writes the value of a base characteristic.
     public func write(_ characteristic: GattCharacteristic,
+                      on peripheral: CBPeripheral,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.write(characteristic.characteristic, value: value, type: type, result: result)
+        manager.write(characteristic.characteristic, on: peripheral, value: value, type: type, result: result)
     }
 
     /// Writes the value of a custom characteristic.
     public func write(_ characteristic: CharacteristicProtocol,
+                      on peripheral: CBPeripheral,
                       value: DataConvertible,
                       type: CBCharacteristicWriteType = .withResponse,
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
-        manager.write(characteristic, value: value, type: type, result: result)
+        manager.write(characteristic, on: peripheral, value: value, type: type, result: result)
     }
 }

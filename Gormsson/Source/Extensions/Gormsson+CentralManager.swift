@@ -19,50 +19,44 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didDiscover peripheral: CBPeripheral,
                                  advertisementData: [String: Any],
                                  rssi RSSI: NSNumber) {
-        didDiscover?(peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))
+        didDiscover?(.success((peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))))
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.
     internal func centralManager(_ central: CBCentralManager,
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
-        didDisconnect?(peripheral, error)
+        connectHandlers[peripheral.identifier]?.didDisconnect?(error)
         cleanPeripheral()
-        current = nil
-        removeRequests()
+        removeRequests(on: peripheral)
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        didConnect?(peripheral)
-        current?.discoverServices(nil)
+        connectHandlers[peripheral.identifier]?.didConnect?()
+        peripheral.discoverServices(nil)
     }
 
     /// Invoked when a connection with a peripheral did fail.
     internal func centralManager(_ central: CBCentralManager,
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
-        didFailConnect?(peripheral, error)
+        connectHandlers[peripheral.identifier]?.didFailConnect?(error)
         cleanPeripheral()
-        current = nil
-        removeRequests()
-    }
-
-    internal func disconnect() {
-        cancelCurrent()
+        removeRequests(on: peripheral)
     }
 
     internal func cleanPeripheral() {
         currentRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
+            req.result?(.failure(GormssonError.deviceDisconnected))
         }
         pendingRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceUnconnected))
+            req.result?(.failure(GormssonError.deviceDisconnected))
         }
     }
 
-    private func removeRequests() {
-        currentRequests.removeAll()
-        pendingRequests.removeAll()
+    private func removeRequests(on peripheral: CBPeripheral) {
+        currentRequests.removeAll(where: { $0.peripheral == peripheral })
+        pendingRequests.removeAll(where: { $0.peripheral == peripheral })
     }
 }
