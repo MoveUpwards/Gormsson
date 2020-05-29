@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.swift_version           = '5.2'
   s.ios.deployment_target   = '10.0'
   s.osx.deployment_target   = '10.13'
-  s.source_files            = 'Gormsson/Sources/**/*.swift'
+  s.source_files            = 'Gormsson/Source/**/*.swift'
   s.frameworks              = 'Foundation'
   s.frameworks              = 'CoreBluetooth'
 
