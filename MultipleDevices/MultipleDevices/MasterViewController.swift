@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController {
         }
 
         observeState()
-        manager.scan { result in
+        manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { result in
             switch result {
             case .failure(let error):
                 print("Scan error:", error)
@@ -47,6 +47,8 @@ class MasterViewController: UITableViewController {
                         print("Connect to", peripheral, "with", advertisement)
                     }, failure: { error in
                         print("Can't connect", peripheral, "\nerror:", error.debugDescription)
+                    }, didReadyHandler: {
+                        print("DidReady to use", peripheral)
                     }, didDisconnectHandler: { error in
                         print("Disconnect", peripheral, "with error:", error.debugDescription)
                     })

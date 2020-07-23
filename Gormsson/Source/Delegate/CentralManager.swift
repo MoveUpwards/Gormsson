@@ -210,7 +210,11 @@ internal final class CentralManager: NSObject {
     }
 
     internal func didDiscoverCharacteristics(on peripheral: CBPeripheral) {
-        if peripheral.state == .connected {
+        connectHandlers[peripheral.identifier]?.remainingServices -= 1
+        guard let counter = connectHandlers[peripheral.identifier]?.remainingServices else {
+            return
+        }
+        if counter <= 0 {
             connectHandlers[peripheral.identifier]?.didReady?()
             let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
             pendingRequests.filter(filter).forEach { request in

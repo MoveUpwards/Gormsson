@@ -19,4 +19,7 @@ internal struct ConnectHandler {
     internal var didReady: (() -> Void)?
     /// The block to call each time a peripheral is disconnect.
     internal var didDisconnect: ((Error?) -> Void)?
+    
+    /// Count the remaining services to discover before sending didReady callback
+    internal var remainingServices: Int = 0
 }
