@@ -15,6 +15,7 @@ extension PeripheralManager: CBPeripheralDelegate {
                              didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
 
+        manager?.connectHandlers[peripheral.identifier]?.remainingServices = services.count
         for service in services {
             peripheral.discoverCharacteristics(nil, for: service)
         }
