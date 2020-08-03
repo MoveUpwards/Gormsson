@@ -37,7 +37,8 @@ open class Gormsson {
     /// - parameter services:       An array of services that the app is interested in. In this case,
     ///                             each service represents the UUID of a service that a peripheral is advertising.
     ///                             A valid UUID with a 16-bit, 32-bit, or 128-bit UUID string representation.
-    ///                             The expected format for 128-bit UUIDs is a string punctuated by hyphens, for example 68753A44-4D6F-1226-9C60-0050E4C00067.
+    ///                             The expected format for 128-bit UUIDs is a string punctuated by hyphens,
+    ///                             for example 68753A44-4D6F-1226-9C60-0050E4C00067.
     /// - parameter options:        An optional dictionary specifying options to customize the scan.
     ///                             For available options, see Peripheral Scanning Options.
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
