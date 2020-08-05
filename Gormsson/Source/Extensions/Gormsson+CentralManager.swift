@@ -20,7 +20,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  advertisementData: [String: Any],
                                  rssi RSSI: NSNumber) {
         let advertisement = GattAdvertisement(with: advertisementData, rssi: RSSI.intValue)
-        didDiscover?(.success((peripheral, advertisement)))
+        didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
 
         if nil != didUpdate { // Only if we need it
             if let index = currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {

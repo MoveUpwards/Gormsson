@@ -27,4 +27,12 @@ opt_in_rules:
   - attributes
   
 identifier_name:
-  min_length: 1 # only warning
+  allowed_symbols: "_"
+  min_length:
+    warning: 2
+    error: 1
+  max_length:
+    warning: 40
+    error: 100
+  excluded:
+    - id

@@ -24,11 +24,11 @@ class MasterViewController: UITableViewController {
         // Do any additional setup after loading the view.
 
         // ## Added for Gormsson
-        manager.scan([gpsControlService]) { [weak self] result in
+        manager.scan([gpsControlService]) { [weak self] (result: Result<GormssonPeripheral, Error>) in
             guard case let .success(device) = result else {
                 return
             }
-            self?.didDiscover(device.0, device.1)
+            self?.didDiscover(device.peripheral, device.advertisement)
         }
     }
 

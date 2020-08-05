@@ -44,7 +44,7 @@ internal final class CentralManager: NSObject {
     /// Dictionary of all connect handler.
     internal var connectHandlers = [UUID: ConnectHandler]()
     /// The block to call each time a peripheral is found.
-    internal var didDiscover: ((Result<(CBPeripheral, GattAdvertisement), Error>) -> Void)?
+    internal var didDiscover: ((Result<GormssonPeripheral, Error>) -> Void)?
 
     /// List all peripherals curently found in the refresh delay of a scanForever.
     internal var currentPeripherals = [GormssonPeripheral]()
@@ -91,7 +91,7 @@ internal final class CentralManager: NSObject {
 
     internal func scan(_ services: [GattService]? = nil,
                        options: [String: Any]? = nil,
-                       didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
+                       didDiscover: @escaping (Result<GormssonPeripheral, Error>) -> Void) {
         guard !(cbManager?.isScanning ?? true) else {
             didDiscover(.failure(GormssonError.alreadyScanning))
             return

@@ -20,11 +20,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        manager.scan([.heartRate]) { [weak self] result in
+        manager.scan([.heartRate]) { [weak self] (result: Result<GormssonPeripheral, Error>) in
             guard case let .success(device) = result else {
                 return
             }
-            let peripheral = device.0
+            let peripheral = device.peripheral
             self?.manager.connect(peripheral)
 
             self?.manager.read(.bodySensorLocation, on: peripheral, result: { (result: Result<DataInitializable, Error>) in
