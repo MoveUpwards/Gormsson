@@ -42,29 +42,6 @@ open class Gormsson {
     /// - parameter options:        An optional dictionary specifying options to customize the scan.
     ///                             For available options, see Peripheral Scanning Options.
     /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
-    @available(*, deprecated, message: "Use scan with GormssonPeripheral instead.")
-    public func scan(_ services: [GattService]? = nil,
-                     options: [String: Any]? = nil,
-                     didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
-        manager.scan(services, options: options) { result in
-            if case let .failure(error) = result {
-                didDiscover(.failure(error))
-            } else if case let .success(device) = result {
-                didDiscover(.success((device.peripheral, device.advertisement)))
-            }
-        }
-    }
-
-    /// Scans for peripherals that are advertising services.
-    ///
-    /// - parameter services:       An array of services that the app is interested in. In this case,
-    ///                             each service represents the UUID of a service that a peripheral is advertising.
-    ///                             A valid UUID with a 16-bit, 32-bit, or 128-bit UUID string representation.
-    ///                             The expected format for 128-bit UUIDs is a string punctuated by hyphens,
-    ///                             for example 68753A44-4D6F-1226-9C60-0050E4C00067.
-    /// - parameter options:        An optional dictionary specifying options to customize the scan.
-    ///                             For available options, see Peripheral Scanning Options.
-    /// - parameter didDiscover:    A block invoked when the manager discovers a peripheral while scanning.
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
                      didDiscover: @escaping (Result<GormssonPeripheral, Error>) -> Void) {
@@ -86,8 +63,8 @@ open class Gormsson {
     ///                             peripheral (new, updated or deleted).
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     delay: Double,
-                     timeout: Double,
+                     delay: TimeInterval,
+                     timeout: TimeInterval,
                      didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
         manager.scan(services, options: options, delay: delay, timeout: timeout, didUpdate: didUpdate)
     }
