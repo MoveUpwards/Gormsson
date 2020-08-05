@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0458E92424D84075001C8687 /* GormssonPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E92324D84075001C8687 /* GormssonPeripheral.swift */; };
 		048E2B672371B78B00D1AECF /* GormssonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B662371B78B00D1AECF /* GormssonTests.swift */; };
 		048E2B692371B78B00D1AECF /* Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD4E45224E15F000D515E3 /* Gormsson.framework */; };
 		048E2B712371C0BE00D1AECF /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B702371C0BE00D1AECF /* CentralManager.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0458E92324D84075001C8687 /* GormssonPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonPeripheral.swift; sourceTree = "<group>"; };
 		048E2B642371B78A00D1AECF /* GormssonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GormssonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048E2B662371B78B00D1AECF /* GormssonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonTests.swift; sourceTree = "<group>"; };
 		048E2B682371B78B00D1AECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				F39E39D6225E391E003804A7 /* Gormsson.swift */,
+				0458E92324D84075001C8687 /* GormssonPeripheral.swift */,
 				F39E39D5225E391E003804A7 /* GattRequest.swift */,
 				F39E3A12225E448C003804A7 /* GattAdvertisement.swift */,
 				048E2B6F2371C0AC00D1AECF /* Delegate */,
@@ -485,6 +488,7 @@
 				F3A2646E236858790081A843 /* CharacteristicProtocol.swift in Sources */,
 				F3A26478236858A50081A843 /* GattRequest+Equatable.swift in Sources */,
 				F39E3A17225F3271003804A7 /* HeartRate.swift in Sources */,
+				0458E92424D84075001C8687 /* GormssonPeripheral.swift in Sources */,
 				048E2B752372C8AA00D1AECF /* ValueObservingOptions.swift in Sources */,
 				F39E39E2225E391E003804A7 /* Gormsson.swift in Sources */,
 				6DE3E6892264C5F1004BCFFA /* DataInitializable+HeartRate.swift in Sources */,
