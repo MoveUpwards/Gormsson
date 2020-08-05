@@ -8,19 +8,22 @@
 
 import CoreBluetooth
 
-public class GormssonPeripheral {
+public struct GormssonPeripheral: Identifiable {
     public private(set) var peripheral: CBPeripheral
     public private(set) var advertisement: GattAdvertisement
-    internal private(set) var lastUpdate: Date = Date()
+    public private(set) var lastUpdate: Date
+
+    public var id: UUID { peripheral.identifier }
 
     internal init(peripheral: CBPeripheral, advertisement: GattAdvertisement) {
         self.peripheral = peripheral
         self.advertisement = advertisement
+        self.lastUpdate = Date()
     }
 
-    internal func update(peripheral: CBPeripheral, advertisement: GattAdvertisement) {
+    internal mutating func update(peripheral: CBPeripheral, advertisement: GattAdvertisement) {
         self.peripheral = peripheral
         self.advertisement = advertisement
-        lastUpdate = Date()
+        self.lastUpdate = Date()
     }
 }
