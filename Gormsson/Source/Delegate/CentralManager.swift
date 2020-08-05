@@ -15,8 +15,13 @@ internal final class CentralManager: NSObject {
 
     // Auto scan logic if needed
     private var needScan = false
+    private var delay: Double = 0.0
+    private var timeout: Double = 0.0
     private var scanServices: [GattService]?
     private var scanOptions: [String: Any]?
+
+    /// A timer to fire scan on scanForever
+    private var timer: Timer?
 
     /// The current state of the manager.
     private var state: GormssonState = .unknown {
@@ -39,7 +44,12 @@ internal final class CentralManager: NSObject {
     /// Dictionary of all connect handler.
     internal var connectHandlers = [UUID: ConnectHandler]()
     /// The block to call each time a peripheral is found.
-    internal var didDiscover: ((Result<(CBPeripheral, GattAdvertisement), Error>) -> Void)?
+    internal var didDiscover: ((Result<GormssonPeripheral, Error>) -> Void)?
+
+    /// List all peripherals curently found in the refresh delay of a scanForever.
+    internal var currentPeripherals = [GormssonPeripheral]()
+    /// The block to call each time a scan refresh occurs.
+    internal var didUpdate: ((Result<[GormssonPeripheral], Error>) -> Void)?
 
     /// The pending requests that wait to be resolved.
     internal var pendingRequests = [GattRequest]()
@@ -81,12 +91,15 @@ internal final class CentralManager: NSObject {
 
     internal func scan(_ services: [GattService]? = nil,
                        options: [String: Any]? = nil,
-                       didDiscover: @escaping (Result<(CBPeripheral, GattAdvertisement), Error>) -> Void) {
+                       didDiscover: @escaping (Result<GormssonPeripheral, Error>) -> Void) {
         guard !(cbManager?.isScanning ?? true) else {
             didDiscover(.failure(GormssonError.alreadyScanning))
             return
         }
         self.didDiscover = didDiscover
+        self.didUpdate = nil
+        self.delay = 0.0
+        self.timeout = 0.0
         guard state == .isPoweredOn else {
             needScan = true
             scanServices = services
@@ -97,8 +110,59 @@ internal final class CentralManager: NSObject {
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: options)
     }
 
+    internal func scan(_ services: [GattService]? = nil,
+                       options: [String: Any]? = nil,
+                       delay: Double,
+                       timeout: Double,
+                       didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
+        guard !(cbManager?.isScanning ?? true) else {
+            didUpdate(.failure(GormssonError.alreadyScanning))
+            return
+        }
+        self.didDiscover = nil
+        self.didUpdate = didUpdate
+        self.delay = delay
+        self.timeout = timeout
+        guard state == .isPoweredOn else {
+            needScan = true
+            scanServices = services
+            scanOptions = options
+            return
+        }
+
+        var privateOptions: [String: Any]
+        if let options = options {
+            privateOptions = options
+        } else {
+            privateOptions = [String: Any]()
+        }
+        privateOptions[CBCentralManagerScanOptionAllowDuplicatesKey] = true
+
+        cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
+
+        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { [weak self] _ in
+            self?.fireUpdate()
+        }
+    }
+
+    private func fireUpdate() {
+        // Keep all peripherals that was updated less than *timeout* seconds
+        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - timeout) })
+        didUpdate?(Result { currentPeripherals })
+    }
+
+    private func clean() {
+        didDiscover = nil
+        didUpdate = nil
+        needScan = false
+        scanServices = nil
+        scanOptions = nil
+        timer?.invalidate()
+    }
+
     internal func stopScan() {
         cbManager?.stopScan()
+        clean()
     }
 
     internal func connect(_ peripheral: CBPeripheral,
@@ -233,8 +297,12 @@ internal final class CentralManager: NSObject {
 
     /// Send a new scan if the first one was too early.
     internal func rescan() {
-        if needScan, let block = didDiscover {
-            scan(scanServices, options: scanOptions, didDiscover: block)
+        if needScan {
+            if let block = didDiscover {
+                scan(scanServices, options: scanOptions, didDiscover: block)
+            } else if let block = didUpdate {
+                scan(scanServices, options: scanOptions, delay: delay, timeout: timeout, didUpdate: block)
+            }
             needScan = false
             scanServices = nil
             scanOptions = nil

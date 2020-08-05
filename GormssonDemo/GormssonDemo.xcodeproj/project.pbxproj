@@ -21,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		046E1D5B24D9529E002BDD62 /* GormssonDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GormssonDemo.entitlements; sourceTree = "<group>"; };
 		12147978760BF359B5E2F367 /* Pods_GormssonDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GormssonDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6192A4DFBC17759D9EF9C185 /* Pods-GormssonDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GormssonDemo.debug.xcconfig"; path = "Target Support Files/Pods-GormssonDemo/Pods-GormssonDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6D5037F62256092300D8CB7A /* GormssonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GormssonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +57,7 @@
 		6D5037ED2256092300D8CB7A = {
 			isa = PBXGroup;
 			children = (
+				046E1D5B24D9529E002BDD62 /* GormssonDemo.entitlements */,
 				F39E39F0225E3A69003804A7 /* GormssonDemo-Bridging-Header.h */,
 				F39E39F8225E3A69003804A7 /* Info.plist */,
 				F39E39F6225E3A69003804A7 /* AppDelegate.swift */,
@@ -396,6 +398,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GormssonDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
 				INFOPLIST_FILE = Info.plist;
@@ -406,6 +409,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.GormssonDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GormssonDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -419,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GormssonDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6S4Z2KMUS;
 				INFOPLIST_FILE = Info.plist;
@@ -429,6 +434,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.surfin.GormssonDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GormssonDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

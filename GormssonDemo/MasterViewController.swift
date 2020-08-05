@@ -23,7 +23,13 @@ class MasterViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
 
-        manager.scan([gpsControlService], didDiscoverHandler: didDiscover) // ## Added for Gormsson
+        // ## Added for Gormsson
+        manager.scan([gpsControlService]) { [weak self] (result: Result<GormssonPeripheral, Error>) in
+            guard case let .success(device) = result else {
+                return
+            }
+            self?.didDiscover(device.peripheral, device.advertisement)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +97,7 @@ class MasterViewController: UITableViewController {
 
                 controller.manager = manager // ## Added for Gormsson
                 manager.connect(peripheral) // ## Added for Gormsson
+                controller.peripheral = peripheral // ## Added for Gormsson
 
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true

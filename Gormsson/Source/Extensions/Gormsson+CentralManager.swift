@@ -19,7 +19,16 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didDiscover peripheral: CBPeripheral,
                                  advertisementData: [String: Any],
                                  rssi RSSI: NSNumber) {
-        didDiscover?(.success((peripheral, GattAdvertisement(with: advertisementData, rssi: RSSI.intValue))))
+        let advertisement = GattAdvertisement(with: advertisementData, rssi: RSSI.intValue)
+        didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
+
+        if nil != didUpdate { // Only if we need it
+            if let index = currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
+                currentPeripherals[index].update(peripheral: peripheral, advertisement: advertisement)
+            } else {
+                currentPeripherals.append(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement))
+            }
+        }
     }
 
     /// Invoked when an existing connection with a peripheral is torn down.

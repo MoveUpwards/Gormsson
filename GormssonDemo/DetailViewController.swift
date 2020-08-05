@@ -9,6 +9,7 @@
 import UIKit
 import Gormsson
 import Nevanlinna
+import CoreBluetooth
 
 class DetailViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private var buttons: [UIButton]!
 
     public var manager: Gormsson?
+    public var peripheral: CBPeripheral?
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -40,7 +42,7 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        manager?.disconnect()
+        manager?.disconnect(peripheral!)
     }
 
     var detailItem: String? {
@@ -68,7 +70,7 @@ class DetailViewController: UIViewController {
     // MARK: - ## Added for Gormsson
 
     @IBAction private func readBatteryLevel(_ sender: Any) {
-        manager?.read(.batteryLevel) { result in
+        manager?.read(.batteryLevel, on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("batteryLevel:", value as? UInt8 ?? "nil")
@@ -79,7 +81,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func readStrings(_ sender: Any) {
-        manager?.read(.manufacturerNameString) { result in
+        manager?.read(.manufacturerNameString, on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("manufacturerNameString:", value as? String ?? "nil")
@@ -90,7 +92,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func freeMemory(_ sender: Any) {
-        manager?.read(GPSFreeMemory()) { result in
+        manager?.read(GPSFreeMemory(), on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("GPSFreeMemory:", value as? UInt ?? "nil")
@@ -101,7 +103,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsStatusStartNotify(_ sender: Any) {
-        manager?.read(GPSStatus()) { result in // Should be notify but it's an error on our GPS
+        manager?.read(GPSStatus(), on: peripheral!) { result in // Should be notify but it's an error on our GPS
             switch result {
             case .success(let value):
                 print("GPSStatus:", value as? UInt ?? "nil")
@@ -112,11 +114,11 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsStatusStopNotify(_ sender: Any) {
-        manager?.stopNotify(GPSStatus())
+        manager?.stopNotify(GPSStatus(), on: peripheral!)
     }
 
     @IBAction private func gpsSessionCount(_ sender: Any) {
-        manager?.read(GPSSessionCount()) { result in
+        manager?.read(GPSSessionCount(), on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("GPSSessionCount:", value as? UInt ?? "nil")
@@ -127,7 +129,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsControlWriteStart(_ sender: Any) {
-        manager?.write(GPSControl(), value: GPSControlEnum.start) { result in
+        manager?.write(GPSControl(), on: peripheral!, value: GPSControlEnum.start) { result in
             switch result {
             case .success(let value):
                 print("GPSControl start:", value as? GPSControlEnum ?? "nil")
@@ -138,7 +140,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction private func gpsControlWriteStop(_ sender: Any) {
-        manager?.write(GPSControl(), value: GPSControlEnum.stop) { result in
+        manager?.write(GPSControl(), on: peripheral!, value: GPSControlEnum.stop) { result in
             switch result {
             case .success(let value):
                 print("GPSControl stop:", value as? GPSControlEnum ?? "nil")
@@ -150,7 +152,7 @@ class DetailViewController: UIViewController {
 
     @IBAction private func gpsControlCustomWrite(_ sender: Any) {
         let cmd: [UInt8] = [0xFB, 0xFA, 0xF1, 0xFB, UInt8.random(in: 0..<255)]
-        manager?.write(GPSArrayData(), value: GPSArrayType(with: cmd)) { result in
+        manager?.write(GPSArrayData(), on: peripheral!, value: GPSArrayType(with: cmd)) { result in
             switch result {
             case .success(let value):
                 print("GPSControl custom:", value as? Int ?? "nil")
@@ -162,7 +164,7 @@ class DetailViewController: UIViewController {
 
     @IBAction private func testNotifyRead(_ sender: Any) {
         print("Notify Read TEST at", Date().timeIntervalSince1970)
-        manager?.notify(.batteryLevel, result: { result in
+        manager?.notify(.batteryLevel, on: peripheral!, result: { result in
             switch result {
             case .success(let value):
                 print("Battery level (notify):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
@@ -170,33 +172,33 @@ class DetailViewController: UIViewController {
                 print("Battery level error:", error)
             }
         })
-        manager?.read(.batteryLevel, result: { result in
+        manager?.read(.batteryLevel, on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("Battery level (read):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
             case .failure(let error):
                 print("Battery level error:", error)
             }
-        })
+        }
     }
 
     @IBAction private func testDoubleRead(_ sender: Any) {
         print("Double Read TEST at", Date().timeIntervalSince1970)
-        manager?.read(.batteryLevel, result: { result in
+        manager?.read(.batteryLevel, on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("Battery level (1):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
             case .failure(let error):
                 print("Battery level error:", error)
             }
-        })
-        manager?.read(.batteryLevel, result: { result in
+        }
+        manager?.read(.batteryLevel, on: peripheral!) { result in
             switch result {
             case .success(let value):
                 print("Battery level (2):", value as? UInt8 ?? "nil", "at", Date().timeIntervalSince1970)
             case .failure(let error):
                 print("Battery level error:", error)
             }
-        })
+        }
     }
 }

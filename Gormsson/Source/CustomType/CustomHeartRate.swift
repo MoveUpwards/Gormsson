@@ -100,7 +100,7 @@ public final class HeartRateMeasurementType: DataInitializable {
             firstIndex += 1 // HRM will be 1 octet more
         }
 
-        return UInt16(with: Array(characteristicData[firstIndex...firstIndex+1]))
+        return UInt16(with: Array(characteristicData[firstIndex...firstIndex + 1]))
     }
 
     /// The current RR-interval in 1/1024s.
@@ -119,7 +119,8 @@ public final class HeartRateMeasurementType: DataInitializable {
         var intervals = [UInt16]()
 
         (0...count).forEach { index in
-            intervals.append(UInt16(with: Array(characteristicData[firstIndex+2*index...firstIndex+2*index+1])))
+            let newIndex = firstIndex + 2 * index
+            intervals.append(UInt16(with: Array(characteristicData[newIndex...newIndex + 1])))
         }
 
         return intervals
