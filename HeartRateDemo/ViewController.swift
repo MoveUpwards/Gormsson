@@ -20,10 +20,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        manager.scan([.heartRate]) { [weak self] peripheral, _ in
+        manager.scan([.heartRate]) { [weak self] result in
+            guard case let .success(device) = result else {
+                return
+            }
+            let peripheral = device.0
             self?.manager.connect(peripheral)
 
-            self?.manager.read(.bodySensorLocation, result: { (result: Result<DataInitializable, Error>) in
+            self?.manager.read(.bodySensorLocation, on: peripheral, result: { (result: Result<DataInitializable, Error>) in
                 switch result {
                 case .success(let value):
                     guard let location = value as? BodySensorLocationEnum else { return }
@@ -36,7 +40,7 @@ class ViewController: UIViewController {
                 }
             })
 
-            self?.manager.notify(.heartRateMeasurement, result: { (result: Result<DataInitializable, Error>) in
+            self?.manager.notify(.heartRateMeasurement, on: peripheral, result: { (result: Result<DataInitializable, Error>) in
                 switch result {
                 case .success(let value):
                     guard let rate = (value as? HeartRateMeasurementType)?.heartRateValue else { return }
