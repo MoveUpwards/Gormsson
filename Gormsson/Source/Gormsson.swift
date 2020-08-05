@@ -61,11 +61,11 @@ open class Gormsson {
     /// - parameter timeout:        The timeout in seconds that remove a scanned device.
     /// - parameter didUpdate:      A block invoked every *delay* seconds with the list of
     ///                             peripheral (new, updated or deleted).
-    public func scanForever(_ services: [GattService]? = nil,
-                            options: [String: Any]? = nil,
-                            delay: Double,
-                            timeout: Double,
-                            didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
+    public func scan(_ services: [GattService]? = nil,
+                     options: [String: Any]? = nil,
+                     delay: Double,
+                     timeout: Double,
+                     didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
         manager.scan(services, options: options, delay: delay, timeout: timeout, didUpdate: didUpdate)
     }
 
