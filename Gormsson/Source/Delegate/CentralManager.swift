@@ -161,6 +161,10 @@ internal final class CentralManager: NSObject {
     }
 
     internal func stopScan() {
+        guard state == .isPoweredOn, cbManager?.isScanning ?? false else {
+            return
+        }
+
         cbManager?.stopScan()
         clean()
     }
@@ -171,8 +175,13 @@ internal final class CentralManager: NSObject {
                           failure: ((Error?) -> Void)? = nil,
                           didReadyHandler: (() -> Void)? = nil,
                           didDisconnectHandler: ((Error?) -> Void)? = nil) {
+        guard state == .isPoweredOn else {
+            failure?(GormssonError.powerOff)
+            return
+        }
+
         if shouldStopScan, cbManager?.isScanning ?? false {
-            stopScan()
+            stopScan() // Auto stop scan if needed
         }
         connectHandlers[peripheral.identifier] = ConnectHandler(didConnect: success,
                                                                 didFailConnect: failure,
@@ -243,7 +252,8 @@ internal final class CentralManager: NSObject {
     /// Stops notifications or indications for the value of a custom characteristic.
     internal func stopNotify(_ characteristic: CharacteristicProtocol,
                              on peripheral: CBPeripheral) {
-        guard let cbCharacteristic = get(characteristic, on: peripheral), cbCharacteristic.isNotifying else { return }
+        guard state == .isPoweredOn,
+            let cbCharacteristic = get(characteristic, on: peripheral), cbCharacteristic.isNotifying else { return }
 
         peripheral.setNotifyValue(false, for: cbCharacteristic)
     }
@@ -310,6 +320,10 @@ internal final class CentralManager: NSObject {
     }
 
     internal func cancel(_ peripheral: CBPeripheral) {
+        guard state == .isPoweredOn else {
+            return
+        }
+
         cbManager?.cancelPeripheralConnection(peripheral)
     }
 
