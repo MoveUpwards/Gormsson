@@ -98,6 +98,10 @@ internal final class CentralManager: NSObject {
     }
 
     internal func stopScan() {
+        guard state == .isPoweredOn, cbManager?.isScanning ?? false else {
+            return
+        }
+
         cbManager?.stopScan()
     }
 
