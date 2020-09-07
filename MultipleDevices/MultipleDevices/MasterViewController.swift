@@ -33,28 +33,44 @@ class MasterViewController: UITableViewController {
         }
 
         observeState()
-        manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { (result: Result<GormssonPeripheral, Error>) in
-            switch result {
-            case .failure(let error):
-                print("Scan error:", error)
-            case .success(let device):
-                DispatchQueue.main.async { [weak self] in
-                    self?.objects.insert(device.peripheral, at: 0)
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                    guard device.peripheral.state == .disconnected else { return }
-                    self?.manager.connect(device.peripheral, success: {
-                        print("Connect to", device.peripheral, "with", device.advertisement)
-                    }, failure: { error in
-                        print("Can't connect", device.peripheral, "\nerror:", error.debugDescription)
-                    }, didReadyHandler: {
-                        print("DidReady to use", device.peripheral)
-                    }, didDisconnectHandler: { error in
-                        print("Disconnect", device.peripheral, "with error:", error.debugDescription)
-                    })
+
+        let checkScanForever = true
+        if checkScanForever {
+            // Scan forever to check when new devices appear or some disappear
+            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, timeout: 3.0) { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    print("Scan error:", error)
+                case .success(let devices):
+                    self?.objects = devices.map({ $0.peripheral })
+                    self?.tableView.reloadData()
                 }
             }
-        } // ## Added for Gormsson
+        } else {
+            // Scan once and auto connect to founded devices
+            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { result in
+                switch result {
+                case .failure(let error):
+                    print("Scan error:", error)
+                case .success(let device):
+                    DispatchQueue.main.async { [weak self] in
+                        self?.objects.insert(device.peripheral, at: 0)
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self?.tableView.insertRows(at: [indexPath], with: .automatic)
+                        guard device.peripheral.state == .disconnected else { return }
+                        self?.manager.connect(device.peripheral, success: {
+                            print("Connect to", device.peripheral, "with", device.advertisement)
+                        }, failure: { error in
+                            print("Can't connect", device.peripheral, "\nerror:", error.debugDescription)
+                        }, didReadyHandler: {
+                            print("DidReady to use", device.peripheral)
+                        }, didDisconnectHandler: { error in
+                            print("Disconnect", device.peripheral, "with error:", error.debugDescription)
+                        })
+                    }
+                }
+            } // ## Added for Gormsson
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
