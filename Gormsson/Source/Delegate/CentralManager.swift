@@ -140,15 +140,18 @@ internal final class CentralManager: NSObject {
 
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
 
-        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { [weak self] _ in
-            self?.fireUpdate()
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { _ in
+                self?.fireUpdate()
+            }
+            self?.timer?.tolerance = 0.2
         }
     }
 
     private func fireUpdate() {
         // Keep all peripherals that was updated less than *timeout* seconds
         currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - timeout) })
-        didUpdate?(Result { currentPeripherals })
+        didUpdate?(.success(currentPeripherals))
     }
 
     private func clean() {
