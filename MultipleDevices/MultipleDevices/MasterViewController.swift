@@ -34,7 +34,7 @@ class MasterViewController: UITableViewController {
 
         observeState()
 
-        let checkScanForever = true
+        let checkScanForever = false
         if checkScanForever {
             // Scan forever to check when new devices appear or some disappear
             manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, timeout: 3.0) { [weak self] result in

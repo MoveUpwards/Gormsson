@@ -36,8 +36,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
         connectHandlers[peripheral.identifier]?.didDisconnect?(error)
-        cleanPeripheral()
-        removeRequests(on: peripheral)
+        remove(peripheral)
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
@@ -51,21 +50,25 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
         connectHandlers[peripheral.identifier]?.didFailConnect?(error)
-        cleanPeripheral()
-        removeRequests(on: peripheral)
+        remove(peripheral)
     }
 
-    internal func cleanPeripheral() {
-        currentRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceDisconnected))
-        }
-        pendingRequests.forEach { req in
-            req.result?(.failure(GormssonError.deviceDisconnected))
-        }
-    }
+    // MARK: - Private functions
 
-    private func removeRequests(on peripheral: CBPeripheral) {
-        currentRequests.removeAll(where: { $0.peripheral == peripheral })
-        pendingRequests.removeAll(where: { $0.peripheral == peripheral })
+    /// Remove current peripheral and send disconnect error to all pending request.
+    private func remove(_ peripheral: CBPeripheral) {
+        currentRequests
+            .filter { $0.peripheral == peripheral }
+            .forEach { $0.result?(.failure(GormssonError.deviceDisconnected)) }
+        currentRequests
+            .removeAll(where: { $0.peripheral == peripheral })
+
+        pendingRequests
+            .filter { $0.peripheral == peripheral }
+            .forEach { $0.result?(.failure(GormssonError.deviceDisconnected)) }
+        pendingRequests
+            .removeAll(where: { $0.peripheral == peripheral })
+
+        connectHandlers[peripheral.identifier] = nil
     }
 }
