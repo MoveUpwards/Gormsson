@@ -36,7 +36,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
         connectHandlers[peripheral.identifier]?.didDisconnect?(error)
-        cleanPeripheral()
+        cleanPeripheral(on: peripheral)
         removeRequests(on: peripheral)
     }
 
@@ -51,15 +51,15 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
         connectHandlers[peripheral.identifier]?.didFailConnect?(error)
-        cleanPeripheral()
+        cleanPeripheral(on: peripheral)
         removeRequests(on: peripheral)
     }
 
-    internal func cleanPeripheral() {
-        currentRequests.forEach { req in
+    internal func cleanPeripheral(on peripheral: CBPeripheral) {
+        currentRequests.filter({$0.peripheral == peripheral}).forEach { (req) in
             req.result?(.failure(GormssonError.deviceDisconnected))
         }
-        pendingRequests.forEach { req in
+        pendingRequests.filter({$0.peripheral == peripheral}).forEach { (req) in
             req.result?(.failure(GormssonError.deviceDisconnected))
         }
     }
