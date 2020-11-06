@@ -57,17 +57,18 @@ extension CentralManager: CBCentralManagerDelegate {
 
     /// Remove current peripheral and send disconnect error to all pending request.
     private func remove(_ peripheral: CBPeripheral) {
+        let currentPeripheral: (GattRequest) -> Bool = { $0.peripheral == peripheral }
         currentRequests
-            .filter { $0.peripheral == peripheral }
+            .filter(currentPeripheral)
             .forEach { $0.result?(.failure(GormssonError.deviceDisconnected)) }
         currentRequests
-            .removeAll(where: { $0.peripheral == peripheral })
+            .removeAll(where: currentPeripheral)
 
         pendingRequests
-            .filter { $0.peripheral == peripheral }
+            .filter(currentPeripheral)
             .forEach { $0.result?(.failure(GormssonError.deviceDisconnected)) }
         pendingRequests
-            .removeAll(where: { $0.peripheral == peripheral })
+            .removeAll(where: currentPeripheral)
 
         connectHandlers[peripheral.identifier] = nil
     }
