@@ -11,6 +11,8 @@ import Foundation
 extension GattRequest: Equatable {
     /// To be Equatable.
     internal static func == (lhs: GattRequest, rhs: GattRequest) -> Bool {
-        return lhs.characteristic.uuid == rhs.characteristic.uuid && lhs.property == rhs.property
+        return lhs.characteristic.uuid == rhs.characteristic.uuid &&
+            lhs.property == rhs.property &&
+            lhs.peripheral == rhs.peripheral
     }
 }

@@ -44,7 +44,7 @@ extension PeripheralManager: CBPeripheralDelegate {
     internal func peripheral(_ peripheral: CBPeripheral,
                              didUpdateNotificationStateFor characteristic: CBCharacteristic,
                              error: Error?) {
-        let reqFilter = filter(for: characteristic, and: .notify)
+        let reqFilter = filter(peripheral, for: characteristic, and: .notify)
 
         if let error = error {
             manager?.currentRequests.filter(reqFilter).forEach { request in
@@ -61,7 +61,7 @@ extension PeripheralManager: CBPeripheralDelegate {
         }
 
         // Remove all unused request
-        if let filteredRequest = manager?.currentRequests
+        if let filteredRequest = manager?.currentRequests.filter({ $0.peripheral == peripheral })
             .filter({ !($0.property == .notify && $0.characteristic.uuid == characteristic.uuid) }) {
             manager?.currentRequests = filteredRequest
         }
@@ -79,7 +79,7 @@ extension PeripheralManager: CBPeripheralDelegate {
     private func requestNotify(for peripheral: CBPeripheral,
                                with characteristic: CBCharacteristic,
                                error: Error?) {
-        let reqFilter = filter(for: characteristic, and: .notify)
+        let reqFilter = filter(peripheral, for: characteristic, and: .notify)
         manager?.currentRequests.filter(reqFilter).forEach { request in
             if let error = error {
                 request.result?(.failure(error))
@@ -93,7 +93,7 @@ extension PeripheralManager: CBPeripheralDelegate {
                          for peripheral: CBPeripheral,
                          with characteristic: CBCharacteristic,
                          error: Error?) {
-        let reqFilter = filter(for: characteristic, and: type)
+        let reqFilter = filter(peripheral, for: characteristic, and: type)
         guard let request = manager?.currentRequests.first(where: reqFilter) else { return }
 
         manager?.currentRequests.removeAll(where: { $0 === request })
@@ -120,7 +120,8 @@ extension PeripheralManager: CBPeripheralDelegate {
         request.result?(.success(value))
     }
 
-    private func filter(for characteristic: CBCharacteristic,
+    private func filter(_ peripheral: CBPeripheral,
+                        for characteristic: CBCharacteristic,
                         and property: CBCharacteristicProperties) -> (GattRequest) -> Bool {
         return { $0.characteristic.uuid == characteristic.uuid &&
             characteristic.properties.contains($0.property) && $0.property == property }
