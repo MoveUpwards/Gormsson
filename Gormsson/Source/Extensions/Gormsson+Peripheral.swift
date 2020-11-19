@@ -123,7 +123,9 @@ extension PeripheralManager: CBPeripheralDelegate {
     private func filter(_ peripheral: CBPeripheral,
                         for characteristic: CBCharacteristic,
                         and property: CBCharacteristicProperties) -> (GattRequest) -> Bool {
-        return { $0.characteristic.uuid == characteristic.uuid &&
-            characteristic.properties.contains($0.property) && $0.property == property }
+        return { $0.peripheral == peripheral &&
+            $0.characteristic.uuid == characteristic.uuid &&
+            characteristic.properties.contains($0.property) &&
+            $0.property == property }
     }
 }
