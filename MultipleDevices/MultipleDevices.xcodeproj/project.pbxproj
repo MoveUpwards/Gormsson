@@ -14,7 +14,7 @@
 		0486A7C8243723030047B019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486A7C6243723030047B019 /* Main.storyboard */; };
 		0486A7CA243723140047B019 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0486A7C9243723140047B019 /* Assets.xcassets */; };
 		0486A7CD243723140047B019 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486A7CB243723140047B019 /* LaunchScreen.storyboard */; };
-		5FAF8397DB09C989288D4368 /* Pods_MultipleDevices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609B83554D7CE57CF0D74ED7 /* Pods_MultipleDevices.framework */; };
+		C73A8985274FEC2F254F7F49 /* Pods_MultipleDevices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E58AA27DF9D63B2ABCBEA92 /* Pods_MultipleDevices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +28,9 @@
 		0486A7CC243723140047B019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0486A7CE243723140047B019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0486A7D4243724BE0047B019 /* MultipleDevices.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultipleDevices.entitlements; sourceTree = "<group>"; };
-		108D9697CF6D1565C70D9CD6 /* Pods-MultipleDevices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultipleDevices.release.xcconfig"; path = "Target Support Files/Pods-MultipleDevices/Pods-MultipleDevices.release.xcconfig"; sourceTree = "<group>"; };
-		609B83554D7CE57CF0D74ED7 /* Pods_MultipleDevices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultipleDevices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3CF91E21C57F4C81F8355FF /* Pods-MultipleDevices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultipleDevices.debug.xcconfig"; path = "Target Support Files/Pods-MultipleDevices/Pods-MultipleDevices.debug.xcconfig"; sourceTree = "<group>"; };
+		4E58AA27DF9D63B2ABCBEA92 /* Pods_MultipleDevices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultipleDevices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC7AD741D44AE6AA82094E15 /* Pods-MultipleDevices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultipleDevices.release.xcconfig"; path = "Target Support Files/Pods-MultipleDevices/Pods-MultipleDevices.release.xcconfig"; sourceTree = "<group>"; };
+		C807CEFFA0B0BCAE2ED47CD7 /* Pods-MultipleDevices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultipleDevices.debug.xcconfig"; path = "Target Support Files/Pods-MultipleDevices/Pods-MultipleDevices.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FAF8397DB09C989288D4368 /* Pods_MultipleDevices.framework in Frameworks */,
+				C73A8985274FEC2F254F7F49 /* Pods_MultipleDevices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +50,8 @@
 			children = (
 				0486A7BD243723030047B019 /* MultipleDevices */,
 				0486A7BC243723030047B019 /* Products */,
-				EF42C7CF5A9851F7F804BE7D /* Pods */,
-				6A5051CB407366CBAC36CB09 /* Frameworks */,
+				A63895A4E5F9A1A50ECB26B6 /* Pods */,
+				054E4AABC1EF1F156034C1BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,19 +79,19 @@
 			path = MultipleDevices;
 			sourceTree = "<group>";
 		};
-		6A5051CB407366CBAC36CB09 /* Frameworks */ = {
+		054E4AABC1EF1F156034C1BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				609B83554D7CE57CF0D74ED7 /* Pods_MultipleDevices.framework */,
+				4E58AA27DF9D63B2ABCBEA92 /* Pods_MultipleDevices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EF42C7CF5A9851F7F804BE7D /* Pods */ = {
+		A63895A4E5F9A1A50ECB26B6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3CF91E21C57F4C81F8355FF /* Pods-MultipleDevices.debug.xcconfig */,
-				108D9697CF6D1565C70D9CD6 /* Pods-MultipleDevices.release.xcconfig */,
+				C807CEFFA0B0BCAE2ED47CD7 /* Pods-MultipleDevices.debug.xcconfig */,
+				BC7AD741D44AE6AA82094E15 /* Pods-MultipleDevices.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -104,11 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0486A7D1243723140047B019 /* Build configuration list for PBXNativeTarget "MultipleDevices" */;
 			buildPhases = (
-				6EBEDF9062F31882A4F3ED0C /* [CP] Check Pods Manifest.lock */,
+				CD741B13D03C40922F110186 /* [CP] Check Pods Manifest.lock */,
 				0486A7B7243723030047B019 /* Sources */,
 				0486A7B8243723030047B019 /* Frameworks */,
 				0486A7B9243723030047B019 /* Resources */,
-				F069740B4F2E16D75EBC8C61 /* [CP] Embed Pods Frameworks */,
+				DBC31A9C8434435188B13660 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,7 +166,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6EBEDF9062F31882A4F3ED0C /* [CP] Check Pods Manifest.lock */ = {
+		CD741B13D03C40922F110186 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -188,7 +188,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F069740B4F2E16D75EBC8C61 /* [CP] Embed Pods Frameworks */ = {
+		DBC31A9C8434435188B13660 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -357,7 +357,7 @@
 		};
 		0486A7D2243723140047B019 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3CF91E21C57F4C81F8355FF /* Pods-MultipleDevices.debug.xcconfig */;
+			baseConfigurationReference = C807CEFFA0B0BCAE2ED47CD7 /* Pods-MultipleDevices.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MultipleDevices/MultipleDevices.entitlements;
@@ -379,7 +379,7 @@
 		};
 		0486A7D3243723140047B019 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 108D9697CF6D1565C70D9CD6 /* Pods-MultipleDevices.release.xcconfig */;
+			baseConfigurationReference = BC7AD741D44AE6AA82094E15 /* Pods-MultipleDevices.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MultipleDevices/MultipleDevices.entitlements;
