@@ -30,7 +30,6 @@ internal final class CentralManager: NSObject {
                 stateBlock?(state)
                 return
             }
-
             if oldValue != state {
                 stateBlock?(state)
             }
@@ -81,11 +80,7 @@ internal final class CentralManager: NSObject {
             state = .isPoweredOn
             rescan()
         default:
-            if state == .isPoweredOn {
-                state = .didLostBluetooth
-            } else {
-                state = .needBluetooth
-            }
+            state = state == .isPoweredOn ? .didLostBluetooth : .needBluetooth
         }
     }
 
@@ -148,26 +143,10 @@ internal final class CentralManager: NSObject {
         }
     }
 
-    private func fireUpdate() {
-        // Keep all peripherals that was updated less than *timeout* seconds
-        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - timeout) })
-        didUpdate?(.success(currentPeripherals))
-    }
-
-    private func clean() {
-        didDiscover = nil
-        didUpdate = nil
-        needScan = false
-        scanServices = nil
-        scanOptions = nil
-        timer?.invalidate()
-    }
-
     internal func stopScan() {
         guard state == .isPoweredOn, cbManager?.isScanning ?? false else {
             return
         }
-
         cbManager?.stopScan()
         clean()
     }
@@ -193,12 +172,6 @@ internal final class CentralManager: NSObject {
 
         cbManager?.connect(peripheral)
         peripheral.delegate = self.peripheralManager
-    }
-
-    /// Gets the CBCharacteristic of the current peripheral or nil if not in.
-    internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
-        return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
-            .characteristics?.first(where: { $0.uuid == characteristic.uuid })
     }
 
     /// Reads the value of a custom characteristic.
@@ -286,6 +259,14 @@ internal final class CentralManager: NSObject {
         write(request, value: value, type: type)
     }
 
+    // MARK: - Helper functions
+
+    /// Gets the CBCharacteristic of the current peripheral or nil if not in.
+    internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
+        return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
+            .characteristics?.first(where: { $0.uuid == characteristic.uuid })
+    }
+
     internal func didDiscoverCharacteristics(on peripheral: CBPeripheral) {
         connectHandlers[peripheral.identifier]?.remainingServices -= 1
         guard let counter = connectHandlers[peripheral.identifier]?.remainingServices else {
@@ -338,7 +319,6 @@ internal final class CentralManager: NSObject {
             request.result?(.failure(GormssonError.powerOff))
             return
         }
-
         guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
@@ -357,12 +337,10 @@ internal final class CentralManager: NSObject {
             request.result?(.failure(GormssonError.powerOff))
             return
         }
-
         guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
-
         guard !cbCharacteristic.isNotifying, !currentRequests.contains(request) else {
             request.result?(.failure(GormssonError.alreadyNotifying))
             return
@@ -380,15 +358,12 @@ internal final class CentralManager: NSObject {
             request.result?(.failure(GormssonError.powerOff))
             return
         }
-
         guard let cbCharacteristic = get(request.characteristic, on: request.peripheral) else {
             request.result?(.failure(GormssonError.characteristicNotFound))
             return
         }
 
-        request.peripheral.writeValue(value.toData(),
-                              for: cbCharacteristic,
-                              type: type)
+        request.peripheral.writeValue(value.toData(), for: cbCharacteristic, type: type)
 
         guard type == .withResponse else {
             request.result?(.success(Empty()))
@@ -396,5 +371,20 @@ internal final class CentralManager: NSObject {
         }
 
         currentRequests.append(request)
+    }
+
+    private func fireUpdate() {
+        // Keep all peripherals that was updated less than *timeout* seconds
+        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - timeout) })
+        didUpdate?(.success(currentPeripherals))
+    }
+
+    private func clean() {
+        didDiscover = nil
+        didUpdate = nil
+        needScan = false
+        scanServices = nil
+        scanOptions = nil
+        timer?.invalidate()
     }
 }

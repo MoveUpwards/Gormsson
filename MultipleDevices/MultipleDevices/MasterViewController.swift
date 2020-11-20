@@ -7,8 +7,24 @@
 //
 
 import UIKit
+import Nevanlinna
 import Gormsson
 import CoreBluetooth
+
+public final class TBMacAddressType: DataInitializable {
+    private let characteristicData: [UInt8]
+
+    /// DataInitializable init.
+    required public init(with octets: [UInt8]) {
+        characteristicData = octets
+    }
+
+    /// The mac address value string representation.
+    public var string: String {
+        return characteristicData.map({ String(format: "%02hhx", $0).uppercased() })
+            .joined(separator: ":")
+    }
+}
 
 class MasterViewController: UITableViewController {
 
@@ -48,7 +64,7 @@ class MasterViewController: UITableViewController {
             }
         } else {
             // Scan once and auto connect to founded devices
-            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { result in
+            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     print("Scan error:", error)
@@ -56,20 +72,62 @@ class MasterViewController: UITableViewController {
                     DispatchQueue.main.async { [weak self] in
                         self?.objects.insert(device.peripheral, at: 0)
                         let indexPath = IndexPath(row: 0, section: 0)
+                        if let data = device.advertisement.manufacturerData?[1...6] {
+                            print(device.peripheral.identifier, ":", self?.serialNumber(for: TBMacAddressType(with: Array(data)).string))
+                        }
                         self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                        guard device.peripheral.state == .disconnected else { return }
-                        self?.manager.connect(device.peripheral, success: {
-                            print("Connect to", device.peripheral, "with", device.advertisement)
-                        }, failure: { error in
-                            print("Can't connect", device.peripheral, "\nerror:", error.debugDescription)
-                        }, didReadyHandler: {
-                            print("DidReady to use", device.peripheral)
-                        }, didDisconnectHandler: { error in
-                            print("Disconnect", device.peripheral, "with error:", error.debugDescription)
-                        })
                     }
                 }
             } // ## Added for Gormsson
+        }
+    }
+
+    private func serialNumber(for macAddress: String) -> String {
+        let firstSerie = "0001-"
+        switch macAddress {
+        case "C8:D1:79:B8:D6:02":
+            return firstSerie + "0115"
+        case "C0:E8:9B:68:42:5C":
+            return firstSerie + "0067"
+        case "FD:D1:41:36:CE:D0":
+            return firstSerie + "0161"
+        case "EF:93:C9:6F:B5:F7":
+            return firstSerie + "0144"
+        case "D5:CC:60:F4:25:F3":
+            return firstSerie + "0177"
+        case "D5:7A:89:96:78:49":
+            return firstSerie + "0050"
+        case "E6:A0:03:D3:E8:E8":
+            return firstSerie + "0073"
+        case "D6:E8:7F:CB:2D:F0":
+            return firstSerie + "0165"
+        case "DD:3B:6D:5C:9E:A8":
+            return firstSerie + "0111"
+        case "E8:2E:7B:49:AA:83":
+            return firstSerie + "0053"
+        case "FD:18:25:B2:2D:08":
+            return firstSerie + "0106"
+        case "C9:D3:1B:78:74:78":
+            return firstSerie + "0105"
+        case "DE:87:FB:B5:99:14":
+            return firstSerie + "0080"
+        case "F7:8E:8E:12:D6:0F":
+            return firstSerie + "0134"
+        case "C0:42:36:12:40:2B":
+            return firstSerie + "0087"
+        case "CA:28:D6:AD:2A:4B":
+            return firstSerie + "0145"
+        case "FE:7B:1B:18:71:F9":
+            return firstSerie + "0026"
+        case "D8:37:B4:2E:0D:7F":
+            return firstSerie + "0160"
+        case "D8:6C:B0:48:22:BC":
+            return firstSerie + "0171"
+        case "E0:39:DB:F1:38:3D":
+            return firstSerie + "0141"
+        default:
+            print("MISSING", macAddress)
+            return "S/N NOT FOUND"
         }
     }
 
@@ -89,6 +147,28 @@ class MasterViewController: UITableViewController {
 
     @objc
     private func playReadBattery(_ sender: Any) {
+        let debugReadAll = true
+        if debugReadAll {
+            print("Will read \(objects.count) objects")
+            var dico = [UUID: String]()
+            let start = DispatchTime.now()
+            manager.execute(.serialNumberString,
+                            on: objects, result: { result in
+                                // Fire for each CBPeripheral
+                                if case let .success(ddd) = result,
+                                   let aaa = ddd.data as? String {
+                                    dico[ddd.peripheral.identifier] = aaa
+                                }
+                            },
+                            timeout: 30,
+                            completion: { error in
+                                if let error = error {
+                                    print(error)
+                                }
+                                print(start.distance(to: DispatchTime.now()))
+                                print(dico)
+                            })
+        } else {
         objects.forEach { [weak self] peripheral in
             self?.manager.read(.batteryLevel, on: peripheral) { result in
                 print("Battery level:", result, "on", peripheral)
@@ -97,8 +177,8 @@ class MasterViewController: UITableViewController {
                 print("Device name:", result, "on", peripheral)
             }
         }
+        }
     }
-
 
     private func observeState() {
         // ## Optional to observe state's changes

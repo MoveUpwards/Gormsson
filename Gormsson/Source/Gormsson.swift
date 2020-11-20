@@ -155,4 +155,72 @@ open class Gormsson {
                       result: @escaping (Result<DataInitializable, Error>) -> Void) {
         manager.write(characteristic, on: peripheral, value: value, type: type, result: result)
     }
+
+    // MARK: - Execute
+
+    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
+    /// At the end of all requests (or if timeout is reach), call completion.
+    public func execute(_ characteristic: GattCharacteristic,
+                        on devices: [CBPeripheral],
+                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
+                        timeout: Int = 30,
+                        completion: ((Error?) -> Void)? = nil) {
+        execute(characteristic.characteristic, on: devices, result: result, timeout: timeout, completion: completion)
+    }
+
+    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
+    /// At the end of all requests (or if timeout is reach), call completion.
+    public func execute(_ characteristic: CharacteristicProtocol,
+                        on devices: [CBPeripheral],
+                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
+                        timeout: Int = 30,
+                        completion: ((Error?) -> Void)? = nil) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let downloadGroup = DispatchGroup()
+
+            devices.forEach { peripheral in
+                downloadGroup.enter()
+
+                var hasResult = false
+                self?.manager.connect(peripheral, success: {
+                    // Everything is fine, wait to be ready
+                }, failure: { error in
+                    if let error = error, !hasResult {
+                        hasResult = true
+                        result(.failure(error))
+                    }
+                }, didReadyHandler: {
+                    self?.manager.read(characteristic, on: peripheral) { currentResult in
+                        if case let .failure(error) = currentResult, !hasResult {
+                            hasResult = true
+                            result(.failure(error))
+                        } else if case let .success(value) = currentResult, !hasResult {
+                            hasResult = true
+                            result(.success((peripheral, value)))
+                        }
+                        self?.disconnect(peripheral)
+                    }
+                }, didDisconnectHandler: { error in
+                    if let error = error, !hasResult {
+                        hasResult = true
+                        result(.failure(error))
+                    }
+
+                    downloadGroup.leave()
+                })
+            }
+
+            // Wait for the timeout, if needed
+            let result = downloadGroup.wait(timeout: .now() + .seconds(timeout))
+
+            DispatchQueue.main.async {
+                guard result == .timedOut else {
+                    completion?(nil) // Completed with success
+                    return
+                }
+
+                completion?(GormssonError.timedOut)
+            }
+        }
+    }
 }
