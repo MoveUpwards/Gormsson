@@ -8,6 +8,9 @@
       location = "group:MultipleDevices/MultipleDevices.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:ExecuteDevices/ExecuteDevices.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:GormssonDemo/GormssonDemo.xcodeproj">
    </FileRef>
    <FileRef

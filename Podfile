@@ -28,6 +28,15 @@ target 'MultipleDevices' do
   pod 'Gormsson', :path => '../Gormsson'
 end
 
+target 'ExecuteDevices' do
+  project 'ExecuteDevices/ExecuteDevices.xcodeproj'
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Gormsson
+  pod 'Gormsson', :path => '../Gormsson'
+end
+
 target 'GormssonDemo' do
   project 'GormssonDemo/GormssonDemo.xcodeproj'
   # Comment the next line if you don't want to use dynamic frameworks
