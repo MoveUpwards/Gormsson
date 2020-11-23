@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042536F42567C0C40078CF56 /* Gromsson+ExecuteAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042536F32567C0C40078CF56 /* Gromsson+ExecuteAll.swift */; };
 		0458E92424D84075001C8687 /* GormssonPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458E92324D84075001C8687 /* GormssonPeripheral.swift */; };
 		048E2B672371B78B00D1AECF /* GormssonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2B662371B78B00D1AECF /* GormssonTests.swift */; };
 		048E2B692371B78B00D1AECF /* Gormsson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD4E45224E15F000D515E3 /* Gormsson.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		042536F32567C0C40078CF56 /* Gromsson+ExecuteAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gromsson+ExecuteAll.swift"; sourceTree = "<group>"; };
 		0458E92324D84075001C8687 /* GormssonPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonPeripheral.swift; sourceTree = "<group>"; };
 		048E2B642371B78A00D1AECF /* GormssonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GormssonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048E2B662371B78B00D1AECF /* GormssonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GormssonTests.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				F3A26475236858A50081A843 /* Gormsson+CentralManager.swift */,
 				F3A26474236858A50081A843 /* Gormsson+Peripheral.swift */,
+				042536F32567C0C40078CF56 /* Gromsson+ExecuteAll.swift */,
 				F3A26472236858A50081A843 /* GattRequest+Equatable.swift */,
 			);
 			path = Extensions;
@@ -496,6 +499,7 @@
 				6DF480952268A9F5006504BF /* CustomHeartRate.swift in Sources */,
 				F3C3660F2268AECE00B09E14 /* CustomHealthThermometer.swift in Sources */,
 				F39E3A13225E448C003804A7 /* GattAdvertisement.swift in Sources */,
+				042536F42567C0C40078CF56 /* Gromsson+ExecuteAll.swift in Sources */,
 				F39E39E4225E391E003804A7 /* BatteryService.swift in Sources */,
 				F3A26485236858AB0081A843 /* GattService.swift in Sources */,
 				F3A26484236858AB0081A843 /* GormssonError.swift in Sources */,

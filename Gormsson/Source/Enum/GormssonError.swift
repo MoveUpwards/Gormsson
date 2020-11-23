@@ -26,4 +26,6 @@ public enum GormssonError: Error {
     case alreadyNotifying
     /// The characteristic's notify was stop.
     case stopNotifying
+    /// The operation reach the timed out.
+    case timedOut
 }
