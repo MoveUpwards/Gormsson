@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		0425374A25680E720078CF56 /* ListDevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425374925680E720078CF56 /* ListDevicesView.swift */; };
 		0425374F25680E900078CF56 /* ActionDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425374E25680E900078CF56 /* ActionDeviceView.swift */; };
 		042537BA2568179F0078CF56 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042537B92568179F0078CF56 /* BluetoothService.swift */; };
+		042537E8256BB8AF0078CF56 /* GattAdvertisement+MacAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042537E7256BB8AE0078CF56 /* GattAdvertisement+MacAddress.swift */; };
+		042537F0256BC1A80078CF56 /* Characteristic+SessionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042537EF256BC1A80078CF56 /* Characteristic+SessionRecord.swift */; };
 		DFAFFA6C66063A989381D93B /* Pods_ExecuteDevices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C764EE144D9FF355F2CC9D /* Pods_ExecuteDevices.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		0425374925680E720078CF56 /* ListDevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDevicesView.swift; sourceTree = "<group>"; };
 		0425374E25680E900078CF56 /* ActionDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDeviceView.swift; sourceTree = "<group>"; };
 		042537B92568179F0078CF56 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
+		042537E7256BB8AE0078CF56 /* GattAdvertisement+MacAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GattAdvertisement+MacAddress.swift"; sourceTree = "<group>"; };
+		042537EF256BC1A80078CF56 /* Characteristic+SessionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Characteristic+SessionRecord.swift"; sourceTree = "<group>"; };
 		35C764EE144D9FF355F2CC9D /* Pods_ExecuteDevices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExecuteDevices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61586438612243FDE0B32E3C /* Pods-ExecuteDevices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExecuteDevices.release.xcconfig"; path = "Target Support Files/Pods-ExecuteDevices/Pods-ExecuteDevices.release.xcconfig"; sourceTree = "<group>"; };
 		8BCC07A9126F11C279D0B229 /* Pods-ExecuteDevices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExecuteDevices.debug.xcconfig"; path = "Target Support Files/Pods-ExecuteDevices/Pods-ExecuteDevices.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				0425374925680E720078CF56 /* ListDevicesView.swift */,
 				0425374E25680E900078CF56 /* ActionDeviceView.swift */,
 				042537B92568179F0078CF56 /* BluetoothService.swift */,
+				042537E6256BB88F0078CF56 /* Extensions */,
 				0425371F256808FE0078CF56 /* Assets.xcassets */,
 				04253724256808FE0078CF56 /* Info.plist */,
 				04253721256808FE0078CF56 /* Preview Content */,
@@ -144,6 +149,15 @@
 				0425373A256808FF0078CF56 /* Info.plist */,
 			);
 			path = ExecuteDevicesUITests;
+			sourceTree = "<group>";
+		};
+		042537E6256BB88F0078CF56 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				042537E7256BB8AE0078CF56 /* GattAdvertisement+MacAddress.swift */,
+				042537EF256BC1A80078CF56 /* Characteristic+SessionRecord.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D00E6798FE58632F836DBB45 /* Pods */ = {
@@ -337,9 +351,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042537E8256BB8AF0078CF56 /* GattAdvertisement+MacAddress.swift in Sources */,
 				0425371E256808FB0078CF56 /* ContentView.swift in Sources */,
 				0425371C256808FB0078CF56 /* ExecuteDevicesApp.swift in Sources */,
 				0425374F25680E900078CF56 /* ActionDeviceView.swift in Sources */,
+				042537F0256BC1A80078CF56 /* Characteristic+SessionRecord.swift in Sources */,
 				0425374A25680E720078CF56 /* ListDevicesView.swift in Sources */,
 				042537BA2568179F0078CF56 /* BluetoothService.swift in Sources */,
 			);

@@ -14,14 +14,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            ListDevicesView(viewModel: ListDevicesViewModel(with: bleService))
-            ActionDeviceView()
+            ListDevicesView(viewModel: bleService)
+            ActionDeviceView(viewModel: bleService)
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

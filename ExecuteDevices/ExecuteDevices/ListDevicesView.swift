@@ -10,44 +10,24 @@ import Combine
 import CoreBluetooth
 import Gormsson
 
-final class ListDevicesViewModel: ObservableObject {
-    @Published var devices: [CBPeripheral] = []
-
-    let bleService: BluetoothService
-
-    init(with bleService: BluetoothService) {
-        self.bleService = bleService
-    }
-
-    func startScan() {
-        bleService.manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print("Scan error:", error)
-            case .success(let device):
-                DispatchQueue.main.async { [weak self] in
-                    self?.devices.insert(device.peripheral, at: 0)
-                }
-            }
-        }
-    }
-}
-
 struct ListDevicesView: View {
-    @StateObject private var viewModel: ListDevicesViewModel
+    @StateObject private var viewModel: BluetoothService
 
-    init(viewModel: ListDevicesViewModel) {
+    init(viewModel: BluetoothService) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         List(viewModel.devices) { device in
-            Text(device.name ?? "NO NAME")
+            Text(device.peripheral.name ?? "NO NAME")
         }
         .navigationBarTitle("\(viewModel.devices.count) devices", displayMode: .inline)
         .navigationBarItems(trailing: menu)
         .onAppear(perform: {
             viewModel.startScan()
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 30.0) {
+                viewModel.stopScan()
+            }
         })
     }
 
@@ -55,22 +35,19 @@ struct ListDevicesView: View {
         Menu {
             Section(header: Text("Edition zone")) {
                 Button(action: {
-//                    currentSheet = .edit
-//                    showSheet.toggle()
+                    viewModel.readSerialNumbers()
                 }) {
                     Label("Read battery", systemImage: "pencil")
                 }
 
                 Button(action: {
-//                    currentSheet = .wifi
-//                    showSheet.toggle()
+                    viewModel.startAll()
                 }) {
                     Label("Write start command", systemImage: "wifi")
                 }
 
                 Button(action: {
-                    //currentSheet = .wifi
-                    //showSheet.toggle()
+                    viewModel.stopAll()
                 }) {
                     Label("Write stop command", systemImage: "wifi")
                 }
@@ -80,4 +57,4 @@ struct ListDevicesView: View {
     }
 }
 
-extension CBPeripheral: Identifiable {} // To use CBPeripheral in ForEach
+extension CBPeripheral: Identifiable {} // To use CBPeripheral in List or ForEach

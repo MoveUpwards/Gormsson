@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ActionDeviceView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @StateObject private var viewModel: BluetoothService
 
-struct ActionDeviceView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActionDeviceView()
+    init(viewModel: BluetoothService) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        Text(viewModel.values)
     }
 }
