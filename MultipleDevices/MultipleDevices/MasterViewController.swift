@@ -7,8 +7,24 @@
 //
 
 import UIKit
+import Nevanlinna
 import Gormsson
 import CoreBluetooth
+
+public final class TBMacAddressType: DataInitializable {
+    private let characteristicData: [UInt8]
+
+    /// DataInitializable init.
+    required public init(with octets: [UInt8]) {
+        characteristicData = octets
+    }
+
+    /// The mac address value string representation.
+    public var string: String {
+        return characteristicData.map({ String(format: "%02hhx", $0).uppercased() })
+            .joined(separator: ":")
+    }
+}
 
 class MasterViewController: UITableViewController {
 
@@ -48,7 +64,7 @@ class MasterViewController: UITableViewController {
             }
         } else {
             // Scan once and auto connect to founded devices
-            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { result in
+            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     print("Scan error:", error)
@@ -57,16 +73,6 @@ class MasterViewController: UITableViewController {
                         self?.objects.insert(device.peripheral, at: 0)
                         let indexPath = IndexPath(row: 0, section: 0)
                         self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                        guard device.peripheral.state == .disconnected else { return }
-                        self?.manager.connect(device.peripheral, success: {
-                            print("Connect to", device.peripheral, "with", device.advertisement)
-                        }, failure: { error in
-                            print("Can't connect", device.peripheral, "\nerror:", error.debugDescription)
-                        }, didReadyHandler: {
-                            print("DidReady to use", device.peripheral)
-                        }, didDisconnectHandler: { error in
-                            print("Disconnect", device.peripheral, "with error:", error.debugDescription)
-                        })
                     }
                 }
             } // ## Added for Gormsson
@@ -98,7 +104,6 @@ class MasterViewController: UITableViewController {
             }
         }
     }
-
 
     private func observeState() {
         // ## Optional to observe state's changes

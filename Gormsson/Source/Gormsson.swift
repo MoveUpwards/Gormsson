@@ -12,7 +12,7 @@ import Nevanlinna
 /// Gormsson is a BLE manager with blocks and auto cast type.
 @available(iOS 9.0, *)
 open class Gormsson {
-    private let manager: CentralManager
+    internal let manager: CentralManager
 
     /// Init a new Gormsson manager
     ///
