@@ -22,6 +22,10 @@ final class BluetoothService: ObservableObject {
                 print("Scan error:", error)
             case .success(let device):
                 DispatchQueue.main.async { [weak self] in
+                    guard self?.devices.contains(where: { $0.peripheral == device.peripheral }) == false else {
+                        print("Already present:\n\(device)")
+                        return
+                    }
                     self?.devices.insert(device, at: 0)
                 }
             }
@@ -33,7 +37,8 @@ final class BluetoothService: ObservableObject {
     }
 
     func readSerialNumbers() {
-        values = ""
+        stopScan()
+        values = "Reading..."
 
         var dico = [String:  String]()
         manager.execute(.serialNumberString, on: devices.map(\.peripheral)) { [weak self] result in
@@ -56,7 +61,8 @@ final class BluetoothService: ObservableObject {
     }
 
     func startAll() {
-        values = ""
+        stopScan()
+        values = "Starting..."
 
         var deviceCount = 0
         manager.execute(SessionRecord(),
@@ -71,7 +77,8 @@ final class BluetoothService: ObservableObject {
     }
 
     func stopAll() {
-        values = ""
+        stopScan()
+        values = "Stopping..."
 
         var deviceCount = 0
         manager.execute(SessionRecord(),
@@ -88,7 +95,7 @@ final class BluetoothService: ObservableObject {
     // MARK: - Private functions
 
     private func serialNumber(for macAddress: String) -> String {
-        let firstSerie = "0001-"
+        let firstSerie = "0001"
         switch macAddress {
         case "C8:D1:79:B8:D6:02":
             return firstSerie + "0115"
