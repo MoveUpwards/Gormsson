@@ -9,24 +9,20 @@
 import Foundation
 
 extension GattCharacteristic {
+    /// Comparaison between GattCharacteristic and CharacteristicProtocol
     public func isEqual(to: CharacteristicProtocol) -> Bool {
         return characteristic.uuid == to.uuid
-    }
-
-    /// Comparaison between GattCharacteristic and CharacteristicProtocol
-    public static func == (lhs: GattCharacteristic, rhs: CharacteristicProtocol) -> Bool {
-        return lhs.characteristic.uuid == rhs.uuid
     }
 }
 
 extension CharacteristicProtocol {
     /// Comparaison between two CharacteristicProtocol
-    public static func == (lhs: CharacteristicProtocol, rhs: CharacteristicProtocol) -> Bool {
-        return lhs.uuid == rhs.uuid
+    public func isEqual(to: CharacteristicProtocol) -> Bool {
+        return uuid == to.uuid
     }
 
     /// Comparaison between CharacteristicProtocol and GattCharacteristic
-    public static func == (lhs: CharacteristicProtocol, rhs: GattCharacteristic) -> Bool {
-        return lhs.uuid == rhs.characteristic.uuid
+    public func isEqual(to: GattCharacteristic) -> Bool {
+        return uuid == to.characteristic.uuid
     }
 }
