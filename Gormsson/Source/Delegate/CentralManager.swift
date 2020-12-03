@@ -258,9 +258,11 @@ internal final class CentralManager: NSObject {
 
         write(request, value: value, type: type)
     }
+}
 
-    // MARK: - Helper functions
+// MARK: - Helper functions
 
+extension CentralManager {
     /// Gets the CBCharacteristic of the current peripheral or nil if not in.
     internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
         return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
@@ -310,9 +312,11 @@ internal final class CentralManager: NSObject {
 
         cbManager?.cancelPeripheralConnection(peripheral)
     }
+}
 
-    // MARK: - Private functions
+// MARK: - Private functions
 
+extension CentralManager {
     private func read(_ request: GattRequest,
                       append: Bool = true) {
         guard state == .isPoweredOn else {
