@@ -32,14 +32,21 @@ extension Gormsson {
         }
     }
 
-    /// Start to connect each device, then **execute** all the characteristics in array order, return all the results and disconnect.
+    public struct ActionResult {
+        var peripheral: CBPeripheral
+        var data: DataInitializable
+        var characteristic: CharacteristicProtocol
+    }
+
+    /// Start to connect each peripheral.
+    /// Then **execute** all the characteristics in array order, return all the results.
+    /// And then disconnect all peripherals.
     /// At the end of all requests (or if timeout is reach), call completion.
     /// Result param will trigger each success or failure, and completion will be trigger just once.
     public func executeAll(_ actions: [Action],
                            on peripherals: [CBPeripheral],
                            timeout: Int = 30,
-                           result: ((Result<(peripheral: CBPeripheral,
-                                             data: DataInitializable), Error>) -> Void)? = nil,
+                           result: ((Result<ActionResult, Error>) -> Void)? = nil,
                            completion: ((Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let downloadGroup = DispatchGroup()
@@ -58,9 +65,13 @@ extension Gormsson {
                         if case let .failure(error) = currentResult {
                             result?(.failure(error))
                         } else if case let .success(value) = currentResult {
-                            result?(.success((peripheral, value)))
+                            result?(.success(value))
                         }
                     }, completion: { error in
+                        if let error = error {
+                            result?(.failure(error))
+                        }
+
                         self?.disconnect(peripheral)
                     })
                 }, didDisconnectHandler: { error in
@@ -91,7 +102,7 @@ extension Gormsson {
     private func execute(at index: Int = 0,
                          actions: [Action],
                          on peripheral: CBPeripheral,
-                         result: @escaping (Result<DataInitializable, Error>) -> Void,
+                         result: @escaping (Result<ActionResult, Error>) -> Void,
                          completion: ((Error?) -> Void)? = nil) {
         guard index < actions.count else {
             completion?(nil)
@@ -102,7 +113,9 @@ extension Gormsson {
             if case let .failure(error) = currentResult {
                 result(.failure(error))
             } else if case let .success(value) = currentResult {
-                result(.success(value))
+                result(.success(ActionResult(peripheral: peripheral,
+                                             data: value,
+                                             characteristic: action.characteristic)))
             }
             self?.execute(at: index + 1, actions: actions, on: peripheral, result: result, completion: completion)
         }
