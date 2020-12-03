@@ -20,6 +20,11 @@ extension Gormsson {
     public struct Action {
         var characteristic: CharacteristicProtocol
         var type: ActionType
+
+        public init(_ characteristic: CharacteristicProtocol, for type: ActionType) {
+            self.characteristic = characteristic
+            self.type = type
+        }
     }
 
     /// Start to connect each device, then **execute** all the characteristics in array order, return all the results and disconnect.
