@@ -22,38 +22,6 @@ extension Gormsson {
         var type: ActionType
     }
 
-    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
-    /// At the end of all requests (or if timeout is reach), call completion.
-    @available(*, deprecated, message: "Will be remove in next minor version", renamed: "executeAll")
-    public func execute(_ characteristic: GattCharacteristic,
-                        on devices: [CBPeripheral],
-                        action: Gormsson.ActionType = .read,
-                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
-                        timeout: Int = 30,
-                        completion: ((Error?) -> Void)? = nil) {
-        executeAll([Action(characteristic: characteristic.characteristic, type: action)],
-                   on: devices,
-                   timeout: timeout,
-                   result: result,
-                   completion: completion)
-    }
-
-    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
-    /// At the end of all requests (or if timeout is reach), call completion.
-    @available(*, deprecated, message: "Will be remove in next minor version", renamed: "executeAll")
-    public func execute(_ characteristic: CharacteristicProtocol,
-                        on devices: [CBPeripheral],
-                        action: Gormsson.ActionType = .read,
-                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
-                        timeout: Int = 30,
-                        completion: ((Error?) -> Void)? = nil) {
-        executeAll([Action(characteristic: characteristic, type: action)],
-                   on: devices,
-                   timeout: timeout,
-                   result: result,
-                   completion: completion)
-    }
-
     /// Start to connect each device, then **execute** all the characteristics in array order, return all the results and disconnect.
     /// At the end of all requests (or if timeout is reach), call completion.
     /// Result param will trigger each success or failure, and completion will be trigger just once.
