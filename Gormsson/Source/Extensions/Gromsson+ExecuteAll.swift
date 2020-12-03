@@ -21,8 +21,13 @@ extension Gormsson {
         var characteristic: CharacteristicProtocol
         var type: ActionType
 
-        public init(_ characteristic: CharacteristicProtocol, for type: ActionType) {
+        public init(_ characteristic: CharacteristicProtocol, for type: ActionType = .read) {
             self.characteristic = characteristic
+            self.type = type
+        }
+
+        public init(_ characteristic: GattCharacteristic, for type: ActionType = .read) {
+            self.characteristic = characteristic.characteristic
             self.type = type
         }
     }
