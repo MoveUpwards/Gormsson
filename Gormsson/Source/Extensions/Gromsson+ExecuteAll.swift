@@ -10,78 +10,73 @@ import CoreBluetooth
 import Nevanlinna
 
 extension Gormsson {
-    /// Action possible on ExecuteAll functions.
-    public enum Action { // No notify or connect/disconnect
+    /// ActionType is the possible type of the characteristic.
+    public enum ActionType { // No notify or connect/disconnect
         case read
         case write(value: DataConvertible, type: CBCharacteristicWriteType = .withResponse)
     }
 
-    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
-    /// At the end of all requests (or if timeout is reach), call completion.
-    public func execute(_ characteristic: GattCharacteristic,
-                        on devices: [CBPeripheral],
-                        action: Gormsson.Action = .read,
-                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
-                        timeout: Int = 30,
-                        completion: ((Error?) -> Void)? = nil) {
-        executeAll(characteristic.characteristic, on: devices, action: action, result: result, timeout: timeout, completion: completion)
+    /// Action is the action to proceed.
+    public struct Action {
+        public let characteristic: CharacteristicProtocol
+        public let type: ActionType
+
+        public init(_ characteristic: CharacteristicProtocol, for type: ActionType = .read) {
+            self.characteristic = characteristic
+            self.type = type
+        }
+
+        public init(_ characteristic: GattCharacteristic, for type: ActionType = .read) {
+            self.characteristic = characteristic.characteristic
+            self.type = type
+        }
     }
 
-    /// Start to connect each device, then **execute** the characteristic, return the result and disconnect.
-    /// At the end of all requests (or if timeout is reach), call completion.
-    public func execute(_ characteristic: CharacteristicProtocol,
-                        on devices: [CBPeripheral],
-                        action: Gormsson.Action = .read,
-                        result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
-                        timeout: Int = 30,
-                        completion: ((Error?) -> Void)? = nil) {
-        executeAll(characteristic, on: devices, action: action, result: result, timeout: timeout, completion: completion)
+    public struct ActionResult {
+        public let peripheral: CBPeripheral
+        public let data: DataInitializable
+        public let characteristic: CharacteristicProtocol
     }
 
-    // MARK: - Private functions
-
-    private func executeAll(_ characteristic: CharacteristicProtocol,
-                            on devices: [CBPeripheral],
-                            action: Gormsson.Action = .read,
-                            result: @escaping (Result<(peripheral: CBPeripheral, data: DataInitializable), Error>) -> Void,
-                            timeout: Int = 30,
-                            completion: ((Error?) -> Void)? = nil) {
+    /// Start to connect each peripheral.
+    /// Then **execute** all the characteristics in array order, return all the results.
+    /// And then disconnect all peripherals.
+    /// At the end of all requests (or if timeout is reach), call completion.
+    /// Result param will trigger each success or failure, and completion will be trigger just once.
+    public func executeAll(_ actions: [Action],
+                           on peripherals: [CBPeripheral],
+                           timeout: Int = 30,
+                           result: ((Result<ActionResult, Error>) -> Void)? = nil,
+                           completion: ((Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let downloadGroup = DispatchGroup()
 
-            devices.forEach { peripheral in
+            peripherals.forEach { peripheral in
                 downloadGroup.enter()
 
-                var hasResult = false
                 self?.manager.connect(peripheral, success: {
                     // Everything is fine, wait to be ready
                 }, failure: { error in
-                    if let error = error, !hasResult {
-                        hasResult = true
-                        result(.failure(error))
+                    if let error = error {
+                        result?(.failure(error))
                     }
                 }, didReadyHandler: {
-                    let block = { (currentResult: Result<DataInitializable, Error>) in
-                        if case let .failure(error) = currentResult, !hasResult {
-                            hasResult = true
-                            result(.failure(error))
-                        } else if case let .success(value) = currentResult, !hasResult {
-                            hasResult = true
-                            result(.success((peripheral, value)))
+                    self?.execute(actions: actions, on: peripheral, result: { currentResult in
+                        if case let .failure(error) = currentResult {
+                            result?(.failure(error))
+                        } else if case let .success(value) = currentResult {
+                            result?(.success(value))
                         }
-                        self?.disconnect(peripheral)
-                    }
+                    }, completion: { error in
+                        if let error = error {
+                            result?(.failure(error))
+                        }
 
-                    switch action {
-                    case .read:
-                        self?.manager.read(characteristic, on: peripheral, result: block)
-                    case .write(let value, let type):
-                        self?.manager.write(characteristic, on: peripheral, value: value, type: type, result: block)
-                    }
+                        self?.disconnect(peripheral)
+                    })
                 }, didDisconnectHandler: { error in
-                    if let error = error, !hasResult {
-                        hasResult = true
-                        result(.failure(error))
+                    if let error = error {
+                        result?(.failure(error))
                     }
 
                     downloadGroup.leave()
@@ -99,6 +94,37 @@ extension Gormsson {
 
                 completion?(GormssonError.timedOut)
             }
+        }
+    }
+
+    // MARK: - Private functions
+
+    private func execute(at index: Int = 0,
+                         actions: [Action],
+                         on peripheral: CBPeripheral,
+                         result: @escaping (Result<ActionResult, Error>) -> Void,
+                         completion: ((Error?) -> Void)? = nil) {
+        guard index < actions.count else {
+            completion?(nil)
+            return
+        }
+        let action = actions[index]
+        let block = { [weak self] (currentResult: Result<DataInitializable, Error>) in
+            if case let .failure(error) = currentResult {
+                result(.failure(error))
+            } else if case let .success(value) = currentResult {
+                result(.success(ActionResult(peripheral: peripheral,
+                                             data: value,
+                                             characteristic: action.characteristic)))
+            }
+            self?.execute(at: index + 1, actions: actions, on: peripheral, result: result, completion: completion)
+        }
+
+        switch action.type {
+        case .read:
+            manager.read(action.characteristic, on: peripheral, result: block)
+        case .write(let value, let type):
+            manager.write(action.characteristic, on: peripheral, value: value, type: type, result: block)
         }
     }
 }
