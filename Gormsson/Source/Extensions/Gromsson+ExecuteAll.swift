@@ -18,8 +18,8 @@ extension Gormsson {
 
     /// Action is the action to proceed.
     public struct Action {
-        var characteristic: CharacteristicProtocol
-        var type: ActionType
+        public let characteristic: CharacteristicProtocol
+        public let type: ActionType
 
         public init(_ characteristic: CharacteristicProtocol, for type: ActionType = .read) {
             self.characteristic = characteristic
@@ -33,9 +33,9 @@ extension Gormsson {
     }
 
     public struct ActionResult {
-        var peripheral: CBPeripheral
-        var data: DataInitializable
-        var characteristic: CharacteristicProtocol
+        public let peripheral: CBPeripheral
+        public let data: DataInitializable
+        public let characteristic: CharacteristicProtocol
     }
 
     /// Start to connect each peripheral.

@@ -41,7 +41,7 @@ final class BluetoothService: ObservableObject {
         values = "Reading..."
 
         var dico = [String:  String]()
-        manager.execute(.serialNumberString, on: devices.map(\.peripheral)) { [weak self] result in
+        manager.executeAll([.init(.serialNumberString)], on: devices.map(\.peripheral)) { [weak self] result in
             // Fire for each CBPeripheral
             if case let .success(object) = result,
                let data = object.data as? String,
