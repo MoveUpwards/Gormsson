@@ -65,31 +65,29 @@ final class BluetoothService: ObservableObject {
         values = "Starting..."
 
         var deviceCount = 0
-        manager.execute(SessionRecord(),
-                        on: devices.map(\.peripheral),
-                        action: .write(value: SessionRecordEnum.start),
-                        result: { result in
-                            deviceCount += 1
-                        },
-                        completion: { [weak self] error in
-                            self?.values = deviceCount == self?.devices.count ? "All started" : "ERROR: Some devices not started"
-                        })
+        manager.executeAll(
+            [.init(SessionRecord(), for: .write(value: SessionRecordEnum.start))],
+            on: devices.map(\.peripheral), result: { result in
+                deviceCount += 1
+            },
+            completion: { [weak self] error in
+                self?.values = deviceCount == self?.devices.count ? "All started" : "ERROR: Some devices not started"
+            })
     }
 
     func stopAll() {
         stopScan()
         values = "Stopping..."
-
+        
         var deviceCount = 0
-        manager.execute(SessionRecord(),
-                        on: devices.map(\.peripheral),
-                        action: .write(value: SessionRecordEnum.stop),
-                        result: { result in
-                            deviceCount += 1
-                        },
-                        completion: { [weak self] error in
-                            self?.values = deviceCount == self?.devices.count ? "All stoped" : "ERROR: Some devices not stoped"
-                        })
+        manager.executeAll(
+            [.init(SessionRecord(), for: .write(value: SessionRecordEnum.stop))],
+            on: devices.map(\.peripheral), result: { result in
+                deviceCount += 1
+            },
+            completion: { [weak self] error in
+                self?.values = deviceCount == self?.devices.count ? "All stoped" : "ERROR: Some devices not stoped"
+            })
     }
 
     // MARK: - Private functions
