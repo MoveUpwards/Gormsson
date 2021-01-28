@@ -58,15 +58,15 @@ open class Gormsson {
     /// - parameter options:        An optional dictionary specifying options to customize the scan.
     ///                             For available options, see Peripheral Scanning Options.
     /// - parameter delay:          The duration in seconds between each refresh.
-    /// - parameter timeout:        The timeout in seconds that remove a scanned device.
+    /// - parameter lifetime:       The lifetime in seconds that a scanned device still fire in scan before to be removed.
     /// - parameter didUpdate:      A block invoked every *delay* seconds with the list of
     ///                             peripheral (new, updated or deleted).
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
                      delay: TimeInterval,
-                     timeout: TimeInterval,
+                     lifetime: TimeInterval,
                      didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
-        manager.scan(services, options: options, delay: delay, timeout: timeout, didUpdate: didUpdate)
+        manager.scan(services, options: options, delay: delay, lifetime: lifetime, didUpdate: didUpdate)
     }
 
     /// Asks the central manager to stop scanning for peripherals.
