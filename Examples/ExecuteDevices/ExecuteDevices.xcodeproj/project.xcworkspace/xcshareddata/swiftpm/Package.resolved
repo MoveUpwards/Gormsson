@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Nevanlinna",
+        "repositoryURL": "https://github.com/MoveUpwards/Nevanlinna.git",
+        "state": {
+          "branch": null,
+          "revision": "5285f5a2aaea8751cc1cb38e51403a45ce096fef",
+          "version": "0.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
