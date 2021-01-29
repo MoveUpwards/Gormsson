@@ -15,7 +15,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/MoveUpwards/Nevanlinna.git", from: "0.3.4")
+        .package(url: "https://github.com/MoveUpwards/Nevanlinna.git", from: "0.7.0")
     ],
     targets: [
         .target(
