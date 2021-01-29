@@ -26,6 +26,10 @@ internal final class CentralManager: NSObject {
     /// The current state of the manager.
     private var state: GormssonState = .unknown {
         didSet {
+            if state == .didLostBluetooth {
+                didDiscover?(.failure(GormssonError.powerOff))
+                didUpdate?(.failure(GormssonError.powerOff))
+            }
             guard distinctState else {
                 stateBlock?(state)
                 return
