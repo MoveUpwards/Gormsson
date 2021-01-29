@@ -29,7 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		850512BF25C3225A004D5489 /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../../Gormsson; sourceTree = "<group>"; };
+		F345651525C46B7800A50B9A /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../..; sourceTree = "<group>"; };
 		F3502A7E225F97A600814ECC /* HeartRateDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3502A99225F97E200814ECC /* HeartRateDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HeartRateDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		F3502A9F225F97E300814ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		F3502A75225F97A600814ECC = {
 			isa = PBXGroup;
 			children = (
-				850512BF25C3225A004D5489 /* Gormsson */,
+				F345651525C46B7800A50B9A /* Gormsson */,
 				F3502A99225F97E200814ECC /* HeartRateDemo-Bridging-Header.h */,
 				F3502AA1225F97E300814ECC /* Info.plist */,
 				F3502AA0225F97E300814ECC /* AppDelegate.swift */,

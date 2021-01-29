@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		046E1D5B24D9529E002BDD62 /* GormssonDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GormssonDemo.entitlements; sourceTree = "<group>"; };
 		6D5037F62256092300D8CB7A /* GormssonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GormssonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		850512B725C32071004D5489 /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../../Gormsson; sourceTree = "<group>"; };
+		F345650C25C46B4B00A50B9A /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../..; sourceTree = "<group>"; };
 		F364363422707298005D6C70 /* Nevanlinna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nevanlinna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F380472322BA90B70051C311 /* GPSArrayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSArrayType.swift; sourceTree = "<group>"; };
 		F380472622BA91140051C311 /* GPSControlEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSControlEnum.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		6D5037ED2256092300D8CB7A = {
 			isa = PBXGroup;
 			children = (
-				850512B725C32071004D5489 /* Gormsson */,
+				F345650C25C46B4B00A50B9A /* Gormsson */,
 				046E1D5B24D9529E002BDD62 /* GormssonDemo.entitlements */,
 				F39E39F0225E3A69003804A7 /* GormssonDemo-Bridging-Header.h */,
 				F39E39F8225E3A69003804A7 /* Info.plist */,
