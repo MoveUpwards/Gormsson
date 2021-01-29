@@ -16,7 +16,7 @@ internal final class CentralManager: NSObject {
     // Auto scan logic if needed
     private var needScan = false
     private var delay: Double = 0.0
-    private var timeout: Double = 0.0
+    private var lifetime: Double = 0.0
     private var scanServices: [GattService]?
     private var scanOptions: [String: Any]?
 
@@ -94,7 +94,7 @@ internal final class CentralManager: NSObject {
         self.didDiscover = didDiscover
         self.didUpdate = nil
         self.delay = 0.0
-        self.timeout = 0.0
+        self.lifetime = 0.0
         guard state == .isPoweredOn else {
             needScan = true
             scanServices = services
@@ -108,7 +108,7 @@ internal final class CentralManager: NSObject {
     internal func scan(_ services: [GattService]? = nil,
                        options: [String: Any]? = nil,
                        delay: Double,
-                       timeout: Double,
+                       lifetime: Double,
                        didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
         guard !(cbManager?.isScanning ?? true) else {
             didUpdate(.failure(GormssonError.alreadyScanning))
@@ -117,7 +117,7 @@ internal final class CentralManager: NSObject {
         self.didDiscover = nil
         self.didUpdate = didUpdate
         self.delay = delay
-        self.timeout = timeout
+        self.lifetime = lifetime
         guard state == .isPoweredOn else {
             needScan = true
             scanServices = services
@@ -297,7 +297,7 @@ extension CentralManager {
             if let block = didDiscover {
                 scan(scanServices, options: scanOptions, didDiscover: block)
             } else if let block = didUpdate {
-                scan(scanServices, options: scanOptions, delay: delay, timeout: timeout, didUpdate: block)
+                scan(scanServices, options: scanOptions, delay: delay, lifetime: lifetime, didUpdate: block)
             }
             needScan = false
             scanServices = nil
@@ -378,8 +378,8 @@ extension CentralManager {
     }
 
     private func fireUpdate() {
-        // Keep all peripherals that was updated less than *timeout* seconds
-        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - timeout) })
+        // Keep all peripherals that was updated less than *lifetime* seconds
+        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - lifetime) })
         didUpdate?(.success(currentPeripherals))
     }
 
