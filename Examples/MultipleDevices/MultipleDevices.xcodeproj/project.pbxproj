@@ -28,7 +28,7 @@
 		0486A7CC243723140047B019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0486A7CE243723140047B019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0486A7D4243724BE0047B019 /* MultipleDevices.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultipleDevices.entitlements; sourceTree = "<group>"; };
-		850512C525C3230E004D5489 /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../../Gormsson; sourceTree = "<group>"; };
+		F345651725C46B8200A50B9A /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 		0486A7B2243723030047B019 = {
 			isa = PBXGroup;
 			children = (
-				850512C525C3230E004D5489 /* Gormsson */,
+				F345651725C46B8200A50B9A /* Gormsson */,
 				0486A7BD243723030047B019 /* MultipleDevices */,
 				0486A7BC243723030047B019 /* Products */,
 				850512C725C32323004D5489 /* Frameworks */,
