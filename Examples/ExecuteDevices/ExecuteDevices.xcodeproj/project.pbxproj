@@ -56,7 +56,7 @@
 		042537B92568179F0078CF56 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		042537E7256BB8AE0078CF56 /* GattAdvertisement+MacAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GattAdvertisement+MacAddress.swift"; sourceTree = "<group>"; };
 		042537EF256BC1A80078CF56 /* Characteristic+SessionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Characteristic+SessionRecord.swift"; sourceTree = "<group>"; };
-		8505129F25C31E63004D5489 /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../../Gormsson; sourceTree = "<group>"; };
+		F345651425C46B6C00A50B9A /* Gormsson */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Gormsson; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +88,7 @@
 		0425370F256808FB0078CF56 = {
 			isa = PBXGroup;
 			children = (
-				8505129F25C31E63004D5489 /* Gormsson */,
+				F345651425C46B6C00A50B9A /* Gormsson */,
 				0425371A256808FB0078CF56 /* ExecuteDevices */,
 				0425372C256808FF0078CF56 /* ExecuteDevicesTests */,
 				04253737256808FF0078CF56 /* ExecuteDevicesUITests */,
