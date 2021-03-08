@@ -48,7 +48,7 @@ extension Gormsson {
                            timeout: Int = 30,
                            result: ((Result<ActionResult, Error>) -> Void)? = nil,
                            completion: ((Error?) -> Void)? = nil) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        manager.queue.async { [weak self] in
             let downloadGroup = DispatchGroup()
 
             peripherals.forEach { peripheral in
@@ -86,14 +86,12 @@ extension Gormsson {
             // Wait for the timeout, if needed
             let result = downloadGroup.wait(timeout: .now() + .seconds(timeout))
 
-            DispatchQueue.main.async {
-                guard result == .timedOut else {
-                    completion?(nil) // Completed with success
-                    return
-                }
-
-                completion?(GormssonError.timedOut)
+            guard result == .timedOut else {
+                completion?(nil) // Completed with success
+                return
             }
+
+            completion?(GormssonError.timedOut)
         }
     }
 
