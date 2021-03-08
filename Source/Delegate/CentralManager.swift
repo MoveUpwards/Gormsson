@@ -60,10 +60,11 @@ internal final class CentralManager: NSObject {
     internal var currentRequests = [GattRequest]()
 
     /// The current queue
-    internal let queue: DispatchQueue
+    private weak var currentQueue: DispatchQueue?
+    internal var queue: DispatchQueue { queue ?? DispatchQueue.main }
 
     internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
-        self.queue = queue ?? DispatchQueue.main
+        self.currentQueue = queue
         super.init()
         cbManager = CBCentralManager(delegate: self, queue: queue, options: options)
         peripheralManager = PeripheralManager(self)
