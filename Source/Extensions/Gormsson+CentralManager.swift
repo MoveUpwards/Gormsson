@@ -24,7 +24,7 @@ extension CentralManager: CBCentralManagerDelegate {
 
         if nil != didUpdate { // Only if we need it
             if let index = currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
-                currentPeripherals[index].update(peripheral: peripheral, advertisement: advertisement)
+                currentPeripherals[index] = GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)
             } else {
                 currentPeripherals.append(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement))
             }
