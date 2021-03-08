@@ -61,7 +61,7 @@ internal final class CentralManager: NSObject {
 
     /// The current queue
     private weak var currentQueue: DispatchQueue?
-    internal var queue: DispatchQueue { queue ?? DispatchQueue.main }
+    internal var queue: DispatchQueue { currentQueue ?? DispatchQueue.main }
 
     internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
         self.currentQueue = queue
