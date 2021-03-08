@@ -59,7 +59,11 @@ internal final class CentralManager: NSObject {
     /// The current active requests (read / notify / write with response requests).
     internal var currentRequests = [GattRequest]()
 
+    /// The current queue
+    internal let queue: DispatchQueue
+
     internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
+        self.queue = queue ?? DispatchQueue.main
         super.init()
         cbManager = CBCentralManager(delegate: self, queue: queue, options: options)
         peripheralManager = PeripheralManager(self)
@@ -139,7 +143,7 @@ internal final class CentralManager: NSObject {
 
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
 
-        DispatchQueue.main.async { [weak self] in
+        queue.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { _ in
                 self?.fireUpdate()
             }
