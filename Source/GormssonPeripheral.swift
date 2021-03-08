@@ -9,9 +9,9 @@
 import CoreBluetooth
 
 public struct GormssonPeripheral: Identifiable {
-    public private(set) var peripheral: CBPeripheral
-    public private(set) var advertisement: GattAdvertisement
-    public private(set) var lastUpdate: Date
+    public let peripheral: CBPeripheral
+    public let advertisement: GattAdvertisement
+    public let lastUpdate: Date
 
     public var id: UUID { peripheral.identifier }
 
