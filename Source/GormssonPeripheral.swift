@@ -20,10 +20,4 @@ public struct GormssonPeripheral: Identifiable {
         self.advertisement = advertisement
         self.lastUpdate = Date()
     }
-
-    internal mutating func update(peripheral: CBPeripheral, advertisement: GattAdvertisement) {
-        self.peripheral = peripheral
-        self.advertisement = advertisement
-        self.lastUpdate = Date()
-    }
 }
