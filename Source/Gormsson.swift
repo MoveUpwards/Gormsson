@@ -63,8 +63,8 @@ open class Gormsson {
     ///                             peripheral (new, updated or deleted).
     public func scan(_ services: [GattService]? = nil,
                      options: [String: Any]? = nil,
-                     delay: TimeInterval,
-                     lifetime: TimeInterval,
+                     delay: TimeInterval = 3.0,
+                     lifetime: TimeInterval = 6.0,
                      didUpdate: @escaping (Result<[GormssonPeripheral], Error>) -> Void) {
         manager.scan(services, options: options, delay: delay, lifetime: lifetime, didUpdate: didUpdate)
     }
@@ -90,7 +90,7 @@ open class Gormsson {
     }
 
     /// Cancels an active or pending local connection to the peripheral.
-    public func disconnect(_ peripheral: CBPeripheral) {
+    public func cancel(_ peripheral: CBPeripheral) {
         manager.cancel(peripheral)
     }
 
