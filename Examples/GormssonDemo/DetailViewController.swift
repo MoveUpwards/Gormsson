@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        manager?.disconnect(peripheral!)
+        manager?.cancel(peripheral!)
     }
 
     var detailItem: String? {

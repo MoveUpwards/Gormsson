@@ -32,7 +32,7 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     // ## Added for Gormsson
-    private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
+    private let gormsson = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class MasterViewController: UITableViewController {
         let checkScanForever = false
         if checkScanForever {
             // Scan forever to check when new devices appear or some disappear
-            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, timeout: 3.0) { [weak self] result in
+            gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, lifetime: 3.0) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     print("Scan error:", error)
@@ -64,7 +64,7 @@ class MasterViewController: UITableViewController {
             }
         } else {
             // Scan once and auto connect to founded devices
-            manager.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
+            gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     print("Scan error:", error)
@@ -89,17 +89,17 @@ class MasterViewController: UITableViewController {
     @objc
     private func disconnectAllDevices(_ sender: Any) {
         objects.forEach { [weak self] peripheral in
-            self?.manager.disconnect(peripheral)
+            self?.gormsson.disconnect(peripheral)
         }
     }
 
     @objc
     private func playReadBattery(_ sender: Any) {
         objects.forEach { [weak self] peripheral in
-            self?.manager.read(.batteryLevel, on: peripheral) { result in
+            self?.gormsson.read(.batteryLevel, on: peripheral) { result in
                 print("Battery level:", result, "on", peripheral)
             }
-            self?.manager.read(.modelNumberString, on: peripheral) { result in
+            self?.gormsson.read(.modelNumberString, on: peripheral) { result in
                 print("Device name:", result, "on", peripheral)
             }
         }
@@ -107,7 +107,7 @@ class MasterViewController: UITableViewController {
 
     private func observeState() {
         // ## Optional to observe state's changes
-        manager.observe(options: [.initial, .distinct]) { [weak self] state in
+        gormsson.observe(options: [.initial, .distinct]) { [weak self] state in
             switch /*manager.*/state {
             case .unknown:
                 print("Gormsson is uninitialized, wait a bit.")
