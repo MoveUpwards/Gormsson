@@ -57,10 +57,8 @@ extension Gormsson {
                 self?.manager.connect(peripheral, success: {
                     // Everything is fine, wait to be ready
                 }, failure: { error in
-                    if let error = error {
-                        result?(.failure(error))
-                    }
-                }, didReadyHandler: {
+                    result?(.failure(error))
+                }, didReady: {
                     self?.execute(actions: actions, on: peripheral, result: { currentResult in
                         if case let .failure(error) = currentResult {
                             result?(.failure(error))
@@ -74,7 +72,7 @@ extension Gormsson {
 
                         self?.cancel(peripheral)
                     })
-                }, didDisconnectHandler: { error in
+                }, didDisconnect: { error in
                     if let error = error {
                         result?(.failure(error))
                     }

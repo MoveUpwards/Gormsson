@@ -49,7 +49,7 @@ extension CentralManager: CBCentralManagerDelegate {
     internal func centralManager(_ central: CBCentralManager,
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
-        connectHandlers[peripheral.identifier]?.didFailConnect?(error)
+        connectHandlers[peripheral.identifier]?.didFailConnect?(error ?? GormssonError.unexpectedNilError)
         remove(peripheral)
     }
 

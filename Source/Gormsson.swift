@@ -79,14 +79,23 @@ open class Gormsson {
     /// Establishes a local connection to a peripheral.
     ///
     /// - parameter peripheral:     The peripheral to which the central is attempting to connect.
+    /// - parameter shouldStopScan: Will stop the current scan if needed.
+    /// - parameter success:        Directly after the peripheral connect, but the device start discovering services and characteristics.
+    /// - parameter failure:        The connect fail handler.
+    /// - parameter didReady:       The peripheral is fully ready to use.
+    /// - parameter didDisconnect:  The peripheral has been disconnected.
     public func connect(_ peripheral: CBPeripheral,
                         shouldStopScan: Bool = false,
                         success: (() -> Void)? = nil,
-                        failure: ((Error?) -> Void)? = nil,
-                        didReadyHandler: (() -> Void)? = nil,
-                        didDisconnectHandler: ((Error?) -> Void)? = nil) {
-        manager.connect(peripheral, shouldStopScan: shouldStopScan, success: success, failure: failure,
-                        didReadyHandler: didReadyHandler, didDisconnectHandler: didDisconnectHandler)
+                        failure: ((Error) -> Void)? = nil,
+                        didReady: (() -> Void)? = nil,
+                        didDisconnect: ((Error?) -> Void)? = nil) {
+        manager.connect(peripheral,
+                        shouldStopScan: shouldStopScan,
+                        success: success,
+                        failure: failure,
+                        didReady: didReady,
+                        didDisconnect: didDisconnect)
     }
 
     /// Cancels an active or pending local connection to the peripheral.
