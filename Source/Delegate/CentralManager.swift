@@ -165,7 +165,7 @@ internal final class CentralManager: NSObject {
                           success: (() -> Void)? = nil,
                           failure: ((Error) -> Void)? = nil,
                           didReady: (() -> Void)? = nil,
-                          didDisconnect: ((Error?) -> Void)? = nil) {
+                          didDisconnect: ((Result<(), Error>) -> Void)? = nil) {
         guard state == .isPoweredOn else {
             failure?(GormssonError.powerOff)
             return
