@@ -28,4 +28,6 @@ public enum GormssonError: Error {
     case stopNotifying
     /// The operation reach the timed out.
     case timedOut
+    /// Each time an action fail where the cause of the failure is nil
+    case unexpectedNilError
 }
