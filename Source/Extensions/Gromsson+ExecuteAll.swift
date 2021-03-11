@@ -72,8 +72,8 @@ extension Gormsson {
 
                         self?.cancel(peripheral)
                     })
-                }, didDisconnect: { error in
-                    if let error = error {
+                }, didDisconnect: { disconnectResult in
+                    if case let .failure(error) = disconnectResult {
                         result?(.failure(error))
                     }
 

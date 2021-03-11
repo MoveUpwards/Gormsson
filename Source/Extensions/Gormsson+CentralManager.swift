@@ -35,7 +35,12 @@ extension CentralManager: CBCentralManagerDelegate {
     internal func centralManager(_ central: CBCentralManager,
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
-        connectHandlers[peripheral.identifier]?.didDisconnect?(error)
+        let handler = connectHandlers[peripheral.identifier]?.didDisconnect
+        if let error = error {
+            handler?(.failure(error))
+        } else {
+            handler?(.success(()))
+        }
         remove(peripheral)
     }
 

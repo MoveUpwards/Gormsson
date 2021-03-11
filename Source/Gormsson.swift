@@ -89,7 +89,7 @@ open class Gormsson {
                         success: (() -> Void)? = nil,
                         failure: ((Error) -> Void)? = nil,
                         didReady: (() -> Void)? = nil,
-                        didDisconnect: ((Error?) -> Void)? = nil) {
+                        didDisconnect: ((Result<(), Error>) -> Void)? = nil) {
         manager.connect(peripheral,
                         shouldStopScan: shouldStopScan,
                         success: success,
