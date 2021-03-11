@@ -163,9 +163,9 @@ internal final class CentralManager: NSObject {
     internal func connect(_ peripheral: CBPeripheral,
                           shouldStopScan: Bool = false,
                           success: (() -> Void)? = nil,
-                          failure: ((Error?) -> Void)? = nil,
-                          didReadyHandler: (() -> Void)? = nil,
-                          didDisconnectHandler: ((Error?) -> Void)? = nil) {
+                          failure: ((Error) -> Void)? = nil,
+                          didReady: (() -> Void)? = nil,
+                          didDisconnect: ((Result<(), Error>) -> Void)? = nil) {
         guard state == .isPoweredOn else {
             failure?(GormssonError.powerOff)
             return
@@ -176,8 +176,8 @@ internal final class CentralManager: NSObject {
         }
         connectHandlers[peripheral.identifier] = ConnectHandler(didConnect: success,
                                                                 didFailConnect: failure,
-                                                                didReady: didReadyHandler,
-                                                                didDisconnect: didDisconnectHandler)
+                                                                didReady: didReady,
+                                                                didDisconnect: didDisconnect)
 
         cbManager?.connect(peripheral)
         peripheral.delegate = self.peripheralManager

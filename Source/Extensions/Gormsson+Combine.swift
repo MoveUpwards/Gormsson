@@ -15,7 +15,7 @@ extension Gormsson {
         Future<Void, Error> { [weak self] promise in
             self?.connect(peripheral, shouldStopScan: false, failure: { _ in
                 promise(.failure(GormssonError.deviceDisconnected))
-            }, didReadyHandler: {
+            }, didReady: {
                 promise(.success(()))
             })
         }.eraseToAnyPublisher()
