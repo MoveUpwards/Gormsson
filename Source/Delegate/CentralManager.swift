@@ -134,22 +134,18 @@ internal final class CentralManager: NSObject {
             return
         }
 
-        var privateOptions: [String: Any]
+        var privateOptions = [String: Any]()
         if let options = options {
             privateOptions = options
-        } else {
-            privateOptions = [String: Any]()
         }
         privateOptions[CBCentralManagerScanOptionAllowDuplicatesKey] = true
 
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
 
-        queue.async { [weak self] in
-            self?.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { _ in
-                self?.fireUpdate()
-            }
-            self?.timer?.tolerance = 0.2
+        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { [weak self] _ in
+            self?.fireUpdate()
         }
+        timer?.tolerance = 0.2
     }
 
     internal func stopScan() {
@@ -388,11 +384,11 @@ extension CentralManager {
 
     private func fireUpdate() {
         queue.async(flags: .barrier) { [weak self] in
-            guard let lifetime = self?.lifetime,
-                  let peripherals = self?.currentPeripherals.filter({ $0.lastUpdate > (Date() - lifetime) }) else { return }
+            guard let self = self else { return }
+
             // Keep all peripherals that was updated less than *lifetime* seconds
-            self?.currentPeripherals = peripherals
-            self?.didUpdate?(.success(peripherals))
+            self.currentPeripherals = self.currentPeripherals.filter({ $0.lastUpdate > (Date() - self.lifetime) })
+            self.didUpdate?(.success(self.currentPeripherals))
         }
     }
 
