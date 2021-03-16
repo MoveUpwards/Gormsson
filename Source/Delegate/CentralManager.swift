@@ -387,9 +387,13 @@ extension CentralManager {
     }
 
     private func fireUpdate() {
-        // Keep all peripherals that was updated less than *lifetime* seconds
-        currentPeripherals = currentPeripherals.filter({ $0.lastUpdate > (Date() - lifetime) })
-        didUpdate?(.success(currentPeripherals))
+        queue.async(flags: .barrier) { [weak self] in
+            guard let lifetime = self?.lifetime,
+                  let peripherals = self?.currentPeripherals.filter({ $0.lastUpdate > (Date() - lifetime) }) else { return }
+            // Keep all peripherals that was updated less than *lifetime* seconds
+            self?.currentPeripherals = peripherals
+            self?.didUpdate?(.success(peripherals))
+        }
     }
 
     private func clean() {

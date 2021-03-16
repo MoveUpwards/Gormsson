@@ -50,7 +50,7 @@ class MasterViewController: UITableViewController {
 
         observeState()
 
-        let checkScanForever = false
+        let checkScanForever = true
         if checkScanForever {
             // Scan forever to check when new devices appear or some disappear
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, lifetime: 3.0) { [weak self] result in
