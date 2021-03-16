@@ -23,10 +23,12 @@ extension CentralManager: CBCentralManagerDelegate {
         didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
 
         if nil != didUpdate { // Only if we need it
-            if let index = currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
-                currentPeripherals[index] = GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)
-            } else {
-                currentPeripherals.append(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement))
+            queue.async(flags: .barrier) { [weak self] in
+                if let index = self?.currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
+                    self?.currentPeripherals[index] = GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)
+                } else {
+                    self?.currentPeripherals.append(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement))
+                }
             }
         }
     }
