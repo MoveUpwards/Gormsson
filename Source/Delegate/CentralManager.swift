@@ -142,10 +142,12 @@ internal final class CentralManager: NSObject {
 
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
 
-        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { [weak self] _ in
-            self?.fireUpdate()
+        queue.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { _ in
+                self?.fireUpdate()
+            }
+            self?.timer?.tolerance = 0.2
         }
-        timer?.tolerance = 0.2
     }
 
     internal func stopScan() {
