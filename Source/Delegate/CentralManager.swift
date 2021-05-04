@@ -87,6 +87,7 @@ internal final class CentralManager: NSObject {
         switch cbState {
         case .poweredOn:
             state = .isPoweredOn
+            needScan = true
             rescan()
         default:
             state = state == .isPoweredOn ? .didLostBluetooth : .needBluetooth
@@ -127,10 +128,11 @@ internal final class CentralManager: NSObject {
         self.didUpdate = didUpdate
         self.delay = delay
         self.lifetime = lifetime
+        scanServices = services
+        scanOptions = options
+
         guard state == .isPoweredOn else {
             needScan = true
-            scanServices = services
-            scanOptions = options
             return
         }
 
