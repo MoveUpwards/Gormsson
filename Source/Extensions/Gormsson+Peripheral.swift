@@ -112,7 +112,7 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-        guard let value = request.characteristic.format.init(with: data.toOctets) else {
+        guard let value = request.characteristic.format.init(with: data.octets) else {
             request.result?(.failure(GormssonError.uncastableValue))
             return
         }
