@@ -376,7 +376,7 @@ extension CentralManager {
             return
         }
 
-        request.peripheral.writeValue(value.toData(), for: cbCharacteristic, type: type)
+        request.peripheral.writeValue(value.data, for: cbCharacteristic, type: type)
 
         guard type == .withResponse else {
             request.result?(.success(Empty()))

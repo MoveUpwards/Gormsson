@@ -40,7 +40,7 @@ public enum SessionRecordEnum: UInt8, DataInitializable, DataConvertible {
         self = value
     }
 
-    public func toData() -> Data {
+    public var data: Data {
         return Data(repeating: rawValue, count: 1)
     }
 }
