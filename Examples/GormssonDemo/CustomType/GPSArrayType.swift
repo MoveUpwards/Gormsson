@@ -18,7 +18,7 @@ public final class GPSArrayType: DataInitializable, DataConvertible {
     }
 
     /// Return Data of the object.
-    public func toData() -> Data {
+    public var data: Data {
         return Data(characteristicData)
     }
 }
