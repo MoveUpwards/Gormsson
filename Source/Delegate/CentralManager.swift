@@ -21,7 +21,7 @@ internal final class CentralManager: NSObject {
     private var scanOptions: [String: Any]?
 
     /// A timer to fire scan on scanForever
-    private var timer: Timer?
+    private var timer: DispatchSourceTimer
 
     /// The current state of the manager.
     private var state: GormssonState = .unknown {
@@ -65,6 +65,7 @@ internal final class CentralManager: NSObject {
 
     internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
         self.currentQueue = queue
+        self.timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
         super.init()
         cbManager = CBCentralManager(delegate: self, queue: queue, options: options)
         peripheralManager = PeripheralManager(self)
@@ -144,12 +145,9 @@ internal final class CentralManager: NSObject {
 
         cbManager?.scanForPeripherals(withServices: services?.map({ $0.uuid }), options: privateOptions)
 
-        queue.async { [weak self] in
-            self?.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: true) { _ in
-                self?.fireUpdate()
-            }
-            self?.timer?.tolerance = 0.2
-        }
+        timer.schedule(deadline: .now(), repeating: delay)
+        timer.setEventHandler(handler: fireUpdate)
+        timer.activate()
     }
 
     internal func stopScan() {
@@ -402,6 +400,6 @@ extension CentralManager {
         needScan = false
         scanServices = nil
         scanOptions = nil
-        timer?.invalidate()
+        timer.cancel()
     }
 }
