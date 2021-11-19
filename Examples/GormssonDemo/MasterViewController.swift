@@ -16,7 +16,7 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     // ## Added for Gormsson
-    private let manager = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
+    private let bleService = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class MasterViewController: UITableViewController {
         // Do any additional setup after loading the view.
 
         // ## Added for Gormsson
-        manager.scan([gpsControlService]) { [weak self] (result: Result<GormssonPeripheral, Error>) in
+        bleService.scan([gpsControlService]) { [weak self] (result: Result<GormssonPeripheral, Error>) in
             guard case let .success(device) = result else {
                 if case let .failure(error) = result {
                     print(error)
@@ -40,7 +40,7 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         // ## Optional to observe state's changes
-        manager.observe(options: [.initial, .distinct]) { [weak self] state in
+        bleService.observe(options: [.initial, .distinct]) { [weak self] state in
             switch /*manager.*/state {
             case .unknown:
                 print("Gormsson is uninitialized, wait a bit.")
@@ -98,8 +98,8 @@ class MasterViewController: UITableViewController {
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = peripheral.name
 
-                controller.manager = manager // ## Added for Gormsson
-                manager.connect(peripheral) // ## Added for Gormsson
+                controller.manager = bleService // ## Added for Gormsson
+                bleService.connect(peripheral) // ## Added for Gormsson
                 controller.peripheral = peripheral // ## Added for Gormsson
 
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
