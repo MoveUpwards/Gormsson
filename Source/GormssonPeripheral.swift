@@ -8,16 +8,24 @@
 
 import CoreBluetooth
 
-public struct GormssonPeripheral: Identifiable {
+public struct GormssonPeripheral {
     public let peripheral: CBPeripheral
     public let advertisement: GattAdvertisement
     public let lastUpdate: Date
-
-    public var id: UUID { peripheral.identifier }
 
     internal init(peripheral: CBPeripheral, advertisement: GattAdvertisement) {
         self.peripheral = peripheral
         self.advertisement = advertisement
         self.lastUpdate = Date()
+    }
+}
+
+extension GormssonPeripheral: Identifiable {
+    public var id: UUID { peripheral.identifier }
+}
+
+extension GormssonPeripheral: Equatable {
+    public static func == (lhs: GormssonPeripheral, rhs: GormssonPeripheral) -> Bool {
+        return lhs.peripheral == rhs.peripheral
     }
 }
