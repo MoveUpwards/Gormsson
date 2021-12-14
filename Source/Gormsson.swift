@@ -19,7 +19,8 @@ open class Gormsson {
     /// - parameter queue:     The dispatch queue on which the events will be dispatched.
     ///                        If nil, the main queue will be used.
     /// - parameter options:   An optional dictionary specifying options for the manager
-    public init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
+    public init(queue: DispatchQueue = DispatchQueue(label: "com.gormsson.ble", attributes: .concurrent),
+                options: [String: Any]? = nil) {
         manager = CentralManager(queue: queue, options: options)
     }
 

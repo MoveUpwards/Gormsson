@@ -60,11 +60,12 @@ internal final class CentralManager: NSObject {
     internal var currentRequests = [GattRequest]()
 
     /// The current queue
-    private weak var currentQueue: DispatchQueue?
-    internal var queue: DispatchQueue { currentQueue ?? DispatchQueue.main }
+    internal weak var queue: DispatchQueue?
+    /// The scan queue
+    internal weak var scanQueue: DispatchQueue?
 
-    internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
-        self.currentQueue = queue
+    internal init(queue: DispatchQueue, options: [String: Any]? = nil) {
+        self.queue = queue
         self.timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
         super.init()
         cbManager = CBCentralManager(delegate: self, queue: queue, options: options)
@@ -102,6 +103,7 @@ internal final class CentralManager: NSObject {
             didDiscover(.failure(GormssonError.alreadyScanning))
             return
         }
+        self.scanQueue = OperationQueue.current?.underlyingQueue
         self.didDiscover = didDiscover
         self.didUpdate = nil
         self.delay = 0.0
@@ -125,6 +127,7 @@ internal final class CentralManager: NSObject {
             didUpdate(.failure(GormssonError.alreadyScanning))
             return
         }
+        self.scanQueue = OperationQueue.current?.underlyingQueue
         self.didDiscover = nil
         self.didUpdate = didUpdate
         self.delay = delay
@@ -385,12 +388,14 @@ extension CentralManager {
     }
 
     private func fireUpdate() {
-        queue.async(flags: .barrier) { [weak self] in
+        queue?.async(flags: .barrier) { [weak self] in
             guard let self = self else { return }
 
             // Keep all peripherals that was updated less than *lifetime* seconds
             self.currentPeripherals = self.currentPeripherals.filter({ $0.lastUpdate > (Date() - self.lifetime) })
-            self.didUpdate?(.success(self.currentPeripherals))
+            self.scanQueue?.async {
+                self.didUpdate?(.success(self.currentPeripherals))
+            }
         }
     }
 

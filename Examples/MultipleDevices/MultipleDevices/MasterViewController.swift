@@ -50,30 +50,28 @@ class MasterViewController: UITableViewController {
 
         observeState()
 
-        let checkScanForever = true
+        let checkScanForever = false
         if checkScanForever {
             // Scan forever to check when new devices appear or some disappear
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, lifetime: 3.0) { [weak self] result in
                 switch result {
-                case .failure(let error):
-                    print("Scan error:", error)
-                case .success(let devices):
-                    self?.objects = devices.map({ $0.peripheral })
-                    self?.tableView.reloadData()
+                    case .failure(let error):
+                        print("Scan error:", error)
+                    case .success(let devices):
+                        self?.objects = devices.map({ $0.peripheral })
+                        self?.tableView.reloadData()
                 }
             }
         } else {
             // Scan once and auto connect to founded devices
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
                 switch result {
-                case .failure(let error):
-                    print("Scan error:", error)
-                case .success(let device):
-                    DispatchQueue.main.async { [weak self] in
+                    case .failure(let error):
+                        print("Scan error:", error)
+                    case .success(let device):
                         self?.objects.insert(device.peripheral, at: 0)
                         let indexPath = IndexPath(row: 0, section: 0)
                         self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                    }
                 }
             } // ## Added for Gormsson
         }
@@ -89,7 +87,7 @@ class MasterViewController: UITableViewController {
     @objc
     private func disconnectAllDevices(_ sender: Any) {
         objects.forEach { [weak self] peripheral in
-            self?.gormsson.disconnect(peripheral)
+            self?.gormsson.cancel(peripheral)
         }
     }
 

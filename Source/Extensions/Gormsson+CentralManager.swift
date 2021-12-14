@@ -20,10 +20,12 @@ extension CentralManager: CBCentralManagerDelegate {
                                  advertisementData: [String: Any],
                                  rssi RSSI: NSNumber) {
         let advertisement = GattAdvertisement(with: advertisementData, rssi: RSSI.intValue)
-        didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
+        scanQueue?.async { [weak self] in
+            self?.didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
+        }
 
         if nil != didUpdate { // Only if we need it
-            queue.async(flags: .barrier) { [weak self] in
+            queue?.async(flags: .barrier) { [weak self] in
                 if let index = self?.currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
                     self?.currentPeripherals[index] = GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)
                 } else {
