@@ -32,7 +32,7 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     // ## Added for Gormsson
-    private let gormsson = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
+    private let gormsson = Gormsson()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class MasterViewController: UITableViewController {
 
         observeState()
 
-        let checkScanForever = false
+        let checkScanForever = true
         if checkScanForever {
             // Scan forever to check when new devices appear or some disappear
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, lifetime: 3.0) { [weak self] result in
@@ -93,14 +93,13 @@ class MasterViewController: UITableViewController {
 
     @objc
     private func playReadBattery(_ sender: Any) {
-        objects.forEach { [weak self] peripheral in
-            self?.gormsson.read(.batteryLevel, on: peripheral) { result in
-                print("Battery level:", result, "on", peripheral)
+        gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
+            if case let .success(value) = result {
+                print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
             }
-            self?.gormsson.read(.modelNumberString, on: peripheral) { result in
-                print("Device name:", result, "on", peripheral)
-            }
-        }
+        }, completion: { error in
+            print(error ?? "TERMINATED")
+        })
     }
 
     private func observeState() {

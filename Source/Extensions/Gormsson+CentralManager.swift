@@ -39,18 +39,21 @@ extension CentralManager: CBCentralManagerDelegate {
     internal func centralManager(_ central: CBCentralManager,
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
-        let handler = connectHandlers[peripheral.identifier]?.didDisconnect
-        if let error = error {
-            handler?(.failure(error))
-        } else {
-            handler?(.success(()))
+        let didDisconnect = connectHandlers[peripheral.identifier]?.didDisconnect
+        connectHandlers[peripheral.identifier]?.connectQueue?.async {
+            if let error = error {
+                didDisconnect?(.failure(error))
+            } else {
+                didDisconnect?(.success(()))
+            }
         }
         remove(peripheral)
     }
 
     /// Invoked when a connection is successfully created with a peripheral.
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        connectHandlers[peripheral.identifier]?.didConnect?()
+        let didConnect = connectHandlers[peripheral.identifier]?.didConnect
+        connectHandlers[peripheral.identifier]?.connectQueue?.async { didConnect?() }
         peripheral.discoverServices(nil)
     }
 
@@ -58,7 +61,10 @@ extension CentralManager: CBCentralManagerDelegate {
     internal func centralManager(_ central: CBCentralManager,
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
-        connectHandlers[peripheral.identifier]?.didFailConnect?(error ?? GormssonError.unexpectedNilError)
+        let didFailConnect = connectHandlers[peripheral.identifier]?.didFailConnect
+        connectHandlers[peripheral.identifier]?.connectQueue?.async {
+            didFailConnect?(error ?? GormssonError.unexpectedNilError)
+        }
         remove(peripheral)
     }
 

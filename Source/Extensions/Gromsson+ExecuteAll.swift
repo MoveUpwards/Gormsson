@@ -48,31 +48,46 @@ extension Gormsson {
                            timeout: Int = 30,
                            result: ((Result<ActionResult, Error>) -> Void)? = nil,
                            completion: ((Error?) -> Void)? = nil) {
+        let currentQueue = OperationQueue.current?.underlyingQueue
+//        manager.queue?.async { [weak self] in
         let downloadGroup = DispatchGroup()
         peripherals.forEach { peripheral in
             downloadGroup.enter()
+            print("1 on", OperationQueue.current?.underlyingQueue)
 
-            manager.connect(peripheral, success: {
+            manager.connect(peripheral, on: manager.queue, success: {
                 // Everything is fine, wait to be ready
             }, failure: { error in
-                result?(.failure(error))
+//                currentQueue?.async {
+                    result?(.failure(error))
+//                }
             }, didReady: { [weak self] in
+                print("2 on", OperationQueue.current?.underlyingQueue)
                 self?.execute(actions: actions, on: peripheral, result: { currentResult in
-                    if case let .failure(error) = currentResult {
-                        result?(.failure(error))
-                    } else if case let .success(value) = currentResult {
-                        result?(.success(value))
-                    }
+                    print("3 on", OperationQueue.current?.underlyingQueue)
+//                    currentQueue?.async {
+                        print("4 on", OperationQueue.current?.underlyingQueue)
+                        if case let .failure(error) = currentResult {
+                            result?(.failure(error))
+                        } else if case let .success(value) = currentResult {
+                            result?(.success(value))
+                        }
+//                    }
                 }, completion: { error in
+                    print("5 on", OperationQueue.current?.underlyingQueue)
                     if let error = error {
-                        result?(.failure(error))
+//                        currentQueue?.async {
+                            result?(.failure(error))
+//                        }
                     }
 
                     self?.cancel(peripheral)
                 })
             }, didDisconnect: { disconnectResult in
                 if case let .failure(error) = disconnectResult {
-                    result?(.failure(error))
+//                    currentQueue?.async {
+                        result?(.failure(error))
+//                    }
                 }
 
                 downloadGroup.leave()
@@ -88,6 +103,7 @@ extension Gormsson {
         }
 
         completion?(GormssonError.timedOut)
+//        }
     }
 
     // MARK: - Private functions

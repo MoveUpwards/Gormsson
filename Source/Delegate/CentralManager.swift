@@ -162,6 +162,7 @@ internal final class CentralManager: NSObject {
     }
 
     internal func connect(_ peripheral: CBPeripheral,
+                          on queue: DispatchQueue? = OperationQueue.current?.underlyingQueue,
                           shouldStopScan: Bool = false,
                           success: (() -> Void)? = nil,
                           failure: ((Error) -> Void)? = nil,
@@ -175,7 +176,8 @@ internal final class CentralManager: NSObject {
         if shouldStopScan, cbManager?.isScanning ?? false {
             stopScan() // Auto stop scan if needed
         }
-        connectHandlers[peripheral.identifier] = ConnectHandler(didConnect: success,
+        connectHandlers[peripheral.identifier] = ConnectHandler(connectQueue: queue,
+                                                                didConnect: success,
                                                                 didFailConnect: failure,
                                                                 didReady: didReady,
                                                                 didDisconnect: didDisconnect)
@@ -285,7 +287,10 @@ extension CentralManager {
             return
         }
         if counter <= 0 {
-            connectHandlers[peripheral.identifier]?.didReady?()
+//            connectHandlers[peripheral.identifier]?.connectQueue?.async { [weak self] in
+                /*self?.*/connectHandlers[peripheral.identifier]?.didReady?()
+//            }
+
             let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
             pendingRequests.filter(filter).forEach { request in
                 switch request.property {
