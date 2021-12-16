@@ -49,56 +49,58 @@ extension Gormsson {
                            result: ((Result<ActionResult, Error>) -> Void)? = nil,
                            completion: ((Error?) -> Void)? = nil) {
         let currentQueue = DispatchQueue.current
-        let downloadGroup = DispatchGroup()
-        peripherals.forEach { peripheral in
-            downloadGroup.enter()
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let downloadGroup = DispatchGroup()
+            peripherals.forEach { peripheral in
+                downloadGroup.enter()
 
-            manager.connect(peripheral, on: manager.queue, success: {
-                // Everything is fine, wait to be ready
-            }, failure: { [weak self] error in
-                self?.manager.async(on: currentQueue) {
-                    result?(.failure(error))
-                }
-            }, didReady: { [weak self] in
-                self?.execute(actions: actions, on: peripheral, result: { currentResult in
+                self?.manager.connect(peripheral, on: self?.manager.queue, success: {
+                    // Everything is fine, wait to be ready
+                }, failure: { [weak self] error in
                     self?.manager.async(on: currentQueue) {
-                        if case let .failure(error) = currentResult {
-                            result?(.failure(error))
-                        } else if case let .success(value) = currentResult {
-                            result?(.success(value))
-                        }
+                        result?(.failure(error))
                     }
-                }, completion: { error in
-                    if let error = error {
+                }, didReady: { [weak self] in
+                    self?.execute(actions: actions, on: peripheral, result: { currentResult in
+                        self?.manager.async(on: currentQueue) {
+                            if case let .failure(error) = currentResult {
+                                result?(.failure(error))
+                            } else if case let .success(value) = currentResult {
+                                result?(.success(value))
+                            }
+                        }
+                    }, completion: { error in
+                        if let error = error {
+                            self?.manager.async(on: currentQueue) {
+                                result?(.failure(error))
+                            }
+                        }
+
+                        self?.cancel(peripheral)
+                    })
+                }, didDisconnect: { [weak self] disconnectResult in
+                    if case let .failure(error) = disconnectResult {
                         self?.manager.async(on: currentQueue) {
                             result?(.failure(error))
                         }
                     }
 
-                    self?.cancel(peripheral)
+                    downloadGroup.leave()
                 })
-            }, didDisconnect: { [weak self] disconnectResult in
-                if case let .failure(error) = disconnectResult {
-                    self?.manager.async(on: currentQueue) {
-                        result?(.failure(error))
-                    }
-                }
-
-                downloadGroup.leave()
-            })
-        }
-
-        // Wait for the timeout, if needed
-        let result = downloadGroup.wait(timeout: .now() + .seconds(timeout))
-
-        guard result == .timedOut else {
-            manager.async(on: currentQueue) {
-                completion?(nil) // Completed with success
             }
-            return
-        }
 
-        completion?(GormssonError.timedOut)
+            // Wait for the timeout, if needed
+            let result = downloadGroup.wait(timeout: .now() + .seconds(timeout))
+
+            guard result == .timedOut else {
+                self?.manager.async(on: currentQueue) {
+                    completion?(nil) // Completed with success
+                }
+                return
+            }
+
+            completion?(GormssonError.timedOut)
+        }
     }
 
     // MARK: - Private functions
