@@ -93,28 +93,49 @@ class MasterViewController: UITableViewController {
 
     @objc
     private func playReadBattery(_ sender: Any) {
-        let allDevices = true
-        if allDevices {
-            gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
-                if case let .success(value) = result {
-                    print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
-                }
-            }, completion: { error in
-                print(error ?? "TERMINATED")
-            })
-        } else {
-            guard let device = objects.first else { return }
-            gormsson.connect(device, success: {
-                print("connected")
-            }, failure: { error in
-                print("failure")
-            }, didReady: { [weak self] in
-                print("ready")
-                self?.gormsson.cancel(device)
-            }, didDisconnect: { result in
-                print("disconnected")
-            })
+        // Test executeAll
+//        executeAll()
+
+        // Test executeAll on utility queue
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            self?.executeAll()
         }
+
+        // Test connect and read functions
+//        connectAndRead()
+
+        // Test connect and read functions on utility queue
+//        DispatchQueue.global(qos: .utility).async { [weak self] in
+//            self?.connectAndRead()
+//        }
+    }
+
+    private func executeAll() {
+        gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
+            if case let .success(value) = result {
+                print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
+            }
+        }, completion: { error in
+            print(error ?? "TERMINATED")
+        })
+    }
+
+    private func connectAndRead() {
+        guard let device = objects.first else { return }
+        gormsson.connect(device, success: {
+            print("connected")
+        }, failure: { error in
+            print("failure")
+        }, didReady: { [weak self] in
+            self?.gormsson.read(.batteryLevel, on: device, result: { result in
+                if case let .success(value) = result {
+                    print("Battery", value, "% on main thread", Thread.isMainThread)
+                }
+                self?.gormsson.cancel(device)
+            })
+        }, didDisconnect: { result in
+            print("disconnected")
+        })
     }
 
     private func observeState() {
