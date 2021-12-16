@@ -28,7 +28,7 @@ internal final class GattRequest {
                   on peripheral: CBPeripheral,
                   characteristic: CharacteristicProtocol,
                   result: ((Result<DataInitializable, Error>) -> Void)? = nil) {
-        self.requestQueue = DispatchQueue.current // OperationQueue.current?.underlyingQueue
+        self.requestQueue = DispatchQueue.current
         self.peripheral = peripheral
         self.property = property
         self.characteristic = characteristic

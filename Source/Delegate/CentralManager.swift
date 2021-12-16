@@ -103,7 +103,7 @@ internal final class CentralManager: NSObject {
             didDiscover(.failure(GormssonError.alreadyScanning))
             return
         }
-        self.scanQueue = DispatchQueue.current // OperationQueue.current?.underlyingQueue
+        self.scanQueue = DispatchQueue.current
         self.didDiscover = didDiscover
         self.didUpdate = nil
         self.delay = 0.0
@@ -127,7 +127,7 @@ internal final class CentralManager: NSObject {
             didUpdate(.failure(GormssonError.alreadyScanning))
             return
         }
-        self.scanQueue = DispatchQueue.current // OperationQueue.current?.underlyingQueue
+        self.scanQueue = DispatchQueue.current
         self.didDiscover = nil
         self.didUpdate = didUpdate
         self.delay = delay
@@ -162,7 +162,7 @@ internal final class CentralManager: NSObject {
     }
 
     internal func connect(_ peripheral: CBPeripheral,
-                          on queue: DispatchQueue? = DispatchQueue.current, // OperationQueue.current?.underlyingQueue,
+                          on queue: DispatchQueue? = DispatchQueue.current,
                           shouldStopScan: Bool = false,
                           success: (() -> Void)? = nil,
                           failure: ((Error) -> Void)? = nil,

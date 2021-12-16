@@ -48,7 +48,7 @@ extension Gormsson {
                            timeout: Int = 30,
                            result: ((Result<ActionResult, Error>) -> Void)? = nil,
                            completion: ((Error?) -> Void)? = nil) {
-        let currentQueue = DispatchQueue.current // OperationQueue.current?.underlyingQueue
+        let currentQueue = DispatchQueue.current
         let downloadGroup = DispatchGroup()
         peripherals.forEach { peripheral in
             downloadGroup.enter()
