@@ -93,13 +93,28 @@ class MasterViewController: UITableViewController {
 
     @objc
     private func playReadBattery(_ sender: Any) {
-        gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
-            if case let .success(value) = result {
-                print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
-            }
-        }, completion: { error in
-            print(error ?? "TERMINATED")
-        })
+        let allDevices = true
+        if allDevices {
+            gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
+                if case let .success(value) = result {
+                    print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
+                }
+            }, completion: { error in
+                print(error ?? "TERMINATED")
+            })
+        } else {
+            guard let device = objects.first else { return }
+            gormsson.connect(device, success: {
+                print("connected")
+            }, failure: { error in
+                print("failure")
+            }, didReady: { [weak self] in
+                print("ready")
+                self?.gormsson.cancel(device)
+            }, didDisconnect: { result in
+                print("disconnected")
+            })
+        }
     }
 
     private func observeState() {

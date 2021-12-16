@@ -287,9 +287,9 @@ extension CentralManager {
             return
         }
         if counter <= 0 {
-//            connectHandlers[peripheral.identifier]?.connectQueue?.async { [weak self] in
-                /*self?.*/connectHandlers[peripheral.identifier]?.didReady?()
-//            }
+            connectHandlers[peripheral.identifier]?.connectQueue?.async { [weak self] in
+                self?.connectHandlers[peripheral.identifier]?.didReady?()
+            }
 
             let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
             pendingRequests.filter(filter).forEach { request in
