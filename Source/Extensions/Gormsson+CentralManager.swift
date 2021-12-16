@@ -20,12 +20,12 @@ extension CentralManager: CBCentralManagerDelegate {
                                  advertisementData: [String: Any],
                                  rssi RSSI: NSNumber) {
         let advertisement = GattAdvertisement(with: advertisementData, rssi: RSSI.intValue)
-        scanQueue?.async { [weak self] in
+        async(on: scanQueue) { [weak self] in
             self?.didDiscover?(.success(GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)))
         }
 
         if nil != didUpdate { // Only if we need it
-            queue?.async(flags: .barrier) { [weak self] in
+            async(on: queue, flags: .barrier) { [weak self] in
                 if let index = self?.currentPeripherals.firstIndex(where: { $0.peripheral.identifier == peripheral.identifier }) {
                     self?.currentPeripherals[index] = GormssonPeripheral(peripheral: peripheral, advertisement: advertisement)
                 } else {
@@ -40,7 +40,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didDisconnectPeripheral peripheral: CBPeripheral,
                                  error: Error?) {
         let didDisconnect = connectHandlers[peripheral.identifier]?.didDisconnect
-        connectHandlers[peripheral.identifier]?.connectQueue?.async {
+        async(on: connectHandlers[peripheral.identifier]?.connectQueue) {
             if let error = error {
                 didDisconnect?(.failure(error))
             } else {
@@ -53,7 +53,7 @@ extension CentralManager: CBCentralManagerDelegate {
     /// Invoked when a connection is successfully created with a peripheral.
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         let didConnect = connectHandlers[peripheral.identifier]?.didConnect
-        connectHandlers[peripheral.identifier]?.connectQueue?.async { didConnect?() }
+        async(on: connectHandlers[peripheral.identifier]?.connectQueue) { didConnect?() }
         peripheral.discoverServices(nil)
     }
 
@@ -62,7 +62,7 @@ extension CentralManager: CBCentralManagerDelegate {
                                  didFailToConnect peripheral: CBPeripheral,
                                  error: Error?) {
         let didFailConnect = connectHandlers[peripheral.identifier]?.didFailConnect
-        connectHandlers[peripheral.identifier]?.connectQueue?.async {
+        async(on: connectHandlers[peripheral.identifier]?.connectQueue) {
             didFailConnect?(error ?? GormssonError.unexpectedNilError)
         }
         remove(peripheral)

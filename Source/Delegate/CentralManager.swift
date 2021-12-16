@@ -275,6 +275,12 @@ internal final class CentralManager: NSObject {
 // MARK: - Helper functions
 
 extension CentralManager {
+    internal func async(on queue: DispatchQueue?, flags: DispatchWorkItemFlags = [], execute: @escaping () -> Void) {
+        ((queue ?? self.queue) ?? DispatchQueue.main).async(flags: flags, execute: execute)
+    }
+}
+
+extension CentralManager {
     /// Gets the CBCharacteristic of the current peripheral or nil if not in.
     internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
         return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
@@ -287,7 +293,7 @@ extension CentralManager {
             return
         }
         if counter <= 0 {
-            connectHandlers[peripheral.identifier]?.connectQueue?.async { [weak self] in
+            async(on: connectHandlers[peripheral.identifier]?.connectQueue) { [weak self] in
                 self?.connectHandlers[peripheral.identifier]?.didReady?()
             }
 
@@ -393,12 +399,12 @@ extension CentralManager {
     }
 
     private func fireUpdate() {
-        queue?.async(flags: .barrier) { [weak self] in
+        async(on: queue, flags: .barrier) { [weak self] in
             guard let self = self else { return }
 
             // Keep all peripherals that was updated less than *lifetime* seconds
             self.currentPeripherals = self.currentPeripherals.filter({ $0.lastUpdate > (Date() - self.lifetime) })
-            self.scanQueue?.async {
+            self.async(on: self.scanQueue) {
                 self.didUpdate?(.success(self.currentPeripherals))
             }
         }

@@ -55,13 +55,13 @@ extension Gormsson {
 
             manager.connect(peripheral, on: manager.queue, success: {
                 // Everything is fine, wait to be ready
-            }, failure: { error in
-                currentQueue?.async {
+            }, failure: { [weak self] error in
+                self?.manager.async(on: currentQueue) {
                     result?(.failure(error))
                 }
             }, didReady: { [weak self] in
                 self?.execute(actions: actions, on: peripheral, result: { currentResult in
-                    currentQueue?.async {
+                    self?.manager.async(on: currentQueue) {
                         if case let .failure(error) = currentResult {
                             result?(.failure(error))
                         } else if case let .success(value) = currentResult {
@@ -70,16 +70,16 @@ extension Gormsson {
                     }
                 }, completion: { error in
                     if let error = error {
-                        currentQueue?.async {
+                        self?.manager.async(on: currentQueue) {
                             result?(.failure(error))
                         }
                     }
 
                     self?.cancel(peripheral)
                 })
-            }, didDisconnect: { disconnectResult in
+            }, didDisconnect: { [weak self] disconnectResult in
                 if case let .failure(error) = disconnectResult {
-                    currentQueue?.async {
+                    self?.manager.async(on: currentQueue) {
                         result?(.failure(error))
                     }
                 }
@@ -92,7 +92,7 @@ extension Gormsson {
         let result = downloadGroup.wait(timeout: .now() + .seconds(timeout))
 
         guard result == .timedOut else {
-            currentQueue?.async {
+            manager.async(on: currentQueue) {
                 completion?(nil) // Completed with success
             }
             return
