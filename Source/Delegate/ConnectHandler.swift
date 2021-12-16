@@ -11,6 +11,9 @@ import CoreBluetooth
 
 /// Struct to handle connect event
 internal struct ConnectHandler {
+    /// The connect queue
+    internal weak var connectQueue: DispatchQueue?
+
     /// The block to call each time a peripheral is connected.
     internal var didConnect: (() -> Void)?
     /// The block to call when a peripheral fails to connect.

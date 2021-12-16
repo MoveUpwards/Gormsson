@@ -11,6 +11,9 @@ import Nevanlinna
 
 /// A class that represent a request on a characteristic.
 internal final class GattRequest {
+    /// The connect queue
+    internal weak var requestQueue: DispatchQueue?
+
     /// The peripheral to request
     internal var peripheral: CBPeripheral
     /// The property of the characteristic.
@@ -25,6 +28,7 @@ internal final class GattRequest {
                   on peripheral: CBPeripheral,
                   characteristic: CharacteristicProtocol,
                   result: ((Result<DataInitializable, Error>) -> Void)? = nil) {
+        self.requestQueue = DispatchQueue.current
         self.peripheral = peripheral
         self.property = property
         self.characteristic = characteristic

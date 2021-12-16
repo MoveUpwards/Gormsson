@@ -60,11 +60,12 @@ internal final class CentralManager: NSObject {
     internal var currentRequests = [GattRequest]()
 
     /// The current queue
-    private weak var currentQueue: DispatchQueue?
-    internal var queue: DispatchQueue { currentQueue ?? DispatchQueue.main }
+    internal weak var queue: DispatchQueue?
+    /// The scan queue
+    internal weak var scanQueue: DispatchQueue?
 
-    internal init(queue: DispatchQueue? = nil, options: [String: Any]? = nil) {
-        self.currentQueue = queue
+    internal init(queue: DispatchQueue, options: [String: Any]? = nil) {
+        self.queue = queue
         self.timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
         super.init()
         cbManager = CBCentralManager(delegate: self, queue: queue, options: options)
@@ -102,6 +103,7 @@ internal final class CentralManager: NSObject {
             didDiscover(.failure(GormssonError.alreadyScanning))
             return
         }
+        self.scanQueue = DispatchQueue.current
         self.didDiscover = didDiscover
         self.didUpdate = nil
         self.delay = 0.0
@@ -125,6 +127,7 @@ internal final class CentralManager: NSObject {
             didUpdate(.failure(GormssonError.alreadyScanning))
             return
         }
+        self.scanQueue = DispatchQueue.current
         self.didDiscover = nil
         self.didUpdate = didUpdate
         self.delay = delay
@@ -159,6 +162,7 @@ internal final class CentralManager: NSObject {
     }
 
     internal func connect(_ peripheral: CBPeripheral,
+                          on queue: DispatchQueue? = DispatchQueue.current,
                           shouldStopScan: Bool = false,
                           success: (() -> Void)? = nil,
                           failure: ((Error) -> Void)? = nil,
@@ -172,7 +176,8 @@ internal final class CentralManager: NSObject {
         if shouldStopScan, cbManager?.isScanning ?? false {
             stopScan() // Auto stop scan if needed
         }
-        connectHandlers[peripheral.identifier] = ConnectHandler(didConnect: success,
+        connectHandlers[peripheral.identifier] = ConnectHandler(connectQueue: queue,
+                                                                didConnect: success,
                                                                 didFailConnect: failure,
                                                                 didReady: didReady,
                                                                 didDisconnect: didDisconnect)
@@ -270,6 +275,12 @@ internal final class CentralManager: NSObject {
 // MARK: - Helper functions
 
 extension CentralManager {
+    internal func async(on queue: DispatchQueue?, flags: DispatchWorkItemFlags = [], execute: @escaping () -> Void) {
+        ((queue ?? self.queue) ?? DispatchQueue.main).async(flags: flags, execute: execute)
+    }
+}
+
+extension CentralManager {
     /// Gets the CBCharacteristic of the current peripheral or nil if not in.
     internal func get(_ characteristic: CharacteristicProtocol, on peripheral: CBPeripheral) -> CBCharacteristic? {
         return peripheral.services?.first(where: { $0.uuid == characteristic.service.uuid })?
@@ -282,7 +293,10 @@ extension CentralManager {
             return
         }
         if counter <= 0 {
-            connectHandlers[peripheral.identifier]?.didReady?()
+            async(on: connectHandlers[peripheral.identifier]?.connectQueue) { [weak self] in
+                self?.connectHandlers[peripheral.identifier]?.didReady?()
+            }
+
             let filter: ((GattRequest) -> Bool) = { $0.peripheral == peripheral }
             pendingRequests.filter(filter).forEach { request in
                 switch request.property {
@@ -385,12 +399,14 @@ extension CentralManager {
     }
 
     private func fireUpdate() {
-        queue.async(flags: .barrier) { [weak self] in
+        async(on: queue, flags: .barrier) { [weak self] in
             guard let self = self else { return }
 
             // Keep all peripherals that was updated less than *lifetime* seconds
             self.currentPeripherals = self.currentPeripherals.filter({ $0.lastUpdate > (Date() - self.lifetime) })
-            self.didUpdate?(.success(self.currentPeripherals))
+            self.async(on: self.scanQueue) {
+                self.didUpdate?(.success(self.currentPeripherals))
+            }
         }
     }
 

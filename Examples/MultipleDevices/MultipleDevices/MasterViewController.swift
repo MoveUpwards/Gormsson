@@ -32,7 +32,7 @@ class MasterViewController: UITableViewController {
     var objects = [CBPeripheral]()
 
     // ## Added for Gormsson
-    private let gormsson = Gormsson(queue: DispatchQueue(label: "com.ble.manager", attributes: .concurrent))
+    private let gormsson = Gormsson()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,25 +55,23 @@ class MasterViewController: UITableViewController {
             // Scan forever to check when new devices appear or some disappear
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")], delay: 3.0, lifetime: 3.0) { [weak self] result in
                 switch result {
-                case .failure(let error):
-                    print("Scan error:", error)
-                case .success(let devices):
-                    self?.objects = devices.map({ $0.peripheral })
-                    self?.tableView.reloadData()
+                    case .failure(let error):
+                        print("Scan error:", error)
+                    case .success(let devices):
+                        self?.objects = devices.map({ $0.peripheral })
+                        self?.tableView.reloadData()
                 }
             }
         } else {
             // Scan once and auto connect to founded devices
             gormsson.scan([.custom("0BD51666-E7CB-469B-8E4D-2742AAAA0100")]) { [weak self] result in
                 switch result {
-                case .failure(let error):
-                    print("Scan error:", error)
-                case .success(let device):
-                    DispatchQueue.main.async { [weak self] in
+                    case .failure(let error):
+                        print("Scan error:", error)
+                    case .success(let device):
                         self?.objects.insert(device.peripheral, at: 0)
                         let indexPath = IndexPath(row: 0, section: 0)
                         self?.tableView.insertRows(at: [indexPath], with: .automatic)
-                    }
                 }
             } // ## Added for Gormsson
         }
@@ -89,20 +87,55 @@ class MasterViewController: UITableViewController {
     @objc
     private func disconnectAllDevices(_ sender: Any) {
         objects.forEach { [weak self] peripheral in
-            self?.gormsson.disconnect(peripheral)
+            self?.gormsson.cancel(peripheral)
         }
     }
 
     @objc
     private func playReadBattery(_ sender: Any) {
-        objects.forEach { [weak self] peripheral in
-            self?.gormsson.read(.batteryLevel, on: peripheral) { result in
-                print("Battery level:", result, "on", peripheral)
-            }
-            self?.gormsson.read(.modelNumberString, on: peripheral) { result in
-                print("Device name:", result, "on", peripheral)
-            }
+        // Test executeAll
+//        executeAll()
+
+        // Test executeAll on utility queue
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            self?.executeAll()
         }
+
+        // Test connect and read functions
+//        connectAndRead()
+
+        // Test connect and read functions on utility queue
+//        DispatchQueue.global(qos: .utility).async { [weak self] in
+//            self?.connectAndRead()
+//        }
+    }
+
+    private func executeAll() {
+        gormsson.executeAll([.init(.batteryLevel), .init(.serialNumberString)], on: objects, result: { result in
+            if case let .success(value) = result {
+                print(value.peripheral.name ?? "--", ":", value.characteristic.service, "=", value.data)
+            }
+        }, completion: { error in
+            print(error ?? "TERMINATED")
+        })
+    }
+
+    private func connectAndRead() {
+        guard let device = objects.first else { return }
+        gormsson.connect(device, success: {
+            print("connected")
+        }, failure: { error in
+            print("failure")
+        }, didReady: { [weak self] in
+            self?.gormsson.read(.batteryLevel, on: device, result: { result in
+                if case let .success(value) = result {
+                    print("Battery", value, "% on main thread", Thread.isMainThread)
+                }
+                self?.gormsson.cancel(device)
+            })
+        }, didDisconnect: { result in
+            print("disconnected")
+        })
     }
 
     private func observeState() {

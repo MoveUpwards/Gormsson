@@ -48,7 +48,9 @@ extension PeripheralManager: CBPeripheralDelegate {
 
         if let error = error {
             manager?.currentRequests.filter(reqFilter).forEach { request in
-                request.result?(.failure(error))
+                manager?.async(on: request.requestQueue) {
+                    request.result?(.failure(error))
+                }
             }
             return
         }
@@ -57,7 +59,9 @@ extension PeripheralManager: CBPeripheralDelegate {
 
         // Notify all requests that the characteristic notification is ended
         manager?.currentRequests.filter(reqFilter).forEach { request in
-            request.result?(.failure(GormssonError.stopNotifying))
+            manager?.async(on: request.requestQueue) {
+                request.result?(.failure(GormssonError.stopNotifying))
+            }
         }
 
         // Remove all unused request
@@ -82,7 +86,9 @@ extension PeripheralManager: CBPeripheralDelegate {
         let reqFilter = filter(peripheral, for: characteristic, and: .notify)
         manager?.currentRequests.filter(reqFilter).forEach { request in
             if let error = error {
-                request.result?(.failure(error))
+                manager?.async(on: request.requestQueue) {
+                    request.result?(.failure(error))
+                }
             } else {
                 compute(request, for: characteristic)
             }
@@ -103,21 +109,29 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-        request.result?(.failure(error))
+        manager?.async(on: request.requestQueue) {
+            request.result?(.failure(error))
+        }
     }
 
     private func compute(_ request: GattRequest, for characteristic: CBCharacteristic) {
         guard let data = characteristic.value else {
-            request.result?(.success(Empty()))
+            manager?.async(on: request.requestQueue) {
+                request.result?(.success(Empty()))
+            }
             return
         }
 
         guard let value = request.characteristic.format.init(with: data.octets) else {
-            request.result?(.failure(GormssonError.uncastableValue))
+            manager?.async(on: request.requestQueue) {
+                request.result?(.failure(GormssonError.uncastableValue))
+            }
             return
         }
 
-        request.result?(.success(value))
+        manager?.async(on: request.requestQueue) {
+            request.result?(.success(value))
+        }
     }
 
     private func filter(_ peripheral: CBPeripheral,
